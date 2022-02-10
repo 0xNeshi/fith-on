@@ -1,7 +1,7 @@
 import { Fade } from "@mui/material";
 import Button from "@mui/material/Button";
 import { blue } from "@mui/material/colors";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import Google from "../assets/images/google.png";
 import { UserContext } from "../providers";
@@ -9,25 +9,12 @@ import { signInWithGoogle } from "../services/authService";
 
 export default function SignIn() {
   const { error } = useContext(UserContext);
-  const [showMessage, setShowMessage] = useState(false);
-  const [showSignIn, setShowSignIn] = useState(false);
-
-  useEffect(() => {
-    const showMessageTimeout = setTimeout(() => setShowMessage(true), 5000);
-    const showSignInTimeout = setTimeout(() => setShowSignIn(true), 6000);
-    return () => {
-      clearTimeout(showMessageTimeout);
-      clearTimeout(showSignInTimeout);
-    };
-  }, []);
 
   return (
     <Container>
-      <Fade in={showMessage} unmountOnExit>
-        <h3 style={{ textAlign: "center" }}>Let's get started...</h3>
-      </Fade>
-      <Fade in={showSignIn}>
+      <Fade in>
         <div>
+          <h3 style={{ textAlign: "center" }}>Let's get started...</h3>
           <Button
             variant="contained"
             onClick={signInWithGoogle}
