@@ -4,24 +4,18 @@ import { blue } from "@mui/material/colors";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import Google from "../assets/images/google.png";
-import FithOnLogo from "../assets/images/fithon-logo.png";
 import { UserContext } from "../providers";
 import { signInWithGoogle } from "../services/authService";
 
 export default function SignIn() {
   const { error } = useContext(UserContext);
-  const [isLoading, setLoading] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
 
   useEffect(() => {
-    const showLogoTimeout = setTimeout(() => setLoading(true), 2000);
-    const hideLogoTimeout = setTimeout(() => setLoading(false), 4000);
     const showMessageTimeout = setTimeout(() => setShowMessage(true), 5000);
     const showSignInTimeout = setTimeout(() => setShowSignIn(true), 6000);
     return () => {
-      clearTimeout(showLogoTimeout);
-      clearTimeout(hideLogoTimeout);
       clearTimeout(showMessageTimeout);
       clearTimeout(showSignInTimeout);
     };
@@ -29,9 +23,6 @@ export default function SignIn() {
 
   return (
     <Container>
-      <Fade in={isLoading} unmountOnExit>
-        <img src={FithOnLogo} alt="" width={300} height={150} />
-      </Fade>
       <Fade in={showMessage} unmountOnExit>
         <h3 style={{ textAlign: "center" }}>Let's get started...</h3>
       </Fade>
