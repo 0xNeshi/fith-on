@@ -39,7 +39,9 @@ export default function getNewBlockSuggestedValues(sections = []) {
     (valuesObj, enumKey) => {
       const exName = EXERCISE_KEYS[enumKey];
       const key = `${exName}Max`;
-      const exercise = currentExercises.find((ex) => ex.name === exName);
+      const exercise = currentExercises.find(
+        (ex) => ex.name === exName && ex.trainingMax > 0
+      );
 
       valuesObj[key] = exercise ? exercise.trainingMax + increments[exName] : 0;
 
