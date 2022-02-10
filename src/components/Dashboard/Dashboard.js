@@ -1,4 +1,4 @@
-import { Divider, Fade, useScrollTrigger } from "@mui/material";
+import { Fade, useScrollTrigger } from "@mui/material";
 import { useCallback, useContext, useMemo, useState } from "react";
 import styled from "styled-components";
 import { useSections } from "../../hooks";

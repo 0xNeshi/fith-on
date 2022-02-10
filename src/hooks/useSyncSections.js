@@ -86,7 +86,7 @@ export default function useSyncSections(userEmail) {
     } catch (e) {
       console.log("There was an error, stopping backup\n", e);
     }
-  }, [userEmail, sections, lastSyncKey]);
+  }, [userEmail, sections, setLastSyncTime]);
 
   useEffect(() => {
     if (!isBackupDataLoaded) {

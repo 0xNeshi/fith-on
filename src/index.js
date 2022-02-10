@@ -1,13 +1,16 @@
+import { StrictMode } from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import "./index.css";
 import reportWebVitals from "./reportWebVitals";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+
+global.Buffer = global.Buffer || require("buffer").Buffer;
 
 ReactDOM.render(
-  <React.StrictMode>
+  <StrictMode>
     <App />
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById("root")
 );
 
