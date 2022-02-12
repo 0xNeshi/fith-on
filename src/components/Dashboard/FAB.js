@@ -1,4 +1,4 @@
-import { FitnessCenter, Menu as MenuIcon, NoteAdd } from "@mui/icons-material";
+import { FitnessCenter, Menu as MenuIcon, NoteAlt } from "@mui/icons-material";
 import Logout from "@mui/icons-material/Logout";
 import { Button } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
@@ -97,7 +97,7 @@ export default function FAB(props) {
         </MenuItem>
         <MenuItem onClick={onAddNote} disabled={isOffline}>
           <ListItemIcon>
-            <NoteAdd />
+            <NoteAlt />
           </ListItemIcon>
           Add note
         </MenuItem>

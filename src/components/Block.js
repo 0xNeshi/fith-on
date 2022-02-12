@@ -1,3 +1,4 @@
+import { FitnessCenter } from "@mui/icons-material";
 import { useMemo } from "react";
 import styled from "styled-components";
 import Section from "./Section";
@@ -24,7 +25,12 @@ export default function Block({ data, changeAmrapReps, deleteBlock }) {
   return (
     <Section
       sectionId={blockId}
-      title={`Block ${blockNumber}`}
+      title={
+        <Title>
+          <FitnessCenter />
+          Block {blockNumber}
+        </Title>
+      }
       onDeleteSection={deleteBlock}
     >
       <BlockRowContainer>{rows}</BlockRowContainer>
@@ -39,4 +45,11 @@ const BlockRowContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
+`;
+
+const Title = styled.h3`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 7px;
 `;

@@ -16,7 +16,7 @@ export default function Section(props) {
   return (
     <Container>
       <Header>
-        <Title>{title}</Title>
+        {title}
         <DeleteIcon
           fontSize="large"
           color="primary"
@@ -29,7 +29,8 @@ export default function Section(props) {
   );
 }
 
-const Container = styled.div`
+const Container = muiStyled((props) => <div {...props} />)(
+  ({ theme }) => `
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,18 +38,14 @@ const Container = styled.div`
   padding: 0 20px;
   background-color: #222;
   color: lightgrey;
-`;
+`
+);
 
 const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-`;
-
-const Title = styled.h3`
-  width: 100%;
-  margin-right: 7px;
 `;
 
 const DeleteIcon = muiStyled(DeleteForeverOutlined)`
