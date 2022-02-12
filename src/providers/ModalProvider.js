@@ -46,7 +46,7 @@ const modalStyle = {
   content: {
     height: "fit-content",
     margin: "auto",
-    backgroundColor: "#222",
+    backgroundColor: "#ACAB71",
     borderRadius: "3px",
     border: "0",
     maxWidth: 400,

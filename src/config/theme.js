@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material";
+import { common } from "@mui/material/colors";
 
 const theme = createTheme({
   palette: {
@@ -7,7 +8,7 @@ const theme = createTheme({
       main: "#947456",
     },
     warning: {
-      main: "#569493",
+      main: common.white,
     },
     background: {
       default: "#ACAB71",

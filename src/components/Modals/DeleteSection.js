@@ -12,11 +12,11 @@ export default function DeleteSection(props) {
           type="button"
           variant="outlined"
           onClick={onClose}
-          color="primary"
+          color="warning"
         >
           Cancel
         </Button>
-        <Button variant="contained" color="warning" onClick={onConfirm}>
+        <Button variant="contained" color="primary" onClick={onConfirm}>
           Delete
         </Button>
       </ButtonContainer>
