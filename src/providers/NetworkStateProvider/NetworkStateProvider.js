@@ -14,7 +14,6 @@ function NetworkStateProvider({ children }) {
     }
 
     function handleOnline() {
-      alert("Back online");
       closeModal();
       setOffline(false);
     }
