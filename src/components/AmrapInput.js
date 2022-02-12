@@ -1,11 +1,13 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useContext, useMemo } from "react";
 import styled from "styled-components";
+import { NetworkStateContext } from "../providers";
 
 const WAIT_INTERVAL = 1000;
 const ENTER_KEY = 13;
 
 export const AmrapInput = ({ reps, onChangeAmrapReps }) => {
   const [amrapReps, setAmrapReps] = useState(reps);
+  const { isOnline } = useContext(NetworkStateContext);
 
   const handleChangeAmrapReps = useCallback(
     () => amrapReps !== reps && onChangeAmrapReps(amrapReps),
@@ -29,14 +31,20 @@ export const AmrapInput = ({ reps, onChangeAmrapReps }) => {
     return () => clearTimeout(timer);
   }, [reps, handleChangeAmrapReps]);
 
+  const value = useMemo(
+    () => (!isOnline && !amrapReps ? "/" : amrapReps || ""),
+    [isOnline, amrapReps]
+  );
+
   return (
     <Input
-      value={amrapReps || ""}
+      value={value}
       type="text"
       onChange={handleChange}
       onBlur={handleChangeAmrapReps}
       onKeyDown={handleKeyDown}
       onFocus={handleFocus}
+      disabled={!isOnline}
     />
   );
 };
@@ -50,4 +58,8 @@ const Input = styled.input`
   background-color: #444;
   font-weight: 600;
   text-align: center;
+
+  :disabled {
+    background-color: transparent;
+  }
 `;
