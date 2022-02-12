@@ -10,7 +10,6 @@ import FAB from "./FAB";
 import {
   useAddBlockModal,
   useAddNoteModal,
-  useNetworkChangeEvents,
   useRemoveSectionModal,
   useSignOutModal,
 } from "./hooks";
@@ -19,8 +18,6 @@ export default function Dashboard() {
   const [ref, setRef] = useState();
   const { isLoading, sections, add, remove, update } = useSections();
   const trigger = useScrollTrigger({ target: ref ? ref : window });
-
-  useNetworkChangeEvents();
 
   const handleAddSection = useCallback(
     (section) => {
