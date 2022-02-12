@@ -1,5 +1,5 @@
 import { useCallback, useContext } from "react";
-import { DeleteForeverOutlined } from "@mui/icons-material";
+import { Delete } from "@mui/icons-material";
 import { NetworkStateContext } from "../providers";
 import { Box, styled, Typography } from "@mui/material";
 
@@ -47,7 +47,7 @@ const Header = styled((props) => (
   width: 100%;
 `;
 
-const DeleteIcon = styled(DeleteForeverOutlined)`
+const DeleteIcon = styled(Delete)`
   ${({ disabled, theme }) =>
     disabled
       ? `cursor: auto; color: ${theme.palette.secondary.main}`
