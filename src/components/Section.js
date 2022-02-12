@@ -6,7 +6,7 @@ import { styled as muiStyled } from "@mui/material";
 
 export default function Section(props) {
   const { sectionId, title, onDeleteSection, children } = props;
-  const { isOnline } = useContext(NetworkStateContext);
+  const { isOffline } = useContext(NetworkStateContext);
 
   const handleDeleteSection = useCallback(
     () => onDeleteSection(sectionId),
@@ -21,7 +21,7 @@ export default function Section(props) {
           fontSize="large"
           color="primary"
           onClick={handleDeleteSection}
-          disabled={!isOnline}
+          disabled={isOffline}
         />
       </Header>
       {children}

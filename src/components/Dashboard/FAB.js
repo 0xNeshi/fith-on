@@ -16,7 +16,7 @@ export default function FAB(props) {
   const { onAddNote, onAddBlock, onSignOut } = props;
   const [anchorEl, setAnchorEl] = useState(null);
   const { user } = useContext(UserContext);
-  const { isOnline } = useContext(NetworkStateContext);
+  const { isOffline } = useContext(NetworkStateContext);
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
@@ -89,13 +89,13 @@ export default function FAB(props) {
           <DisplayName>{user.displayName}</DisplayName>
         </MenuItem>
         <Divider />
-        <MenuItem onClick={onAddBlock} disabled={!isOnline}>
+        <MenuItem onClick={onAddBlock} disabled={isOffline}>
           <ListItemIcon>
             <FitnessCenter />
           </ListItemIcon>
           Add block
         </MenuItem>
-        <MenuItem onClick={onAddNote} disabled={!isOnline}>
+        <MenuItem onClick={onAddNote} disabled={isOffline}>
           <ListItemIcon>
             <NoteAdd />
           </ListItemIcon>

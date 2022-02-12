@@ -3,20 +3,20 @@ import { ModalContext } from "..";
 import OfflineWarning from "./OfflineWarning";
 
 function NetworkStateProvider({ children }) {
-  const [isOnline, setOnline] = useState(true);
+  const [isOffline, setOffline] = useState(false);
   const { openModal, closeModal } = useContext(ModalContext);
 
   useEffect(() => {
     function handleOffline() {
       const modalContent = <OfflineWarning onConfirm={closeModal} />;
       openModal(modalContent);
-      setOnline(false);
+      setOffline(true);
     }
 
     function handleOnline() {
       alert("Back online");
       closeModal();
-      setOnline(true);
+      setOffline(false);
     }
 
     window.addEventListener("online", handleOnline);
@@ -29,12 +29,12 @@ function NetworkStateProvider({ children }) {
   }, [closeModal, openModal]);
 
   return (
-    <NetworkStateContext.Provider value={{ isOnline }}>
+    <NetworkStateContext.Provider value={{ isOffline }}>
       {children}
     </NetworkStateContext.Provider>
   );
 }
 
-const NetworkStateContext = createContext({ isOnline: true });
+const NetworkStateContext = createContext({ isOffline: false });
 
 export { NetworkStateProvider as default, NetworkStateContext };

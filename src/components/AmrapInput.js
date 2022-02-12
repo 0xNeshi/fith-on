@@ -7,7 +7,7 @@ const ENTER_KEY = 13;
 
 export const AmrapInput = ({ reps, onChangeAmrapReps }) => {
   const [amrapReps, setAmrapReps] = useState(reps);
-  const { isOnline } = useContext(NetworkStateContext);
+  const { isOffline } = useContext(NetworkStateContext);
 
   const handleChangeAmrapReps = useCallback(
     () => amrapReps !== reps && onChangeAmrapReps(amrapReps),
@@ -32,8 +32,8 @@ export const AmrapInput = ({ reps, onChangeAmrapReps }) => {
   }, [reps, handleChangeAmrapReps]);
 
   const value = useMemo(
-    () => (!isOnline && !amrapReps ? "/" : amrapReps || ""),
-    [isOnline, amrapReps]
+    () => (isOffline && !amrapReps ? "/" : amrapReps || ""),
+    [isOffline, amrapReps]
   );
 
   return (
@@ -44,7 +44,7 @@ export const AmrapInput = ({ reps, onChangeAmrapReps }) => {
       onBlur={handleChangeAmrapReps}
       onKeyDown={handleKeyDown}
       onFocus={handleFocus}
-      disabled={!isOnline}
+      disabled={isOffline}
     />
   );
 };
