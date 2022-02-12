@@ -1,8 +1,7 @@
 import { Fade, useScrollTrigger } from "@mui/material";
-import { useCallback, useContext, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 import { useSections } from "../../hooks";
-import { NetworkStateContext } from "../../providers";
 import { getNewBlockSuggestedValues } from "../../utilities";
 import Block from "../Block";
 import Loading from "../Loading";
@@ -19,7 +18,6 @@ export default function Dashboard() {
   const [ref, setRef] = useState();
   const { isLoading, sections, add, remove, update } = useSections();
   const trigger = useScrollTrigger({ target: ref ? ref : window });
-  const { isOnline } = useContext(NetworkStateContext);
 
   const handleAddSection = useCallback(
     (section) => {

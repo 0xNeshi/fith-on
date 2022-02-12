@@ -1,9 +1,12 @@
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import styled from "styled-components";
-import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
+import { DeleteForeverOutlined } from "@mui/icons-material";
+import { NetworkStateContext } from "../providers";
+import { styled as muiStyled } from "@mui/material";
 
 export default function Section(props) {
   const { sectionId, title, onDeleteSection, children } = props;
+  const { isOnline } = useContext(NetworkStateContext);
 
   const handleDeleteSection = useCallback(
     () => onDeleteSection(sectionId),
@@ -14,11 +17,11 @@ export default function Section(props) {
     <Container>
       <Header>
         <Title>{title}</Title>
-        <DeleteForeverOutlinedIcon
+        <DeleteIcon
           fontSize="large"
           color="primary"
-          style={{ cursor: "pointer" }}
           onClick={handleDeleteSection}
+          disabled={!isOnline}
         />
       </Header>
       {children}
@@ -46,4 +49,11 @@ const Header = styled.div`
 const Title = styled.h3`
   width: 100%;
   margin-right: 7px;
+`;
+
+const DeleteIcon = muiStyled(DeleteForeverOutlined)`
+  ${({ disabled, theme }) =>
+    disabled
+      ? `cursor: auto; color: ${theme.palette.secondary.main}`
+      : "cursor: pointer"}
 `;
