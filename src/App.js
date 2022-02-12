@@ -1,11 +1,11 @@
 import { Container, CssBaseline } from "@mui/material";
 import { grey, lightGreen } from "@mui/material/colors";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useContext } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Loading from "./components/Loading";
 import { RequireAnon, RequireAuth } from "./guards";
-import { ModalProvider, UserProvider } from "./providers";
+import { ModalProvider, UserContext, UserProvider } from "./providers";
 
 const Dashboard = lazy(() => import("./components/Dashboard"));
 const SignIn = lazy(() => import("./components/SignIn"));
@@ -38,11 +38,7 @@ export default function App() {
                       </RequireAuth>
                     }
                   />
-                  <Route
-                    exact
-                    path="/"
-                    element={<Navigate to="/dashboard" />}
-                  />
+                  <Route exact path="/" element={<Content />} />
                 </Routes>
               </BrowserRouter>
             </Suspense>
@@ -71,3 +67,19 @@ const theme = createTheme({
     },
   },
 });
+
+function Content() {
+  const { user, isLoading } = useContext(UserContext);
+
+  if (isLoading) {
+    return (
+      <div style={{ height: "100vh" }}>
+        <Loading />
+      </div>
+    );
+  }
+
+  const targetUrl = !!user ? "/dashboard" : "/signin";
+
+  return <Navigate to={targetUrl} />;
+}

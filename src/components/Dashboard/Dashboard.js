@@ -1,8 +1,7 @@
 import { Fade, useScrollTrigger } from "@mui/material";
-import { useCallback, useContext, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 import { useSections } from "../../hooks";
-import { UserContext } from "../../providers";
 import { getNewBlockSuggestedValues } from "../../utilities";
 import Block from "../Block";
 import Loading from "../Loading";
@@ -17,34 +16,26 @@ import {
 } from "./hooks";
 
 export default function Dashboard() {
-  const { user } = useContext(UserContext);
+  const [ref, setRef] = useState();
+  const { isLoading, sections, add, remove, update } = useSections();
+  const trigger = useScrollTrigger({ target: ref ? ref : window });
 
   useNetworkChangeEvents();
 
-  const {
-    isLoading,
-    sections,
-    add: addSection,
-    remove: removeSection,
-    update: updateSection,
-  } = useSections(user.email);
-
-  const [ref, setRef] = useState();
-
   const handleAddSection = useCallback(
     (section) => {
-      addSection(section);
+      add(section);
       ref?.scrollTo({
         top: 0,
         behavior: "smooth",
       });
     },
-    [addSection, ref]
+    [add, ref]
   );
 
   const { open: openAddNote } = useAddNoteModal(handleAddSection);
   const { open: openAddBlock } = useAddBlockModal(handleAddSection);
-  const { open: openRemoveSection } = useRemoveSectionModal(removeSection);
+  const { open: openRemoveSection } = useRemoveSectionModal(remove);
   const { open: openSignOut } = useSignOutModal();
 
   const sortedSections = useMemo(
@@ -63,9 +54,9 @@ export default function Dashboard() {
       const week = section.weeks.find((week) => week.number === weekNumber);
       const exercise = week.exercises.find((e) => e.name === exerciseName);
       exercise.amrapReps = amrapReps;
-      updateSection(section);
+      update(section);
     },
-    [sortedSections, updateSection]
+    [sortedSections, update]
   );
 
   const sectionComponents = useMemo(
@@ -90,10 +81,6 @@ export default function Dashboard() {
       ),
     [sortedSections, changeAmrapReps, openRemoveSection]
   );
-
-  const trigger = useScrollTrigger({
-    target: ref ? ref : window,
-  });
 
   return (
     <Container>

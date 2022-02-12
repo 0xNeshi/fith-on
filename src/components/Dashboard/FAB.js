@@ -9,15 +9,14 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 import { useContext, useState } from "react";
+import styled from "styled-components";
 import { UserContext } from "../../providers";
 
 export default function FAB(props) {
   const { onAddNote, onAddBlock, onSignOut } = props;
+  const [anchorEl, setAnchorEl] = useState(null);
   const { user } = useContext(UserContext);
 
-  console.log(user);
-
-  const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
@@ -61,27 +60,35 @@ export default function FAB(props) {
             overflow: "visible",
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             mt: 1.5,
-            width: 220,
+            "& .MuiAvatar-root": {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
+            },
+            "&:before": {
+              content: '""',
+              display: "block",
+              position: "absolute",
+              bottom: -15,
+              right: 25,
+              width: 15,
+              height: 15,
+              bgcolor: "background.paper",
+              transform: "translateY(-50%) rotate(45deg)",
+              zIndex: 0,
+            },
           },
         }}
         transformOrigin={{ horizontal: "right", vertical: "bottom" }}
         anchorOrigin={{ horizontal: "right", vertical: "top" }}
       >
         <MenuItem>
-          <Avatar />
-          <p
-            style={{
-              textOverflow: "ellipsis",
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              width: 210,
-            }}
-          >
-            {user.displayName}
-          </p>
+          <Avatar src={user.photoURL} />
+          <DisplayName>{user.displayName}</DisplayName>
         </MenuItem>
         <Divider />
-        <MenuItem sx={{ fontSize: 20 }} onClick={onAddBlock}>
+        <MenuItem onClick={onAddBlock}>
           <ListItemIcon>
             <FitnessCenter />
           </ListItemIcon>
@@ -104,3 +111,9 @@ export default function FAB(props) {
     </>
   );
 }
+
+const DisplayName = styled.span`
+  text-overflow: ellipsis,
+  white-space: nowrap,
+  overflow: hidden,
+`;

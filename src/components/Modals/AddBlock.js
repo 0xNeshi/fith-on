@@ -10,7 +10,7 @@ const TRAINING_MAX_SCHEMA = yup
   .typeError("Must be a number")
   .positive("Must be a positive number")
   .nullable(true)
-  .transform((_, x) => (x === "" ? null : +x));
+  .transform((_, x) => (!x ? null : +x));
 
 const YUP_SHAPE = yup.object().shape({
   squatMax: TRAINING_MAX_SCHEMA,
