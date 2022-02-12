@@ -1,15 +1,11 @@
 import { Container, CssBaseline, ThemeProvider } from "@mui/material";
-import { lazy, Suspense, useContext, useEffect, useState } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Landing from "./components/Landing";
 import Loading from "./components/Loading";
 import theme from "./config/theme";
 import { RequireAnon, RequireAuth } from "./guards";
-import {
-  ModalProvider,
-  UserContext,
-  UserProvider,
-  NetworkStateProvider,
-} from "./providers";
+import { ModalProvider, NetworkStateProvider, UserProvider } from "./providers";
 
 const Dashboard = lazy(() => import("./components/Dashboard"));
 const SignIn = lazy(() => import("./components/SignIn"));
@@ -43,7 +39,7 @@ export default function App() {
                         </RequireAuth>
                       }
                     />
-                    <Route exact path="/" element={<Content />} />
+                    <Route exact path="/" element={<Landing />} />
                   </Routes>
                 </BrowserRouter>
               </Suspense>
@@ -53,16 +49,4 @@ export default function App() {
       </UserProvider>
     </ThemeProvider>
   );
-}
-
-function Content() {
-  const { user, isLoading } = useContext(UserContext);
-
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  const targetUrl = !!user ? "/dashboard" : "/signin";
-
-  return <Navigate to={targetUrl} />;
 }
