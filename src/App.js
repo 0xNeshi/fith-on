@@ -1,5 +1,5 @@
 import { Container, CssBaseline, ThemeProvider } from "@mui/material";
-import { lazy, Suspense, useContext } from "react";
+import { lazy, Suspense, useContext, useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Loading from "./components/Loading";
 import theme from "./config/theme";
@@ -20,7 +20,7 @@ export default function App() {
       <UserProvider>
         <ModalProvider>
           <NetworkStateProvider>
-            <Container component="main" sx={{ padding: 0 }}>
+            <Container component="main" sx={{ padding: 0, maxWidth: 500 }}>
               <CssBaseline />
               <Suspense fallback={<Loading />}>
                 <BrowserRouter>
@@ -59,11 +59,7 @@ function Content() {
   const { user, isLoading } = useContext(UserContext);
 
   if (isLoading) {
-    return (
-      <div style={{ height: "100vh" }}>
-        <Loading />
-      </div>
-    );
+    return <Loading />;
   }
 
   const targetUrl = !!user ? "/dashboard" : "/signin";

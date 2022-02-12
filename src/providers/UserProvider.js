@@ -2,13 +2,15 @@ import { createContext, useEffect, useState } from "react";
 import { auth } from "../config/firebase";
 
 export default function UserProvider({ children }) {
-  const [user, setUser] = useState();
   const [isLoading, setLoading] = useState(true);
+  const [user, setUser] = useState();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
-      setLoading(false);
-      setUser(currentUser);
+      if (!user || currentUser === undefined || currentUser?.uid !== user.uid) {
+        setUser(currentUser);
+        setLoading(false);
+      }
     });
 
     return () => unsubscribe();

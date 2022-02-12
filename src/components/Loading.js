@@ -7,7 +7,7 @@ export default function Loading() {
 
 const Container = styled.div`
   display: flex;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   align-items: center;
   justify-content: center;

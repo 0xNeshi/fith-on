@@ -79,12 +79,18 @@ export default function Dashboard() {
     [sortedSections, changeAmrapReps, openRemoveSection]
   );
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <Container>
       <Content ref={(_ref) => setRef(_ref)}>
-        {!isLoading && !sectionComponents?.length && <EmptySectionsMessage />}
-        {!isLoading && !!sectionComponents?.length && sectionComponents}
-        {isLoading && <Loading />}
+        {!sectionComponents?.length ? (
+          <EmptySectionsMessage />
+        ) : (
+          sectionComponents
+        )}
         <Footer>&copy;Copyright 2022 by misicnenad</Footer>
       </Content>
       <Fade in={!isLoading && !trigger} unmountOnExit>

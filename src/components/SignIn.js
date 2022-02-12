@@ -1,15 +1,11 @@
 import { Fade } from "@mui/material";
 import Button from "@mui/material/Button";
 import { blue } from "@mui/material/colors";
-import { useContext } from "react";
 import styled from "styled-components";
 import Google from "../assets/images/google.png";
-import { UserContext } from "../providers";
 import { signInWithGoogle } from "../services/authService";
 
 export default function SignIn() {
-  const { error } = useContext(UserContext);
-
   return (
     <Container>
       <Fade in>
@@ -23,7 +19,6 @@ export default function SignIn() {
             <ButtonIcon src={Google} alt="" />
             Connect with Google
           </Button>
-          {error && <Error>{error}</Error>}
         </div>
       </Fade>
     </Container>
