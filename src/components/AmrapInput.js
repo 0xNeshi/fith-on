@@ -55,7 +55,7 @@ const Input = styled((props) => <input {...props} />)(
   height: 30px;
   border: none;
   border-radius: 2px;
-  color: lightgrey;
+  color: white;
   background-color: ${theme.palette.background.default};
   font-weight: 600;
   text-align: center;

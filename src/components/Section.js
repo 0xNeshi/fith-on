@@ -18,7 +18,6 @@ export default function Section(props) {
         {title}
         <DeleteIcon
           fontSize="large"
-          color="warning"
           onClick={handleDeleteSection}
           disabled={isOffline}
         />
