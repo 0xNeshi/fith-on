@@ -1,8 +1,7 @@
 import { useCallback, useContext } from "react";
-import styled from "styled-components";
 import { DeleteForeverOutlined } from "@mui/icons-material";
 import { NetworkStateContext } from "../providers";
-import { styled as muiStyled } from "@mui/material";
+import { Box, styled, Typography } from "@mui/material";
 
 export default function Section(props) {
   const { sectionId, title, onDeleteSection, children } = props;
@@ -19,7 +18,7 @@ export default function Section(props) {
         {title}
         <DeleteIcon
           fontSize="large"
-          color="primary"
+          color="warning"
           onClick={handleDeleteSection}
           disabled={isOffline}
         />
@@ -29,26 +28,27 @@ export default function Section(props) {
   );
 }
 
-const Container = muiStyled((props) => <div {...props} />)(
+const Container = styled(Box)(
   ({ theme }) => `
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   padding: 0 20px;
-  background-color: #222;
-  color: lightgrey;
+  background-color: ${theme.palette.background.paper}
 `
 );
 
-const Header = styled.div`
+const Header = styled((props) => (
+  <Typography variant="subtitle1" component="div" {...props} />
+))`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
 `;
 
-const DeleteIcon = muiStyled(DeleteForeverOutlined)`
+const DeleteIcon = styled(DeleteForeverOutlined)`
   ${({ disabled, theme }) =>
     disabled
       ? `cursor: auto; color: ${theme.palette.secondary.main}`

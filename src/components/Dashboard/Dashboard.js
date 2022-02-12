@@ -13,6 +13,7 @@ import {
   useRemoveSectionModal,
   useSignOutModal,
 } from "./hooks";
+import { Box, styled as muiStyled } from "@mui/material";
 
 export default function Dashboard() {
   const [ref, setRef] = useState();
@@ -126,7 +127,7 @@ const Container = styled.div`
   position: relative;
 `;
 
-const Content = styled.div`
+const Content = muiStyled(Box)`
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -136,7 +137,6 @@ const Content = styled.div`
   width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: #282c34;
 `;
 
 const FABContainer = styled.div`

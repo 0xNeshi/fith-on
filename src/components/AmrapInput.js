@@ -1,5 +1,5 @@
+import { styled } from "@mui/material";
 import { useEffect, useState, useCallback, useContext, useMemo } from "react";
-import styled from "styled-components";
 import { NetworkStateContext } from "../providers";
 
 const WAIT_INTERVAL = 1000;
@@ -49,17 +49,19 @@ export const AmrapInput = ({ reps, onChangeAmrapReps }) => {
   );
 };
 
-const Input = styled.input`
+const Input = styled((props) => <input {...props} />)(
+  ({ theme }) => `
   width: 30px;
   height: 30px;
   border: none;
   border-radius: 2px;
   color: lightgrey;
-  background-color: #444;
+  background-color: ${theme.palette.background.default};
   font-weight: 600;
   text-align: center;
 
   :disabled {
     background-color: transparent;
   }
-`;
+`
+);

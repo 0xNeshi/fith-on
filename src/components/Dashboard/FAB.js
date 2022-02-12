@@ -43,7 +43,7 @@ export default function FAB(props) {
             aria-haspopup="true"
             aria-expanded={!!anchorEl ? "true" : undefined}
             variant="contained"
-            color="secondary"
+            color="primary"
           >
             <MenuIcon fontSize="large" />
           </Button>
