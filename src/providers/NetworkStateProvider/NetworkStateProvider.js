@@ -3,7 +3,7 @@ import { ModalContext } from "..";
 import OfflineWarning from "./OfflineWarning";
 
 function NetworkStateProvider({ children }) {
-  const [isOnline, setOnline] = useState();
+  const [isOnline, setOnline] = useState(true);
   const { openModal, closeModal } = useContext(ModalContext);
 
   useEffect(() => {

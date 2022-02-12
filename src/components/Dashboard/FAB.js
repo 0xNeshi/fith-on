@@ -10,12 +10,13 @@ import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 import { useContext, useState } from "react";
 import styled from "styled-components";
-import { UserContext } from "../../providers";
+import { NetworkStateContext, UserContext } from "../../providers";
 
 export default function FAB(props) {
   const { onAddNote, onAddBlock, onSignOut } = props;
   const [anchorEl, setAnchorEl] = useState(null);
   const { user } = useContext(UserContext);
+  const { isOnline } = useContext(NetworkStateContext);
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
@@ -88,13 +89,13 @@ export default function FAB(props) {
           <DisplayName>{user.displayName}</DisplayName>
         </MenuItem>
         <Divider />
-        <MenuItem onClick={onAddBlock}>
+        <MenuItem onClick={onAddBlock} disabled={!isOnline}>
           <ListItemIcon>
             <FitnessCenter />
           </ListItemIcon>
           Add block
         </MenuItem>
-        <MenuItem onClick={onAddNote}>
+        <MenuItem onClick={onAddNote} disabled={!isOnline}>
           <ListItemIcon>
             <NoteAdd />
           </ListItemIcon>
