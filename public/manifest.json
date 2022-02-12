@@ -54,7 +54,7 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": "/signin",
+  "start_url": "/",
   "theme_color": "#222222",
   "background_color": "#222222",
   "display": "standalone"
