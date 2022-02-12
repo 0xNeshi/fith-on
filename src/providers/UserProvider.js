@@ -14,6 +14,8 @@ export default function UserProvider({ children }) {
     });
 
     return () => unsubscribe();
+    // subscribe only once
+    // eslint-disable-next-line
   }, []);
 
   return (

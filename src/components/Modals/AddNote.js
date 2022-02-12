@@ -27,7 +27,7 @@ export default function AddNote({ onClose, onSubmit }) {
     <Form onSubmit={handleSubmit(onSubmit)}>
       <InputContainer>
         <Input
-          label="Title"
+          label="Title*"
           registerReturn={register("title")}
           error={errors?.title?.message}
           autoFocus

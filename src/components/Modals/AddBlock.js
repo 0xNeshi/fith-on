@@ -35,31 +35,36 @@ export default function AddBlock(props) {
   return (
     <Form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
       <InputContainer>
-        <Input
-          label="Squat max"
-          registerReturn={register("squatMax")}
-          error={errors?.squatMax?.message}
-        />
-        <Input
-          label="Bench max"
-          registerReturn={register("benchMax")}
-          error={errors?.benchMax?.message}
-        />
-        <Input
-          label="Deadlift max"
-          registerReturn={register("deadliftMax")}
-          error={errors?.deadliftMax?.message}
-        />
-        <Input
-          label="Overhead max"
-          registerReturn={register("overheadMax")}
-          error={errors?.overheadMax?.message}
-        />
-        <Input
-          label="Block number"
-          registerReturn={register("blockNumber")}
-          error={errors?.blockNumber?.message}
-        />
+        <InputColumn>
+          <Input
+            label="Block number"
+            registerReturn={register("blockNumber")}
+            error={errors?.blockNumber?.message}
+            style={{ marginBottom: 10 }}
+          />
+          <Input
+            label="Squat max"
+            registerReturn={register("squatMax")}
+            error={errors?.squatMax?.message}
+          />
+          <Input
+            label="Bench max"
+            registerReturn={register("benchMax")}
+            error={errors?.benchMax?.message}
+          />
+        </InputColumn>
+        <InputColumn style={{ justifyContent: "flex-end" }}>
+          <Input
+            label="Deadlift max"
+            registerReturn={register("deadliftMax")}
+            error={errors?.deadliftMax?.message}
+          />
+          <Input
+            label="Overhead max"
+            registerReturn={register("overheadMax")}
+            error={errors?.overheadMax?.message}
+          />
+        </InputColumn>
       </InputContainer>
       <ButtonContainer>
         <Button
@@ -87,21 +92,24 @@ export default function AddBlock(props) {
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  height: 60vh;
-  gap: 20px;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-evenly;
+  margin-top: 40px;
 `;
 
 const InputContainer = styled.div`
   display: flex;
-  flex-direction: column;
   height: 100%;
-  justify-content: space-evenly;
   width: 100%;
-  align-items: center;
+  gap: 40px;
+`;
+
+const InputColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;

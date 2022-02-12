@@ -49,7 +49,7 @@ const modalStyle = {
     backgroundColor: "#222",
     borderRadius: "3px",
     border: "0",
-    maxWidth: 300,
+    maxWidth: 400,
   },
   overlay: {
     backgroundColor: "rgba(22, 22, 22, 0.75)",
