@@ -30,14 +30,14 @@ export default function AddNote({ onClose, onSubmit }) {
           label="Title"
           registerReturn={register("title")}
           error={errors?.title?.message}
+          autoFocus
         />
         <Input
           label="Text"
           registerReturn={register("text")}
           error={errors?.text?.message}
           multiline
-          rows={5}
-          variant="filled"
+          maxRows={3}
         />
       </InputContainer>
       <ButtonContainer>
@@ -66,7 +66,6 @@ export default function AddNote({ onClose, onSubmit }) {
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  height: 40vh;
   justify-content: space-between;
   align-items: center;
 `;
@@ -82,4 +81,5 @@ const InputContainer = styled.div`
   flex-direction: column;
   gap: 20px;
   width: 80%;
+  margin-bottom: 50px;
 `;
