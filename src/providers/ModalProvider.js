@@ -8,7 +8,7 @@ const ModalContext = createContext({
   closeModal: () => {},
 });
 
-export default function ModalProvider({ children }) {
+function ModalProvider({ children }) {
   const [overlayRef, setOverlayRef] = useState();
   const [isOpen, setOpen] = useState(false);
   const [content, setContent] = useState();
@@ -40,16 +40,16 @@ export default function ModalProvider({ children }) {
   );
 }
 
-export { ModalContext };
+export { ModalProvider as default, ModalContext };
 
 const modalStyle = {
   content: {
     height: "fit-content",
-    marginTop: "auto",
-    marginBottom: "auto",
+    margin: "auto",
     backgroundColor: "#222",
     borderRadius: "3px",
     border: "0",
+    maxWidth: 300,
   },
   overlay: {
     backgroundColor: "rgba(22, 22, 22, 0.75)",
