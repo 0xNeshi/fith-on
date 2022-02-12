@@ -16,7 +16,11 @@ export default function App() {
       <UserProvider>
         <ModalProvider>
           <NetworkStateProvider>
-            <Container component="main" maxWidth="sm" sx={{ padding: 0 }}>
+            <Container
+              component="main"
+              maxWidth="sm"
+              sx={{ paddingLeft: 0, backgroundColor: "background.paper" }}
+            >
               <CssBaseline />
               <Suspense fallback={<Loading />}>
                 <BrowserRouter>

@@ -34,7 +34,7 @@ const Container = styled(Box)(
   align-items: center;
   width: 100%;
   padding: 0 20px;
-  background-color: ${theme.palette.background.paper}
+  background-color: ${theme.palette.background.default}
 `
 );
 
