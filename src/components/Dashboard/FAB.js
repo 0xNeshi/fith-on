@@ -1,15 +1,13 @@
 import { FitnessCenter, Menu as MenuIcon, NoteAlt } from "@mui/icons-material";
 import Logout from "@mui/icons-material/Logout";
-import { Button } from "@mui/material";
+import { Button, Fab, styled } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 import { useContext, useState } from "react";
-import styled from "styled-components";
 import { NetworkStateContext, UserContext } from "../../providers";
 
 export default function FAB(props) {
@@ -23,32 +21,19 @@ export default function FAB(props) {
 
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          textAlign: "center",
-        }}
+      <Fab
+        aria-label="actions"
+        onClick={handleClick}
+        aria-controls={!!anchorEl ? "account-menu" : undefined}
+        aria-expanded={!!anchorEl ? "true" : undefined}
+        aria-haspopup="true"
+        sx={{ width: 72, height: 72 }}
+        color="secondary"
       >
         <Tooltip title="Actions">
-          <Button
-            onClick={handleClick}
-            sx={{
-              width: 72,
-              height: 72,
-              borderRadius: "50%",
-              boxShadow: "2px 3px 6px #000",
-            }}
-            aria-controls={!!anchorEl ? "account-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={!!anchorEl ? "true" : undefined}
-            variant="contained"
-            color="primary"
-          >
-            <MenuIcon fontSize="large" />
-          </Button>
+          <MenuIcon fontSize="large" color="primary" />
         </Tooltip>
-      </Box>
+      </Fab>
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
@@ -114,7 +99,7 @@ export default function FAB(props) {
   );
 }
 
-const DisplayName = styled.span`
+const DisplayName = styled("span")`
   text-overflow: ellipsis,
   white-space: nowrap,
   overflow: hidden,

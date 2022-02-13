@@ -1,11 +1,11 @@
 import React from "react";
-import styled from "styled-components";
+import { Box, styled } from "@mui/material";
 
 export default function Loading() {
   return <Container>Loading...</Container>;
 }
 
-const Container = styled.div`
+const Container = styled(Box)`
   display: flex;
   height: 100vh;
   width: 100%;

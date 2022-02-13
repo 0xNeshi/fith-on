@@ -12,7 +12,7 @@ const lightTheme = createTheme({
       main: "#949356",
     },
     secondary: {
-      main: grey[300],
+      main: grey[100],
     },
     warning: {
       main: "#569474",
