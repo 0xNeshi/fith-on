@@ -6,9 +6,6 @@ import {
 import { common, grey } from "@mui/material/colors";
 import { createContext, useCallback, useState } from "react";
 
-const blueGreen = "#569474";
-const brown = "#947456";
-
 const olive = {
   100: "#d4d3bb",
   600: "#bab86c",
@@ -22,9 +19,6 @@ const lightTheme = createTheme({
     },
     secondary: {
       main: grey[100],
-    },
-    warning: {
-      main: blueGreen,
     },
     text: {
       primary: grey[700],
@@ -43,16 +37,12 @@ const oliveTheme = createTheme({
     secondary: {
       main: olive[900],
     },
-    warning: {
-      main: brown,
-    },
     text: {
       primary: common.white,
-      secondary: common.white,
     },
     background: {
-      default: olive[600],
-      paper: olive[900],
+      default: olive[900],
+      paper: olive[600],
     },
     action: {
       active: common.white,
