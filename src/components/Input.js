@@ -23,7 +23,7 @@ export default function Input({ label, registerReturn, error, ...rest }) {
 
 const StyledField = styled(TextField)(
   ({ mode }) =>
-    mode === MODES.olive &&
+    mode !== MODES.light &&
     `& .MuiInput-underline:before {
   border-bottom: 1px solid rgba(255, 255, 255, 0.84);
 }`

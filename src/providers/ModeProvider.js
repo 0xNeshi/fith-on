@@ -3,7 +3,7 @@ import {
   CssBaseline,
   ThemeProvider as MuiThemeProvider,
 } from "@mui/material";
-import { common, grey } from "@mui/material/colors";
+import { common, grey, orange } from "@mui/material/colors";
 import { createContext, useCallback, useState } from "react";
 
 const olive = {
@@ -51,18 +51,43 @@ const oliveTheme = createTheme({
   },
 });
 
+const darkTheme = createTheme({
+  palette: {
+    primary: {
+      main: orange[600],
+      contrastText: common.white,
+    },
+    secondary: {
+      main: grey[800],
+    },
+    text: {
+      primary: common.white,
+      secondary: common.white,
+    },
+    background: {
+      default: grey[900],
+      paper: grey[800],
+    },
+    action: {
+      active: common.white,
+    },
+  },
+});
+
 const MODES = {
   light: "light",
   olive: "olive",
+  dark: "dark",
 };
 
 const MODE_CONFIGS = {
   [MODES.light]: lightTheme,
   [MODES.olive]: oliveTheme,
+  [MODES.dark]: darkTheme,
 };
 
 function ModeProvider({ children }) {
-  const [mode, setMode] = useState(MODES.olive);
+  const [mode, setMode] = useState(MODES.dark);
 
   const changeMode = useCallback((newMode) => setMode(newMode), []);
 
