@@ -20,6 +20,7 @@ export default function Section(props) {
           fontSize="medium"
           onClick={handleDeleteSection}
           disabled={isOffline}
+          color="primary"
         />
       </Header>
       {children}

@@ -1,27 +1,22 @@
-import { Container, CssBaseline, ThemeProvider } from "@mui/material";
+import { Container } from "@mui/material";
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Landing from "./components/Landing";
 import Loading from "./components/Loading";
-import theme from "./config/theme";
 import { RequireAnon, RequireAuth } from "./guards";
 import { ModalProvider, NetworkStateProvider, UserProvider } from "./providers";
+import ThemeProvider from "./providers/ThemeProvider";
 
 const Dashboard = lazy(() => import("./components/Dashboard"));
 const SignIn = lazy(() => import("./components/SignIn"));
 
 export default function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider>
       <UserProvider>
         <ModalProvider>
           <NetworkStateProvider>
-            <Container
-              component="main"
-              maxWidth="sm"
-              sx={{ padding: 0, backgroundColor: "background.paper" }}
-            >
-              <CssBaseline />
+            <Container component="main" maxWidth="sm" sx={{ padding: 0 }}>
               <Suspense fallback={<Loading />}>
                 <BrowserRouter>
                   <Routes>

@@ -5,7 +5,7 @@ import { NetworkStateContext } from "../providers";
 const WAIT_INTERVAL = 1000;
 const ENTER_KEY = 13;
 
-export const AmrapInput = ({ reps, onChangeAmrapReps }) => {
+export default function AmrapInput({ reps, onChangeAmrapReps }) {
   const [amrapReps, setAmrapReps] = useState(reps);
   const { isOffline } = useContext(NetworkStateContext);
 
@@ -47,9 +47,9 @@ export const AmrapInput = ({ reps, onChangeAmrapReps }) => {
       disabled={isOffline}
     />
   );
-};
+}
 
-const Input = styled((props) => <input {...props} />)(
+const Input = styled("input")(
   ({ theme }) => `
   width: 30px;
   height: 30px;

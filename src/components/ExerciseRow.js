@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { AmrapInput } from "./AmrapInput";
+import AmrapInput from "./AmrapInput";
 
 export default function ExerciseRow({
   exerciseName,

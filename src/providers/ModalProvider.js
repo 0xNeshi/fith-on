@@ -1,7 +1,6 @@
-import { createContext, useCallback, useEffect, useState } from "react";
-import ReactModal from "react-modal";
-
-ReactModal.setAppElement("#root");
+import { ModalUnstyled } from "@mui/base";
+import { Box, styled } from "@mui/material";
+import { createContext, useCallback, useState } from "react";
 
 const ModalContext = createContext({
   openModal: (content) => content,
@@ -9,7 +8,6 @@ const ModalContext = createContext({
 });
 
 function ModalProvider({ children }) {
-  const [overlayRef, setOverlayRef] = useState();
   const [isOpen, setOpen] = useState(false);
   const [content, setContent] = useState();
 
@@ -19,39 +17,51 @@ function ModalProvider({ children }) {
   }, []);
   const closeModal = useCallback(() => setOpen(false), []);
 
-  useEffect(() => {
-    if (overlayRef?.style) {
-      overlayRef.style.zIndex = 3;
-    }
-  }, [overlayRef?.style]);
-
   return (
     <ModalContext.Provider value={{ openModal, closeModal }}>
       {children}
-      <ReactModal
-        isOpen={isOpen}
-        overlayRef={(ref) => setOverlayRef(ref)}
-        onRequestClose={() => closeModal()}
-        style={modalStyle}
+      <StyledModal
+        open={isOpen}
+        onClose={closeModal}
+        BackdropComponent={Backdrop}
       >
-        {content}
-      </ReactModal>
+        <Box sx={style}>{content}</Box>
+      </StyledModal>
     </ModalContext.Provider>
   );
 }
 
 export { ModalProvider as default, ModalContext };
 
-const modalStyle = {
-  content: {
-    height: "fit-content",
-    margin: "auto",
-    backgroundColor: "#ACAB71",
-    borderRadius: "3px",
-    border: "0",
-    maxWidth: 400,
-  },
-  overlay: {
-    backgroundColor: "rgba(22, 22, 22, 0.75)",
-  },
+const style = {
+  maxWidth: 400,
+  bgcolor: "background.default",
+  p: 2,
+  px: 3,
+  pb: 3,
+  marginRight: 3,
+  marginLeft: 3,
 };
+
+const StyledModal = styled(ModalUnstyled)`
+  position: fixed;
+  z-index: 1300;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Backdrop = styled("div")`
+  z-index: -1;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-tap-highlight-color: transparent;
+`;
