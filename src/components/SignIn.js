@@ -1,6 +1,5 @@
-import { Fade } from "@mui/material";
+import { Box, Fade, styled, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-import styled from "styled-components";
 import Google from "../assets/images/google.png";
 import { signInWithGoogle } from "../services/authService";
 
@@ -8,8 +7,10 @@ export default function SignIn() {
   return (
     <Container>
       <Fade in>
-        <div>
-          <h3 style={{ textAlign: "center" }}>Let's get started...</h3>
+        <Box>
+          <Header variant="h6" component="div">
+            Let's get started...
+          </Header>
           <Button
             variant="contained"
             onClick={signInWithGoogle}
@@ -19,13 +20,13 @@ export default function SignIn() {
             <ButtonIcon src={Google} alt="" />
             Connect with Google
           </Button>
-        </div>
+        </Box>
       </Fade>
     </Container>
   );
 }
 
-const Container = styled.div`
+const Container = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,7 +34,12 @@ const Container = styled.div`
   height: 100vh;
 `;
 
-const ButtonIcon = styled.img`
+const Header = styled(Typography)`
+  text-align: center;
+  margin-bottom: 15px;
+`;
+
+const ButtonIcon = styled("img")`
   padding: 10px;
   width: 50px;
   height: 100%;
