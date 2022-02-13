@@ -44,27 +44,27 @@ export default function FAB(props) {
         </MenuItem>
         <MenuItem onClick={onSelectMode}>
           <ListItemIcon>
-            <SettingsIcon />
+            <SettingsIcon color="primary" />
           </ListItemIcon>
           Choose mode
         </MenuItem>
         <Divider />
         <MenuItem onClick={onAddBlock} disabled={isOffline}>
           <ListItemIcon>
-            <FitnessCenter />
+            <FitnessCenter color="primary" />
           </ListItemIcon>
           Add block
         </MenuItem>
         <MenuItem onClick={onAddNote} disabled={isOffline}>
           <ListItemIcon>
-            <NoteAlt />
+            <NoteAlt color="primary" />
           </ListItemIcon>
           Add note
         </MenuItem>
         <Divider />
         <MenuItem onClick={onSignOut}>
           <ListItemIcon>
-            <Logout />
+            <Logout color="primary" />
           </ListItemIcon>
           Sign out
         </MenuItem>
@@ -74,7 +74,7 @@ export default function FAB(props) {
 }
 
 const DisplayName = styled("span")`
-  text-overflow: ellipsis,
-  white-space: nowrap,
-  overflow: hidden,
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
