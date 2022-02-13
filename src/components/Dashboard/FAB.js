@@ -43,7 +43,7 @@ export default function FAB(props) {
         PaperProps={{
           elevation: 0,
           sx: {
-            bgcolor: "background.default",
+            bgcolor: "secondary.main",
             overflow: "visible",
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             mt: 1.5,
@@ -61,7 +61,7 @@ export default function FAB(props) {
               right: 25,
               width: 15,
               height: 15,
-              bgcolor: "background.default",
+              bgcolor: "secondary.main",
               transform: "translateY(-50%) rotate(45deg)",
               zIndex: 0,
             },
