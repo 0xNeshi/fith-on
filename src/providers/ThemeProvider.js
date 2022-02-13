@@ -35,10 +35,11 @@ const oliveTheme = createTheme({
       main: common.white,
     },
     secondary: {
-      main: olive[900],
+      main: olive[600],
     },
     text: {
       primary: common.white,
+      secondary: common.white,
     },
     background: {
       default: olive[900],
@@ -61,7 +62,7 @@ const THEME_CONFIGS = {
 };
 
 function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState("olive");
+  const [theme, setTheme] = useState(THEMES.olive);
 
   const changeTheme = useCallback((newTheme) => setTheme(newTheme), []);
 
