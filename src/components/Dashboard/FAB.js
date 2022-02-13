@@ -71,7 +71,7 @@ export default function FAB(props) {
         anchorOrigin={{ horizontal: "right", vertical: "top" }}
       >
         <MenuItem>
-          <Avatar src={user.photoURL} />
+          <Avatar src={user.photoURL} sx={{ bgcolor: "white" }} />
           <DisplayName>{user.displayName}</DisplayName>
         </MenuItem>
         <Divider />

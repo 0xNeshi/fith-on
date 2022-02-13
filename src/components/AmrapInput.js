@@ -1,6 +1,7 @@
-import { TextField } from "@mui/material";
+import { styled, TextField } from "@mui/material";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { NetworkStateContext } from "../providers";
+import { ThemeContext, THEMES } from "../providers/ThemeProvider";
 
 const WAIT_INTERVAL = 1000;
 const ENTER_KEY = 13;
@@ -8,6 +9,7 @@ const ENTER_KEY = 13;
 export default function AmrapInput({ reps, onChangeAmrapReps }) {
   const [amrapReps, setAmrapReps] = useState(reps);
   const { isOffline } = useContext(NetworkStateContext);
+  const { theme } = useContext(ThemeContext);
 
   const handleChangeAmrapReps = useCallback(
     () => amrapReps !== reps && onChangeAmrapReps(amrapReps),
@@ -37,7 +39,7 @@ export default function AmrapInput({ reps, onChangeAmrapReps }) {
   );
 
   return (
-    <TextField
+    <Input
       variant="standard"
       inputProps={{ style: { textAlign: "center", padding: 0 } }}
       sx={{ width: 30, height: 30 }}
@@ -47,6 +49,15 @@ export default function AmrapInput({ reps, onChangeAmrapReps }) {
       onKeyDown={handleKeyDown}
       onFocus={handleFocus}
       disabled={isOffline}
+      mode={theme}
     />
   );
 }
+
+const Input = styled(TextField)(
+  ({ mode }) =>
+    mode === THEMES.olive &&
+    `& .MuiInput-underline:before {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.84);
+}`
+);
