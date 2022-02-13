@@ -1,7 +1,7 @@
 import { useCallback, useContext } from "react";
 import { Delete } from "@mui/icons-material";
 import { NetworkStateContext } from "../providers";
-import { Box, styled, Typography } from "@mui/material";
+import { Box, Button, styled, Typography } from "@mui/material";
 
 export default function Section(props) {
   const { sectionId, title, onDeleteSection, children } = props;
@@ -16,12 +16,14 @@ export default function Section(props) {
     <Container>
       <Header>
         {title}
-        <DeleteIcon
-          fontSize="medium"
-          onClick={handleDeleteSection}
-          disabled={isOffline}
+        <Button
           color="primary"
-        />
+          disabled={isOffline}
+          onClick={handleDeleteSection}
+          sx={{ padding: "0 6px", minWidth: 0 }}
+        >
+          <DeleteIcon fontSize="medium" />
+        </Button>
       </Header>
       {children}
     </Container>
@@ -52,8 +54,5 @@ const Header = styled((props) => (
 `;
 
 const DeleteIcon = styled(Delete)`
-  ${({ disabled, theme }) =>
-    disabled
-      ? `cursor: auto; color: ${theme.palette.secondary.main}`
-      : "cursor: pointer"}
+  ${({ disabled, theme }) => (disabled ? `cursor: auto;` : "cursor: pointer")}
 `;
