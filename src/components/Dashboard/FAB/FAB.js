@@ -1,14 +1,16 @@
 import { FitnessCenter, Menu as MenuIcon, NoteAlt } from "@mui/icons-material";
 import Logout from "@mui/icons-material/Logout";
-import { Button, Fab, styled } from "@mui/material";
+import { Fab, styled } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 import { useContext, useState } from "react";
-import { NetworkStateContext, UserContext } from "../../providers";
+import { NetworkStateContext, UserContext } from "../../../providers";
+import FabMenu from "./FabMenu";
+
+const MENU_ID = "account-menu";
 
 export default function FAB(props) {
   const { onAddNote, onAddBlock, onSignOut } = props;
@@ -24,7 +26,7 @@ export default function FAB(props) {
       <Fab
         aria-label="actions"
         onClick={handleClick}
-        aria-controls={!!anchorEl ? "account-menu" : undefined}
+        aria-controls={!!anchorEl ? MENU_ID : undefined}
         aria-expanded={!!anchorEl ? "true" : undefined}
         aria-haspopup="true"
         sx={{ width: 72, height: 72 }}
@@ -34,42 +36,7 @@ export default function FAB(props) {
           <MenuIcon fontSize="large" color="primary" />
         </Tooltip>
       </Fab>
-      <Menu
-        anchorEl={anchorEl}
-        id="account-menu"
-        open={!!anchorEl}
-        onClose={handleClose}
-        onClick={handleClose}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            bgcolor: "secondary.main",
-            overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            mt: 1.5,
-            "& .MuiAvatar-root": {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            "&:before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              bottom: -15,
-              right: 25,
-              width: 15,
-              height: 15,
-              bgcolor: "secondary.main",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
-            },
-          },
-        }}
-        transformOrigin={{ horizontal: "right", vertical: "bottom" }}
-        anchorOrigin={{ horizontal: "right", vertical: "top" }}
-      >
+      <FabMenu id={MENU_ID} anchorEl={anchorEl} onClick={handleClose}>
         <MenuItem>
           <Avatar src={user.photoURL} sx={{ bgcolor: "white" }} />
           <DisplayName>{user.displayName}</DisplayName>
@@ -94,7 +61,7 @@ export default function FAB(props) {
           </ListItemIcon>
           Sign out
         </MenuItem>
-      </Menu>
+      </FabMenu>
     </>
   );
 }
