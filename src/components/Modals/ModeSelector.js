@@ -1,9 +1,9 @@
 import { styled, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { useContext } from "react";
-import ModeProvider, { MODES } from "../../providers";
+import { ModeContext, MODES } from "../../providers";
 
 export default function ModeSelector() {
-  const { mode, setMode } = useContext(ModeProvider);
+  const { mode, setMode } = useContext(ModeContext);
 
   return (
     <Group value={mode} exclusive onChange={(_, newMode) => setMode(newMode)}>
