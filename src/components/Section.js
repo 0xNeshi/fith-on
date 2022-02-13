@@ -38,6 +38,7 @@ const Container = styled((props) => <Box sx={{ boxShadow: 3 }} {...props} />)(
   width: 100%;
   padding: 0 20px;
   background-color: ${theme.palette.background.default};
+  font-weight: 600;
 `
 );
 
