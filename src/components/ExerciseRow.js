@@ -1,24 +1,21 @@
 import styled from "styled-components";
 import AmrapInput from "./AmrapInput";
 
-export default function ExerciseRow({
-  exerciseName,
-  weights,
-  trainingMax,
-  amrapReps,
-  changeAmrapReps,
-}) {
-  const [first, second, third] = weights;
+export default function ExerciseRow(props) {
+  const [first, second, third] = props.weights;
 
   return (
     <tr>
-      <NameCell>{exerciseName}</NameCell>
-      <TMCell>{trainingMax}</TMCell>
+      <NameCell>{props.exerciseName}</NameCell>
+      <TMCell>{props.trainingMax}</TMCell>
       <td>{first}</td>
       <td>{second}</td>
       <td>{third}</td>
       <AmrapCell>
-        <AmrapInput reps={amrapReps} onChangeAmrapReps={changeAmrapReps} />
+        <AmrapInput
+          reps={props.amrapReps}
+          onChangeAmrapReps={props.changeAmrapReps}
+        />
       </AmrapCell>
     </tr>
   );
