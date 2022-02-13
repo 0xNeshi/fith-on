@@ -30,7 +30,7 @@ export default function Section(props) {
   );
 }
 
-const Container = styled(Box)(
+const Container = styled((props) => <Box sx={{ boxShadow: 3 }} {...props} />)(
   ({ theme }) => `
   display: flex;
   flex-direction: column;
@@ -38,9 +38,6 @@ const Container = styled(Box)(
   width: 100%;
   padding: 0 20px;
   background-color: ${theme.palette.background.default};
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 
-    0px 3px 4px 0px rgb(0 0 0 / 14%), 
-    0px 1px 8px 0px rgb(0 0 0 / 12%);
 `
 );
 
@@ -54,5 +51,5 @@ const Header = styled((props) => (
 `;
 
 const DeleteIcon = styled(Delete)`
-  ${({ disabled, theme }) => (disabled ? `cursor: auto;` : "cursor: pointer")}
+  ${({ disabled }) => (disabled ? `cursor: auto;` : "cursor: pointer")}
 `;
