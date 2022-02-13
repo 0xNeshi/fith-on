@@ -12,7 +12,7 @@ const lightTheme = createTheme({
       main: "#949356",
     },
     secondary: {
-      main: "#945676",
+      main: grey[300],
     },
     warning: {
       main: "#569474",
@@ -25,6 +25,7 @@ const lightTheme = createTheme({
     },
   },
 });
+
 const oliveGreenTheme = createTheme({
   palette: {
     primary: {

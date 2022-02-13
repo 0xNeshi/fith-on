@@ -17,9 +17,9 @@ export default function ExerciseRow({
       <td>{first}</td>
       <td>{second}</td>
       <td>{third}</td>
-      <td>
+      <AmrapCell>
         <AmrapInput reps={amrapReps} onChangeAmrapReps={changeAmrapReps} />
-      </td>
+      </AmrapCell>
     </tr>
   );
 }
@@ -30,4 +30,9 @@ const TMCell = styled.td`
 
 const NameCell = styled.td`
   text-align: left;
+`;
+
+const AmrapCell = styled.td`
+  display: flex;
+  justify-content: center;
 `;

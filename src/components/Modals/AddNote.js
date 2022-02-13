@@ -41,7 +41,7 @@ export default function AddNote({ onClose, onSubmit }) {
         />
       </InputContainer>
       <ButtonContainer>
-        <Button onClick={onClose} color="secondary" disabled={isSubmitting}>
+        <Button onClick={onClose} color="warning" disabled={isSubmitting}>
           Cancel
         </Button>
         <Button color="primary" disabled={isSubmitting} submit>

@@ -1,5 +1,5 @@
-import { styled } from "@mui/material";
-import { useEffect, useState, useCallback, useContext, useMemo } from "react";
+import { TextField } from "@mui/material";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { NetworkStateContext } from "../providers";
 
 const WAIT_INTERVAL = 1000;
@@ -37,9 +37,11 @@ export default function AmrapInput({ reps, onChangeAmrapReps }) {
   );
 
   return (
-    <Input
+    <TextField
+      variant="standard"
+      inputProps={{ style: { textAlign: "center", padding: 0 } }}
+      sx={{ width: 30, height: 30 }}
       value={value}
-      type="text"
       onChange={handleChange}
       onBlur={handleChangeAmrapReps}
       onKeyDown={handleKeyDown}
@@ -48,20 +50,3 @@ export default function AmrapInput({ reps, onChangeAmrapReps }) {
     />
   );
 }
-
-const Input = styled("input")(
-  ({ theme }) => `
-  width: 30px;
-  height: 30px;
-  border: none;
-  border-radius: 2px;
-  color: white;
-  background-color: ${theme.palette.background.default};
-  font-weight: 600;
-  text-align: center;
-
-  :disabled {
-    background-color: transparent;
-  }
-`
-);
