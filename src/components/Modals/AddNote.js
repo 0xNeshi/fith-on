@@ -1,8 +1,8 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import * as yup from "yup";
+import Button from "../Button";
 import Input from "../Input";
 
 const schema = yup.object().shape({
@@ -41,21 +41,10 @@ export default function AddNote({ onClose, onSubmit }) {
         />
       </InputContainer>
       <ButtonContainer>
-        <Button
-          type="button"
-          variant="outlined"
-          onClick={onClose}
-          color="secondary"
-          disabled={isSubmitting}
-        >
+        <Button onClick={onClose} color="secondary" disabled={isSubmitting}>
           Cancel
         </Button>
-        <Button
-          type="submit"
-          variant="outlined"
-          color="primary"
-          disabled={isSubmitting}
-        >
+        <Button color="primary" disabled={isSubmitting} submit>
           Submit
         </Button>
       </ButtonContainer>

@@ -11,6 +11,9 @@ const lightTheme = createTheme({
     primary: {
       main: "#949356",
     },
+    secondary: {
+      main: "#945676",
+    },
     warning: {
       main: "#569474",
     },

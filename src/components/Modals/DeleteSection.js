@@ -1,5 +1,5 @@
-import { Button } from "@mui/material";
 import styled from "styled-components";
+import Button from "../Button";
 
 export default function DeleteSection(props) {
   const { onClose, onConfirm } = props;
@@ -8,15 +8,10 @@ export default function DeleteSection(props) {
     <Container>
       <h4>Confirm deletion</h4>
       <ButtonContainer>
-        <Button
-          type="button"
-          variant="outlined"
-          onClick={onClose}
-          color="warning"
-        >
+        <Button color="warning" onClick={onClose}>
           Cancel
         </Button>
-        <Button variant="contained" color="primary" onClick={onConfirm}>
+        <Button color="primary" onClick={onConfirm} autoFocus>
           Delete
         </Button>
       </ButtonContainer>

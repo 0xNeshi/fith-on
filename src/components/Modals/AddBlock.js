@@ -1,8 +1,8 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import * as yup from "yup";
+import Button from "../Button";
 import Input from "../Input";
 
 const TRAINING_MAX_SCHEMA = yup
@@ -67,21 +67,10 @@ export default function AddBlock(props) {
         </InputColumn>
       </InputContainer>
       <ButtonContainer>
-        <Button
-          type="button"
-          variant="outlined"
-          onClick={onClose}
-          color="warning"
-          disabled={isSubmitting}
-        >
+        <Button color="warning" disabled={isSubmitting} onClick={onClose}>
           Cancel
         </Button>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          disabled={isSubmitting}
-        >
+        <Button color="primary" disabled={isSubmitting} submit>
           Submit
         </Button>
       </ButtonContainer>

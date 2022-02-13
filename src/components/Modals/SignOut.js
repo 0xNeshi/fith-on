@@ -1,20 +1,15 @@
-import { Button } from "@mui/material";
 import styled from "styled-components";
+import Button from "../Button";
 
 export default function SignOut({ onSignOut, onClose }) {
   return (
     <Container>
       <h4>Are you sure you wish to sign out?</h4>
       <ButtonContainer>
-        <Button
-          type="button"
-          variant="contained"
-          onClick={onClose}
-          color="primary"
-        >
+        <Button color="primary" onClick={onClose}>
           Cancel
         </Button>
-        <Button variant="outlined" color="warning" onClick={onSignOut}>
+        <Button color="warning" onClick={onSignOut} autoFocus>
           Sign out
         </Button>
       </ButtonContainer>
