@@ -19,7 +19,7 @@ export default function App() {
             <Container
               component="main"
               maxWidth="sm"
-              sx={{ paddingLeft: 0, backgroundColor: "background.paper" }}
+              sx={{ padding: 0, backgroundColor: "background.paper" }}
             >
               <CssBaseline />
               <Suspense fallback={<Loading />}>
