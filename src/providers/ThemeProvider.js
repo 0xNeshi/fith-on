@@ -6,7 +6,7 @@ import {
 import { common, grey } from "@mui/material/colors";
 import { createContext, useCallback, useState } from "react";
 
-const lightTheme = createTheme({
+const light = createTheme({
   palette: {
     primary: {
       main: "#949356",
@@ -26,7 +26,7 @@ const lightTheme = createTheme({
   },
 });
 
-const oliveGreenTheme = createTheme({
+const olive = createTheme({
   palette: {
     primary: {
       main: common.white,
@@ -49,12 +49,12 @@ const oliveGreenTheme = createTheme({
 });
 
 const THEMES = {
-  light: lightTheme,
-  olive: oliveGreenTheme,
+  light: light,
+  olive: olive,
 };
 
 function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(lightTheme);
+  const [theme, setTheme] = useState(THEMES.olive);
 
   const changeTheme = useCallback((newTheme) => setTheme(THEMES[newTheme]), []);
 
