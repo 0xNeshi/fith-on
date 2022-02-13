@@ -10,6 +10,7 @@ import FAB from "./FAB";
 import {
   useAddBlockModal,
   useAddNoteModal,
+  useModeSelectorModal,
   useRemoveSectionModal,
   useSignOutModal,
 } from "./hooks";
@@ -35,6 +36,7 @@ export default function Dashboard() {
   const { open: openAddBlock } = useAddBlockModal(handleAddSection);
   const { open: openRemoveSection } = useRemoveSectionModal(remove);
   const { open: openSignOut } = useSignOutModal();
+  const openModeSelector = useModeSelectorModal();
 
   const sortedSections = useMemo(
     () => [...sections].sort((s1, s2) => s2.dateCreated - s1.dateCreated),
@@ -100,6 +102,7 @@ export default function Dashboard() {
             onAddNote={openAddNote}
             onAddBlock={handleOpenAddBlock}
             onSignOut={openSignOut}
+            onSelectMode={openModeSelector}
           />
         </FABContainer>
       </Fade>

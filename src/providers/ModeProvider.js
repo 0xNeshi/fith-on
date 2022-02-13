@@ -64,8 +64,9 @@ const MODE_CONFIGS = {
 function ModeProvider({ children }) {
   const [mode, setMode] = useState(MODES.olive);
 
-  const changeMode = useCallback((newTheme) => setMode(newTheme), []);
+  const changeMode = useCallback((newMode) => setMode(newMode), []);
 
+  console.log("mode", mode);
   return (
     <ModeContext.Provider value={{ mode, setMode: changeMode }}>
       <MuiThemeProvider theme={MODE_CONFIGS[mode]}>
@@ -78,4 +79,4 @@ function ModeProvider({ children }) {
 
 const ModeContext = createContext({ mode: null, setMode: null });
 
-export { ModeProvider as default, ModeContext, MODES };
+export { ModeProvider as default, ModeContext, MODES, MODE_CONFIGS };
