@@ -8,7 +8,7 @@ export default function SignIn() {
     <Container>
       <Fade in>
         <Box>
-          <Header variant="h6" component="div">
+          <Header variant="h6" component="h6">
             Let's get started...
           </Header>
           <Button
