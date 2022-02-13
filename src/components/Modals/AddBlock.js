@@ -67,7 +67,7 @@ export default function AddBlock(props) {
         </InputColumn>
       </InputContainer>
       <ButtonContainer>
-        <Button color="warning" disabled={isSubmitting} onClick={onClose}>
+        <Button color="secondary" disabled={isSubmitting} onClick={onClose}>
           Cancel
         </Button>
         <Button color="primary" disabled={isSubmitting} submit>

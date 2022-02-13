@@ -9,7 +9,7 @@ export default function SignOut({ onSignOut, onClose }) {
         <Button color="primary" onClick={onClose}>
           Cancel
         </Button>
-        <Button color="warning" onClick={onSignOut} autoFocus>
+        <Button color="secondary" onClick={onSignOut} autoFocus>
           Sign out
         </Button>
       </ButtonContainer>

@@ -41,7 +41,7 @@ export default function AddNote({ onClose, onSubmit }) {
         />
       </InputContainer>
       <ButtonContainer>
-        <Button onClick={onClose} color="warning" disabled={isSubmitting}>
+        <Button onClick={onClose} color="secondary" disabled={isSubmitting}>
           Cancel
         </Button>
         <Button color="primary" disabled={isSubmitting} submit>
@@ -63,6 +63,7 @@ const ButtonContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-evenly;
+  margin-top: 40px;
 `;
 
 const InputContainer = styled.div`
@@ -70,5 +71,4 @@ const InputContainer = styled.div`
   flex-direction: column;
   gap: 20px;
   width: 80%;
-  margin-bottom: 50px;
 `;

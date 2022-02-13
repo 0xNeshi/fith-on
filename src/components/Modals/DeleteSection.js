@@ -8,7 +8,7 @@ export default function DeleteSection(props) {
     <Container>
       <h4>Confirm deletion</h4>
       <ButtonContainer>
-        <Button color="warning" onClick={onClose}>
+        <Button color="secondary" onClick={onClose}>
           Cancel
         </Button>
         <Button color="primary" onClick={onConfirm} autoFocus>
@@ -30,5 +30,5 @@ const Container = styled.form`
 const ButtonContainer = styled.div`
   display: flex;
   width: 100%;
-  gap: 10px;
+  gap: 15px;
 `;

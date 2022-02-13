@@ -6,51 +6,64 @@ import {
 import { common, grey } from "@mui/material/colors";
 import { createContext, useCallback, useState } from "react";
 
-const light = createTheme({
+const blueGreen = "#569474";
+const brown = "#947456";
+
+const olive = {
+  100: "#d4d3bb",
+  300: "#cecd98",
+  600: "#bab86c",
+  900: "#949356",
+};
+
+const lightTheme = createTheme({
   palette: {
     primary: {
-      main: "#949356",
+      main: olive[900],
     },
     secondary: {
       main: grey[100],
     },
     warning: {
-      main: "#569474",
+      main: blueGreen,
     },
     text: {
       primary: grey[700],
     },
     background: {
-      paper: "#d4d3bb",
+      paper: olive[100],
     },
   },
 });
 
-const olive = createTheme({
+const oliveTheme = createTheme({
   palette: {
     primary: {
       main: common.white,
     },
     secondary: {
-      main: "#947456",
+      main: olive[900],
     },
     warning: {
-      main: common.white,
-    },
-    background: {
-      default: "#949356",
-      paper: "#ACAB71",
+      main: brown,
     },
     text: {
       primary: common.white,
       secondary: common.white,
     },
+    background: {
+      default: olive[600],
+      paper: olive[900],
+    },
+    action: {
+      active: common.white,
+    },
   },
 });
 
 const THEMES = {
-  light: light,
-  olive: olive,
+  light: lightTheme,
+  olive: oliveTheme,
 };
 
 function ThemeProvider({ children }) {
