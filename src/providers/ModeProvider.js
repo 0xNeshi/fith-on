@@ -66,7 +66,6 @@ function ModeProvider({ children }) {
 
   const changeMode = useCallback((newMode) => setMode(newMode), []);
 
-  console.log("mode", mode);
   return (
     <ModeContext.Provider value={{ mode, setMode: changeMode }}>
       <MuiThemeProvider theme={MODE_CONFIGS[mode]}>

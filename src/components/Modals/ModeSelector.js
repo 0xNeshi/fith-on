@@ -1,6 +1,10 @@
-import { styled, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import {
+  styled,
+  ToggleButton as MuiToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
 import { useCallback, useContext } from "react";
-import { ModeContext, MODES } from "../../providers";
+import { ModeContext, MODES, MODE_CONFIGS } from "../../providers";
 
 export default function ModeSelector() {
   const { mode, setMode } = useContext(ModeContext);
@@ -14,7 +18,11 @@ export default function ModeSelector() {
   return (
     <Group value={mode} exclusive onChange={handleModeSelect}>
       {Object.keys(MODES).map((modeOption) => (
-        <ToggleButton key={modeOption} value={MODES[modeOption]}>
+        <ToggleButton
+          key={modeOption}
+          value={MODES[modeOption]}
+          mode={modeOption}
+        >
           {MODES[modeOption]}
         </ToggleButton>
       ))}
@@ -25,7 +33,13 @@ export default function ModeSelector() {
 const Group = styled(ToggleButtonGroup)`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
-  text-align: center;
+  gap: 15px;
 `;
+
+const ToggleButton = styled(MuiToggleButton)(
+  ({ mode }) => `
+    background-color: ${MODE_CONFIGS[MODES[mode]].palette.background.default};
+    color: ${MODE_CONFIGS[MODES[mode]].palette.primary.main};
+  `
+);
