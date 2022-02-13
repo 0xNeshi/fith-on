@@ -62,18 +62,23 @@ const oliveTheme = createTheme({
 });
 
 const THEMES = {
-  light: lightTheme,
-  olive: oliveTheme,
+  light: "light",
+  olive: "olive",
+};
+
+const THEME_CONFIGS = {
+  [THEMES.light]: lightTheme,
+  [THEMES.olive]: oliveTheme,
 };
 
 function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(THEMES.olive);
+  const [theme, setTheme] = useState("olive");
 
-  const changeTheme = useCallback((newTheme) => setTheme(THEMES[newTheme]), []);
+  const changeTheme = useCallback((newTheme) => setTheme(newTheme), []);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme: changeTheme }}>
-      <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={THEME_CONFIGS[theme]}>
         <CssBaseline />
         {children}
       </MuiThemeProvider>
