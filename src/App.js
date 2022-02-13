@@ -4,15 +4,19 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Landing from "./components/Landing";
 import Loading from "./components/Loading";
 import { RequireAnon, RequireAuth } from "./guards";
-import { ModalProvider, NetworkStateProvider, UserProvider } from "./providers";
-import ThemeProvider from "./providers/ThemeProvider";
+import {
+  ModalProvider,
+  ModeProvider,
+  NetworkStateProvider,
+  UserProvider,
+} from "./providers";
 
 const Dashboard = lazy(() => import("./components/Dashboard"));
 const SignIn = lazy(() => import("./components/SignIn"));
 
 export default function App() {
   return (
-    <ThemeProvider>
+    <ModeProvider>
       <UserProvider>
         <ModalProvider>
           <NetworkStateProvider>
@@ -50,6 +54,6 @@ export default function App() {
           </NetworkStateProvider>
         </ModalProvider>
       </UserProvider>
-    </ThemeProvider>
+    </ModeProvider>
   );
 }

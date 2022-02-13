@@ -51,31 +51,31 @@ const oliveTheme = createTheme({
   },
 });
 
-const THEMES = {
+const MODES = {
   light: "light",
   olive: "olive",
 };
 
-const THEME_CONFIGS = {
-  [THEMES.light]: lightTheme,
-  [THEMES.olive]: oliveTheme,
+const MODE_CONFIGS = {
+  [MODES.light]: lightTheme,
+  [MODES.olive]: oliveTheme,
 };
 
-function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(THEMES.olive);
+function ModeProvider({ children }) {
+  const [mode, setMode] = useState(MODES.olive);
 
-  const changeTheme = useCallback((newTheme) => setTheme(newTheme), []);
+  const changeMode = useCallback((newTheme) => setMode(newTheme), []);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme: changeTheme }}>
-      <MuiThemeProvider theme={THEME_CONFIGS[theme]}>
+    <ModeContext.Provider value={{ mode, setMode: changeMode }}>
+      <MuiThemeProvider theme={MODE_CONFIGS[mode]}>
         <CssBaseline />
         {children}
       </MuiThemeProvider>
-    </ThemeContext.Provider>
+    </ModeContext.Provider>
   );
 }
 
-const ThemeContext = createContext({ theme: null, setTheme: null });
+const ModeContext = createContext({ mode: null, setMode: null });
 
-export { ThemeProvider as default, ThemeContext, THEMES };
+export { ModeProvider as default, ModeContext, MODES };

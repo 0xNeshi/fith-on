@@ -1,19 +1,15 @@
 import { styled, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { useContext } from "react";
-import ThemeProvider, { THEMES } from "../../providers/ThemeProvider";
+import ModeProvider, { MODES } from "../../providers";
 
 export default function ModeSelector() {
-  const { theme, setTheme } = useContext(ThemeProvider);
+  const { mode, setMode } = useContext(ModeProvider);
 
   return (
-    <Group
-      value={theme}
-      exclusive
-      onChange={(_, newTheme) => setTheme(newTheme)}
-    >
-      {Object.keys(THEMES).map((themeOption) => (
-        <ToggleButton value={THEMES[themeOption]}>
-          {THEMES[themeOption]}
+    <Group value={mode} exclusive onChange={(_, newMode) => setMode(newMode)}>
+      {Object.keys(MODES).map((modeOption) => (
+        <ToggleButton value={MODES[modeOption]}>
+          {MODES[modeOption]}
         </ToggleButton>
       ))}
     </Group>

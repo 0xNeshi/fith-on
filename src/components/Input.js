@@ -1,9 +1,9 @@
 import { styled, TextField } from "@mui/material";
 import { useContext } from "react";
-import { ThemeContext, THEMES } from "../providers/ThemeProvider";
+import { ModeContext, MODES } from "../providers";
 
 export default function Input({ label, registerReturn, error, ...rest }) {
-  const { theme } = useContext(ThemeContext);
+  const { mode } = useContext(ModeContext);
 
   return (
     <StyledField
@@ -15,7 +15,7 @@ export default function Input({ label, registerReturn, error, ...rest }) {
       FormHelperTextProps={{
         style: { fontSize: 12 },
       }}
-      mode={theme}
+      mode={mode}
       {...rest}
     />
   );
@@ -23,7 +23,7 @@ export default function Input({ label, registerReturn, error, ...rest }) {
 
 const StyledField = styled(TextField)(
   ({ mode }) =>
-    mode === THEMES.olive &&
+    mode === MODES.olive &&
     `& .MuiInput-underline:before {
   border-bottom: 1px solid rgba(255, 255, 255, 0.84);
 }`
