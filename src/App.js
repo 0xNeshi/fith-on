@@ -16,8 +16,8 @@ const SignIn = lazy(() => import("./components/SignIn"));
 
 export default function App() {
   return (
-    <ModeProvider>
-      <UserProvider>
+    <UserProvider>
+      <ModeProvider>
         <ModalProvider>
           <NetworkStateProvider>
             <Container
@@ -53,7 +53,7 @@ export default function App() {
             </Container>
           </NetworkStateProvider>
         </ModalProvider>
-      </UserProvider>
-    </ModeProvider>
+      </ModeProvider>
+    </UserProvider>
   );
 }

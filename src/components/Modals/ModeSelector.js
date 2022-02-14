@@ -1,45 +1,48 @@
 import {
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
   styled,
-  ToggleButton as MuiToggleButton,
-  ToggleButtonGroup,
+  Typography,
 } from "@mui/material";
-import { useCallback, useContext } from "react";
-import { ModeContext, MODES, MODE_CONFIGS } from "../../providers";
+import { MODES } from "../../providers";
 
-export default function ModeSelector() {
-  const { mode, setMode } = useContext(ModeContext);
-
-  const handleModeSelect = useCallback((_, newMode) => {
-    if (!!newMode) {
-      setMode(newMode);
-    }
-  }, []);
+export default function ModeSelector({ currentMode, onConfirm }) {
+  const handleOnChange = (event) => {
+    onConfirm(event.target.value);
+  };
 
   return (
-    <Group value={mode} exclusive onChange={handleModeSelect}>
-      {Object.keys(MODES).map((modeOption) => (
-        <ToggleButton
-          key={modeOption}
-          value={MODES[modeOption]}
-          mode={modeOption}
+    <Container>
+      <Typography variant="subtitle1" component="div">
+        Choose mode below
+      </Typography>
+      <FormControl variant="filled" sx={{ m: 1, minWidth: 200 }}>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-standard"
+          value={currentMode}
+          onChange={handleOnChange}
+          label="Mode"
+          color="secondary"
         >
-          {MODES[modeOption]}
-        </ToggleButton>
-      ))}
-    </Group>
+          {Object.keys(MODES).map((modeOption) => (
+            <MenuItem key={modeOption} value={MODES[modeOption]}>
+              {MODES[modeOption]}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </Container>
   );
 }
 
-const Group = styled(ToggleButtonGroup)`
+const Container = styled(Box)`
   display: flex;
   flex-direction: column;
+  gap: 20px;
   align-items: center;
-  gap: 15px;
+  padding: 20px 0;
 `;
-
-const ToggleButton = styled(MuiToggleButton)(
-  ({ mode }) => `
-    background-color: ${MODE_CONFIGS[MODES[mode]].palette.background.default};
-    color: ${MODE_CONFIGS[MODES[mode]].palette.primary.main};
-  `
-);

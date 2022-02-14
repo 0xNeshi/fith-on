@@ -2,10 +2,16 @@ import { useCallback, useContext } from "react";
 import { ModalContext } from "../../../providers";
 import { ModeSelector } from "../../Modals";
 
-export default function useModeSelectorModal() {
+export default function useModeSelectorModal(currentMode, onConfirm) {
   const { openModal } = useContext(ModalContext);
 
-  const open = useCallback(() => openModal(<ModeSelector />), [openModal]);
+  const open = useCallback(
+    () =>
+      openModal(
+        <ModeSelector currentMode={currentMode} onConfirm={onConfirm} />
+      ),
+    [openModal]
+  );
 
   return open;
 }

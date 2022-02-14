@@ -4,7 +4,14 @@ import {
   ThemeProvider as MuiThemeProvider,
 } from "@mui/material";
 import { common, grey, orange } from "@mui/material/colors";
-import { createContext, useCallback, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { UserContext } from ".";
 
 const olive = {
   100: "#d4d3bb",
@@ -87,9 +94,13 @@ const MODE_CONFIGS = {
 };
 
 function ModeProvider({ children }) {
-  const [mode, setMode] = useState(MODES.dark);
+  const localMode = localStorage.getItem("mode") || MODES.dark;
+  const [mode, setMode] = useState(localMode);
 
-  const changeMode = useCallback((newMode) => setMode(newMode), []);
+  const changeMode = useCallback((newMode) => {
+    setMode(newMode);
+    localStorage.setItem("mode", newMode);
+  }, []);
 
   return (
     <ModeContext.Provider value={{ mode, setMode: changeMode }}>

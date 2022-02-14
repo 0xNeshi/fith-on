@@ -4,7 +4,6 @@ import { createContext, useCallback, useState } from "react";
 
 const ModalContext = createContext({
   openModal: (content) => content,
-  closeModal: () => {},
 });
 
 function ModalProvider({ children }) {
@@ -15,10 +14,12 @@ function ModalProvider({ children }) {
     setContent(modalContent);
     setOpen(true);
   }, []);
-  const closeModal = useCallback(() => setOpen(false), []);
+  const closeModal = useCallback(() => {
+    setOpen(false);
+  }, []);
 
   return (
-    <ModalContext.Provider value={{ openModal, closeModal }}>
+    <ModalContext.Provider value={{ openModal }}>
       {children}
       <StyledModal
         open={isOpen}

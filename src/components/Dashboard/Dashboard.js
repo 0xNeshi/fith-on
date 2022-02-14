@@ -1,5 +1,5 @@
 import { Fade, useScrollTrigger } from "@mui/material";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 import styled from "styled-components";
 import { useSections } from "../../hooks";
 import { getNewBlockSuggestedValues } from "../../utilities";
@@ -15,11 +15,13 @@ import {
   useSignOutModal,
 } from "./hooks";
 import { Box, styled as muiStyled } from "@mui/material";
+import { ModeContext } from "../../providers";
 
 export default function Dashboard() {
   const [ref, setRef] = useState();
   const { isLoading, sections, add, remove, update } = useSections();
   const trigger = useScrollTrigger({ target: ref ? ref : window });
+  const { mode, setMode } = useContext(ModeContext);
 
   const handleAddSection = useCallback(
     (section) => {
@@ -32,11 +34,13 @@ export default function Dashboard() {
     [add, ref]
   );
 
+  const handleSetMode = useCallback((newMode) => setMode(newMode), []);
+
   const { open: openAddNote } = useAddNoteModal(handleAddSection);
   const { open: openAddBlock } = useAddBlockModal(handleAddSection);
   const { open: openRemoveSection } = useRemoveSectionModal(remove);
   const { open: openSignOut } = useSignOutModal();
-  const openModeSelector = useModeSelectorModal();
+  const openModeSelector = useModeSelectorModal(mode, handleSetMode);
 
   const sortedSections = useMemo(
     () => [...sections].sort((s1, s2) => s2.dateCreated - s1.dateCreated),
