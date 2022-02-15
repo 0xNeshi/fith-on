@@ -7,9 +7,13 @@ import {
   Typography,
 } from "@mui/material";
 import { MODES } from "../../providers";
+import { useState } from "react";
 
 export default function ModeSelector({ currentMode, onConfirm }) {
+  const [mode, setMode] = useState(currentMode);
+
   const handleOnChange = (event) => {
+    setMode(event.target.value);
     onConfirm(event.target.value);
   };
 
@@ -22,7 +26,7 @@ export default function ModeSelector({ currentMode, onConfirm }) {
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
-          value={currentMode}
+          value={mode}
           onChange={handleOnChange}
           label="Mode"
           color="secondary"
@@ -41,7 +45,6 @@ export default function ModeSelector({ currentMode, onConfirm }) {
 const Container = styled(Box)`
   display: flex;
   flex-direction: column;
-  gap: 20px;
   align-items: center;
   padding: 20px 0;
 `;
