@@ -30,6 +30,7 @@ export default function ModeSelector({ currentMode, onConfirm }) {
           onChange={handleOnChange}
           label="Mode"
           color="secondary"
+          autoFocus
         >
           {Object.keys(MODES).map((modeOption) => (
             <MenuItem key={modeOption} value={MODES[modeOption]}>

@@ -6,10 +6,10 @@ export default function SignOut({ onSignOut, onClose }) {
     <Container>
       <h4>Are you sure you wish to sign out?</h4>
       <ButtonContainer>
-        <Button color="primary" onClick={onClose}>
+        <Button color="primary" onClick={onClose} autoFocus>
           Cancel
         </Button>
-        <Button color="secondary" onClick={onSignOut} autoFocus>
+        <Button color="secondary" onClick={onSignOut}>
           Sign out
         </Button>
       </ButtonContainer>

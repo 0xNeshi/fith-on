@@ -46,6 +46,7 @@ export default function AddBlock(props) {
             label="Squat max"
             registerReturn={register("squatMax")}
             error={errors?.squatMax?.message}
+            autoFocus
           />
           <Input
             label="Bench max"
@@ -70,7 +71,7 @@ export default function AddBlock(props) {
         <Button color="secondary" disabled={isSubmitting} onClick={onClose}>
           Cancel
         </Button>
-        <Button color="primary" disabled={isSubmitting} submit>
+        <Button color="primary" disabled={isSubmitting} submit autoFocus>
           Submit
         </Button>
       </ButtonContainer>
