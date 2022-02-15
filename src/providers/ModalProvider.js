@@ -2,9 +2,7 @@ import { ModalUnstyled } from "@mui/base";
 import { Box, styled } from "@mui/material";
 import { createContext, useCallback, useState } from "react";
 
-const ModalContext = createContext({
-  openModal: (content) => content,
-});
+const ModalContext = createContext({ openModal: (content) => content });
 
 function ModalProvider({ children }) {
   const [isOpen, setOpen] = useState(false);
@@ -31,8 +29,6 @@ function ModalProvider({ children }) {
     </ModalContext.Provider>
   );
 }
-
-export { ModalProvider as default, ModalContext };
 
 const style = {
   maxWidth: 400,
@@ -66,3 +62,5 @@ const Backdrop = styled("div")`
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-tap-highlight-color: transparent;
 `;
+
+export { ModalProvider as default, ModalContext };

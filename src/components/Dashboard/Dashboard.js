@@ -34,7 +34,7 @@ export default function Dashboard() {
     [add, ref]
   );
 
-  const handleSetMode = useCallback((newMode) => setMode(newMode), []);
+  const handleSetMode = useCallback((newMode) => setMode(newMode), [setMode]);
 
   const { open: openAddNote } = useAddNoteModal(handleAddSection);
   const { open: openAddBlock } = useAddBlockModal(handleAddSection);

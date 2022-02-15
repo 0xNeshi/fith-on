@@ -4,14 +4,7 @@ import {
   ThemeProvider as MuiThemeProvider,
 } from "@mui/material";
 import { common, grey, orange } from "@mui/material/colors";
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { UserContext } from ".";
+import { createContext, useCallback, useState } from "react";
 
 const olive = {
   100: "#d4d3bb",
@@ -93,6 +86,8 @@ const MODE_CONFIGS = {
   [MODES.dark]: darkTheme,
 };
 
+const ModeContext = createContext({ mode: null, setMode: null });
+
 function ModeProvider({ children }) {
   const localMode = localStorage.getItem("mode") || MODES.dark;
   const [mode, setMode] = useState(localMode);
@@ -111,7 +106,5 @@ function ModeProvider({ children }) {
     </ModeContext.Provider>
   );
 }
-
-const ModeContext = createContext({ mode: null, setMode: null });
 
 export { ModeProvider as default, ModeContext, MODES, MODE_CONFIGS };

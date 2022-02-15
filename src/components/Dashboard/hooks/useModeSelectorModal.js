@@ -10,7 +10,7 @@ export default function useModeSelectorModal(currentMode, onConfirm) {
       openModal(
         <ModeSelector currentMode={currentMode} onConfirm={onConfirm} />
       ),
-    [openModal]
+    [openModal, currentMode, onConfirm]
   );
 
   return open;
