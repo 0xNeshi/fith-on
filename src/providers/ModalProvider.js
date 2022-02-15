@@ -2,7 +2,10 @@ import { ModalUnstyled } from "@mui/base";
 import { Box, styled } from "@mui/material";
 import { createContext, useCallback, useState } from "react";
 
-const ModalContext = createContext({ openModal: (content) => content });
+const ModalContext = createContext({
+  openModal: (content) => content,
+  closeModal: () => {},
+});
 
 function ModalProvider({ children }) {
   const [isOpen, setOpen] = useState(false);
@@ -17,7 +20,7 @@ function ModalProvider({ children }) {
   }, []);
 
   return (
-    <ModalContext.Provider value={{ openModal }}>
+    <ModalContext.Provider value={{ openModal, closeModal }}>
       {children}
       <StyledModal
         open={isOpen}
