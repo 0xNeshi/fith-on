@@ -49,7 +49,7 @@ export default function WeekRow({ changeAmrapReps, week, blockId }) {
   return (
     <Container>
       <WeekHeader>
-        Week {week.number} (<u>{repSchemas[week.number]}</u>)
+        Week {week.number} ({repSchemas[week.number]})
       </WeekHeader>
       <Table>
         <thead>
