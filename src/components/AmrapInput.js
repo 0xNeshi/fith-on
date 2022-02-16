@@ -1,6 +1,6 @@
 import { styled, TextField } from "@mui/material";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { ModeContext, MODES, NetworkStateContext } from "../providers";
+import { ModeContext, NetworkStateContext } from "../providers";
 
 const WAIT_INTERVAL = 1000;
 const ENTER_KEY = 13;
@@ -54,9 +54,8 @@ export default function AmrapInput({ reps, onChangeAmrapReps }) {
 }
 
 const Input = styled(TextField)(
-  ({ mode }) =>
-    mode === MODES.olive &&
+  ({ theme }) =>
     `& .MuiInput-underline:before {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.84);
-}`
+      border-bottom: 1px solid ${theme.palette.primary.main};
+    }`
 );

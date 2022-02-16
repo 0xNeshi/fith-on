@@ -28,9 +28,8 @@ export default function Input({
 }
 
 const StyledField = styled(TextField)(
-  ({ mode }) =>
-    mode !== MODES.light &&
+  ({ theme }) =>
     `& .MuiInput-underline:before {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.84);
-}`
+      border-bottom: 1px solid ${theme.palette.primary.main};
+    }`
 );
