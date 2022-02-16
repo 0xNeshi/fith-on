@@ -28,5 +28,5 @@ const Container = styled.form`
 const ButtonContainer = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-evenly;
+  gap: 15px;
 `;
