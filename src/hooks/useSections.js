@@ -25,7 +25,7 @@ export default function useSections() {
     );
     setSections(sortedSections);
     setLoading(false);
-  }, [user.email]);
+  }, [user.email, setSections]);
 
   useEffect(() => getData(), [getData]);
 

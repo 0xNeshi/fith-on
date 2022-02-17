@@ -1,14 +1,14 @@
 import { Box, Fade, styled } from "@mui/material";
-import { useCallback, useContext, useMemo } from "react";
+import { useCallback, useContext } from "react";
 import { ModeContext } from "../../providers";
+import { getNewBlockSuggestedValues } from "../../utilities";
+import FAB from "./FAB";
 import {
   useAddBlockModal,
   useAddNoteModal,
   useModeSelectorModal,
   useSignOutModal,
 } from "./hooks";
-import { getNewBlockSuggestedValues } from "../../utilities";
-import FAB from "./FAB";
 
 export default function useFAB(sections, display, handleAddSection) {
   const { mode, setMode } = useContext(ModeContext);
