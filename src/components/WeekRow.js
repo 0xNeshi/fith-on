@@ -59,7 +59,7 @@ export default function WeekRow({ changeAmrapReps, week, blockId }) {
             <HeaderCell>{fractionToPercentage(first)}</HeaderCell>
             <HeaderCell>{fractionToPercentage(second)}</HeaderCell>
             <HeaderCell>{fractionToPercentage(third)}</HeaderCell>
-            <HeaderCell>+</HeaderCell>
+            <HeaderCell>R+</HeaderCell>
           </tr>
         </thead>
         <tbody>{exerciseRows}</tbody>
