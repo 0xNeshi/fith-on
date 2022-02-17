@@ -2,13 +2,7 @@ import { styled, TextField } from "@mui/material";
 import { useContext } from "react";
 import { ModeContext } from "../providers";
 
-export default function Input({
-  label,
-  registerReturn,
-  error,
-  autoFocus,
-  ...rest
-}) {
+export default function Input({ label, registerReturn, error, ...rest }) {
   const { mode } = useContext(ModeContext);
 
   return (
