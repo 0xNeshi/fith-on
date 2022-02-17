@@ -7,16 +7,15 @@ import {
   removeSection,
   updateSection,
 } from "../services";
+import usePersistentState from "./usePersistentState";
 
 export default function useSections() {
-  const [sections, setSections] = useState([]);
-  const [isLoading, setLoading] = useState(false);
-  const [toggleRefresh, setToggleRefresh] = useState(false);
   const { user } = useContext(UserContext);
-
-  const refresh = useCallback(() => {
-    setToggleRefresh((prevState) => !prevState);
-  }, []);
+  const [sections, setSections] = usePersistentState(
+    `sections-${user?.email}`,
+    []
+  );
+  const [isLoading, setLoading] = useState(false);
 
   const getData = useCallback(async () => {
     setLoading(true);
@@ -28,7 +27,7 @@ export default function useSections() {
     setLoading(false);
   }, [user.email]);
 
-  useEffect(() => getData(), [toggleRefresh, getData]);
+  useEffect(() => getData(), [getData]);
 
   const add = useCallback(
     (section) => {
@@ -69,6 +68,5 @@ export default function useSections() {
     remove,
     update,
     isLoading,
-    refresh,
   };
 }
