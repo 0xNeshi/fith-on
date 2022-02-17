@@ -1,25 +1,16 @@
-import { Fade, styled, useScrollTrigger, Box } from "@mui/material";
-import { useCallback, useContext, useMemo, useState } from "react";
+import { Box, styled, useScrollTrigger } from "@mui/material";
+import { useCallback, useMemo, useState } from "react";
 import { useSections } from "../../hooks";
-import { ModeContext } from "../../providers";
-import { getNewBlockSuggestedValues } from "../../utilities";
 import Block from "../Block";
 import Loading from "../Loading";
 import Note from "../Note";
-import FAB from "./FAB";
-import {
-  useAddBlockModal,
-  useAddNoteModal,
-  useModeSelectorModal,
-  useRemoveSectionModal,
-  useSignOutModal,
-} from "./hooks";
+import { useRemoveSectionModal } from "./hooks";
+import useFAB from "./useFAB";
 
 export default function Dashboard() {
   const [ref, setRef] = useState();
   const { isLoading, sections, add, remove, update } = useSections();
   const trigger = useScrollTrigger({ target: ref ? ref : window });
-  const { mode, setMode } = useContext(ModeContext);
 
   const handleAddSection = useCallback(
     (section) => {
@@ -31,24 +22,23 @@ export default function Dashboard() {
     },
     [add, ref]
   );
-
-  const handleSetMode = useCallback((newMode) => setMode(newMode), [setMode]);
-
-  const { open: openAddNote } = useAddNoteModal(handleAddSection);
-  const { open: openAddBlock } = useAddBlockModal(handleAddSection);
-  const { open: openRemoveSection } = useRemoveSectionModal(remove);
-  const { open: openSignOut } = useSignOutModal();
-  const openModeSelector = useModeSelectorModal(mode, handleSetMode);
-
   const sortedSections = useMemo(
     () => [...sections].sort((s1, s2) => s2.dateCreated - s1.dateCreated),
     [sections]
   );
 
-  const handleOpenAddBlock = useCallback(() => {
-    const suggestedValues = getNewBlockSuggestedValues(sortedSections);
-    openAddBlock(suggestedValues);
-  }, [openAddBlock, sortedSections]);
+  const shouldDisplayFab = useMemo(
+    () => !isLoading && !trigger,
+    [isLoading, trigger]
+  );
+
+  const fabComponent = useFAB(
+    sortedSections,
+    shouldDisplayFab,
+    handleAddSection
+  );
+
+  const { open: openRemoveSection } = useRemoveSectionModal(remove);
 
   const changeAmrapReps = useCallback(
     (sectionId, weekNumber, exerciseName, amrapReps) => {
@@ -98,16 +88,7 @@ export default function Dashboard() {
         )}
         <Footer>&copy;Copyright 2022 by misicnenad</Footer>
       </Content>
-      <Fade in={!isLoading && !trigger} unmountOnExit>
-        <FABContainer>
-          <FAB
-            onAddNote={openAddNote}
-            onAddBlock={handleOpenAddBlock}
-            onSignOut={openSignOut}
-            onSelectMode={openModeSelector}
-          />
-        </FABContainer>
-      </Fade>
+      {fabComponent}
     </Container>
   );
 }
@@ -151,13 +132,6 @@ const Content = styled(Box)`
   ::-webkit-scrollbar {
     display: none;
   }
-`;
-
-const FABContainer = styled(Box)`
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-  z-index: 2;
 `;
 
 const Footer = styled("footer")`
