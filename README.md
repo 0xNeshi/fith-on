@@ -1,10 +1,29 @@
 # FithOn - Fitness tracker for 5/3/1 lifting program by Jim Wendler
 
-An app to assist in running the 5/3/1 weight lifting program created by Jim Wendler, used to track blocks, exercises, weights and reps.
+To use visit https://fitn-on.web.app/
 
-Created with the mobile-first web-undfriendly approach.
+An app to assist in running the 5/3/1 weight lifting program created by Jim Wendler, used to track blocks, exercises, weights and reps, created with the mobile-first approach.
 
-To use visit https://training-711ed.web.app/
+Features:
+
+- manage blocks and training notes
+- track assistance exercises
+- track AMRAP reps
+- fully installable on smartphone
+- backups enabled
+- slick Material UI design
+- available offline in read-only mode
+- automatic weight calculation
+- sign in/out with Google
+- change themes
+
+## Story time
+
+It wasn't too hard for me to track all my weights/percentages using a simple notepad, but once my girlfriend got interested in following the same program and we entered a sort of personal trainer-trainee dynamic, it got a bit more difficult to manage both her and my weights. To make matters worse, her phone that contained her weight records got reset with all her notes gone. This was rather demotivating for her because she was diligent in her tracking habits, and it meant she had no point of reference when challenging herself, no record of prior personal bests in either weight, sets or reps.
+
+Now, for some time prior to this, I was looking for a project to test and hone my React skills, but it wasn't high on my list of priorities until this happened. This pushed me to commit myself to creating the app you're looking at right now. I couldn't allow the thing that happened to my girlfriend to happen to either of us ever again, so I took a long walk and decided on the app I wanted to build.
+
+FithOn is the product of hard work, sweat and back pain. Since I created it for myself and for my girlfriend, you can be sure that I payed a lot of attention to optimizing it to the extreme. And related to the previous point, living in a country with poor internet provider services, I went above and beyond in optimizing network usage.
 
 ## Getting Started with Create React App
 
