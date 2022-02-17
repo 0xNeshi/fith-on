@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import styled from "styled-components";
+import { Box, styled } from "@mui/material";
 import ExerciseRow from "./ExerciseRow";
 
 const repSchemas = {
@@ -68,7 +68,7 @@ export default function WeekRow({ changeAmrapReps, week, blockId }) {
   );
 }
 
-const Container = styled.div`
+const Container = styled(Box)`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -76,17 +76,17 @@ const Container = styled.div`
   height: 220px;
 `;
 
-const WeekHeader = styled.h4`
+const WeekHeader = styled("h4")`
   margin-block: 0;
 `;
 
-const Table = styled.table`
+const Table = styled("table")`
   border-collapse: collapse;
   font-size: 0.9rem;
   text-align: center;
 `;
 
-const HeaderCell = styled.td`
+const HeaderCell = styled("td")`
   font-weight: bold;
 `;
 

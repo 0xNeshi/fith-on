@@ -1,5 +1,5 @@
 import { NoteAlt } from "@mui/icons-material";
-import styled from "styled-components";
+import { styled } from "@mui/material";
 import Section from "./Section";
 
 export default function Note({ data, deleteNote }) {
@@ -20,14 +20,7 @@ export default function Note({ data, deleteNote }) {
   );
 }
 
-const Title = styled.h3`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-`;
-
-const Text = styled.p`
+const Text = styled("p")`
   width: 90%;
   overflow-wrap: break-word;
 `;

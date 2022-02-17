@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "@mui/material";
 import AmrapInput from "./AmrapInput";
 
 export default function ExerciseRow(props) {
@@ -21,15 +21,15 @@ export default function ExerciseRow(props) {
   );
 }
 
-const TMCell = styled.td`
+const TMCell = styled("td")`
   font-weight: 600;
 `;
 
-const NameCell = styled.td`
+const NameCell = styled("td")`
   text-align: left;
 `;
 
-const AmrapCell = styled.td`
+const AmrapCell = styled("td")`
   display: flex;
   justify-content: center;
 `;

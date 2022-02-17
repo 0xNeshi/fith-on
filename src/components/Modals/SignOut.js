@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { Box, styled } from "@mui/material";
 import Button from "../Button";
 
 export default function SignOut({ onSignOut, onClose }) {
@@ -17,7 +17,7 @@ export default function SignOut({ onSignOut, onClose }) {
   );
 }
 
-const Container = styled.form`
+const Container = styled("form")`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -25,8 +25,9 @@ const Container = styled.form`
   text-align: center;
 `;
 
-const ButtonContainer = styled.div`
+const ButtonContainer = styled(Box)`
   display: flex;
   width: 100%;
   gap: 15px;
+  justify-content: center;
 `;

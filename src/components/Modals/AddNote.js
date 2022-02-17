@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import styled from "styled-components";
+import { Box, styled } from "@mui/material";
 import * as yup from "yup";
 import Button from "../Button";
 import Input from "../Input";
@@ -52,21 +52,22 @@ export default function AddNote({ onClose, onSubmit }) {
   );
 }
 
-const Form = styled.form`
+const Form = styled("form")`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 `;
 
-const ButtonContainer = styled.div`
+const ButtonContainer = styled(Box)`
   display: flex;
   width: 100%;
   gap: 15px;
   margin-top: 40px;
+  justify-content: center;
 `;
 
-const InputContainer = styled.div`
+const InputContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   gap: 20px;

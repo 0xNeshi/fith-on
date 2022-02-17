@@ -1,5 +1,4 @@
-import { Button } from "@mui/material";
-import styled from "styled-components";
+import { Button, styled, Box } from "@mui/material";
 
 export default function OfflineWarning({ onConfirm }) {
   return (
@@ -16,7 +15,7 @@ export default function OfflineWarning({ onConfirm }) {
   );
 }
 
-const Container = styled.form`
+const Container = styled("form")`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -24,10 +23,10 @@ const Container = styled.form`
   text-align: center;
 `;
 
-const ButtonContainer = styled.div`
+const ButtonContainer = styled(Box)`
   display: flex;
   width: 100%;
-  justify-content: space-evenly;
+  justify-content: center;
 `;
 
 const StyledButton = styled(Button)`

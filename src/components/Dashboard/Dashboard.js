@@ -1,7 +1,7 @@
-import { Fade, useScrollTrigger } from "@mui/material";
+import { Fade, styled, useScrollTrigger, Box } from "@mui/material";
 import { useCallback, useContext, useMemo, useState } from "react";
-import styled from "styled-components";
 import { useSections } from "../../hooks";
+import { ModeContext } from "../../providers";
 import { getNewBlockSuggestedValues } from "../../utilities";
 import Block from "../Block";
 import Loading from "../Loading";
@@ -14,8 +14,6 @@ import {
   useRemoveSectionModal,
   useSignOutModal,
 } from "./hooks";
-import { Box, styled as muiStyled } from "@mui/material";
-import { ModeContext } from "../../providers";
 
 export default function Dashboard() {
   const [ref, setRef] = useState();
@@ -127,14 +125,14 @@ function EmptySectionsMessage() {
   );
 }
 
-const Container = styled.div`
+const Container = styled(Box)`
   height: 100vh;
   flex-direction: column;
   font-size: calc(10px + 2vmin);
   position: relative;
 `;
 
-const Content = muiStyled(Box)`
+const Content = styled(Box)`
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -155,14 +153,14 @@ const Content = muiStyled(Box)`
   }
 `;
 
-const FABContainer = styled.div`
+const FABContainer = styled(Box)`
   position: absolute;
   bottom: 15px;
   right: 15px;
   z-index: 2;
 `;
 
-const Footer = styled.footer`
+const Footer = styled("footer")`
   font-size: 12px;
   width: 100%;
   margin-top: auto;
