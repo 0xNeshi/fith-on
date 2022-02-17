@@ -42,7 +42,7 @@ const Container = styled((props) => <Box sx={{ boxShadow: 3 }} {...props} />)(
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 0 20px;
+  padding: 0 20px 5px;
   background-color: ${theme.palette.background.default};
 `
 );
