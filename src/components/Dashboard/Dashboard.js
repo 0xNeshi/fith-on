@@ -8,19 +8,21 @@ import { useRemoveSectionModal } from "./hooks";
 import useFAB from "./useFAB";
 
 export default function Dashboard() {
-  const [ref, setRef] = useState();
+  const [contentRef, setContentRef] = useState();
   const { isLoading, sections, add, remove, update } = useSections();
-  const trigger = useScrollTrigger({ target: ref ? ref : window });
+  const trigger = useScrollTrigger({
+    target: contentRef ? contentRef : window,
+  });
 
   const handleAddSection = useCallback(
     (section) => {
       add(section);
-      ref?.scrollTo({
+      contentRef?.scrollTo({
         top: 0,
         behavior: "smooth",
       });
     },
-    [add, ref]
+    [add, contentRef]
   );
   const sortedSections = useMemo(
     () => [...sections].sort((s1, s2) => s2.dateCreated - s1.dateCreated),
@@ -80,7 +82,7 @@ export default function Dashboard() {
 
   return (
     <Container>
-      <Content ref={(_ref) => setRef(_ref)}>
+      <Content ref={(_ref) => setContentRef(_ref)}>
         {!sectionComponents?.length ? (
           <EmptySectionsMessage />
         ) : (
