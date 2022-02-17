@@ -1,6 +1,6 @@
 import { FitnessCenter } from "@mui/icons-material";
+import { Box, styled } from "@mui/material";
 import { useMemo } from "react";
-import styled from "styled-components";
 import Section from "./Section";
 import WeekRow from "./WeekRow";
 
@@ -26,12 +26,10 @@ export default function Block({ data, changeAmrapReps, deleteBlock }) {
     <Section
       sectionId={blockId}
       dateCreated={dateCreated}
-      title={
-        <Title>
-          <FitnessCenter />
-          Block {blockNumber}
-        </Title>
-      }
+      title={{
+        icon: <FitnessCenter />,
+        text: `Block ${blockNumber}`,
+      }}
       onDeleteSection={deleteBlock}
     >
       <BlockRowContainer>{rows}</BlockRowContainer>
@@ -39,18 +37,11 @@ export default function Block({ data, changeAmrapReps, deleteBlock }) {
   );
 }
 
-const BlockRowContainer = styled.div`
+const BlockRowContainer = styled(Box)`
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
-`;
-
-const Title = styled.h3`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 7px;
 `;

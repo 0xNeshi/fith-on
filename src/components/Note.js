@@ -10,12 +10,10 @@ export default function Note({ data, deleteNote }) {
       sectionId={noteId}
       dateCreated={dateCreated}
       onDeleteSection={deleteNote}
-      title={
-        <Title>
-          <NoteAlt />
-          {title}
-        </Title>
-      }
+      title={{
+        icon: <NoteAlt />,
+        text: title,
+      }}
     >
       {text && <Text>{text}</Text>}
     </Section>

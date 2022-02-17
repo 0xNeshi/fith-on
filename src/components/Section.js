@@ -15,12 +15,10 @@ export default function Section(props) {
   return (
     <Container>
       <Header>
-        <Box sx={{}}>
-          {title}
-          <DateCreated>
-            - {new Date(dateCreated).toLocaleDateString()}
-          </DateCreated>
-        </Box>
+        <Title>
+          {title.icon}
+          {title.text}
+        </Title>
         <Button
           color="primary"
           disabled={isOffline}
@@ -30,6 +28,9 @@ export default function Section(props) {
           <DeleteIcon fontSize="medium" />
         </Button>
       </Header>
+      <DateCreated>
+        <i>- {new Date(dateCreated).toLocaleDateString("en-GB")}</i>
+      </DateCreated>
       {children}
     </Container>
   );
@@ -46,13 +47,12 @@ const Container = styled((props) => <Box sx={{ boxShadow: 3 }} {...props} />)(
 `
 );
 
-const Header = styled((props) => (
-  <Typography variant="subtitle1" component="div" {...props} />
-))`
+const Header = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  padding-top: 10px;
 `;
 
 const DeleteIcon = styled(Delete)`
@@ -63,5 +63,17 @@ const DateCreated = styled((props) => (
   <Typography variant="subtitle2" component="div" {...props} />
 ))`
   width: 100%;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
+  padding-left: 30px;
+`;
+
+const Title = styled((props) => (
+  <Typography variant="h6" component="h6" {...props} />
+))`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: bold;
+  word-break: break-all;
 `;
