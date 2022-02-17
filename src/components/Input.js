@@ -1,9 +1,18 @@
 import { styled, TextField } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { ModeContext } from "../providers";
 
-export default function Input({ label, registerReturn, error, ...rest }) {
+export default function Input(props) {
+  const inputRef = useRef();
   const { mode } = useContext(ModeContext);
+
+  const { label, registerReturn, error, autoFocus, ...rest } = props;
+
+  useEffect(() => {
+    if (autoFocus) {
+      inputRef.current?.focus();
+    }
+  }, [inputRef, autoFocus]);
 
   return (
     <StyledField
@@ -16,6 +25,7 @@ export default function Input({ label, registerReturn, error, ...rest }) {
         style: { fontSize: 12 },
       }}
       mode={mode}
+      inputRef={inputRef}
       {...rest}
     />
   );
