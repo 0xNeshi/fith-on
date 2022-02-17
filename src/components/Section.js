@@ -4,7 +4,7 @@ import { NetworkStateContext } from "../providers";
 import { Box, Button, styled, Typography } from "@mui/material";
 
 export default function Section(props) {
-  const { sectionId, title, onDeleteSection, children } = props;
+  const { sectionId, title, onDeleteSection, dateCreated, children } = props;
   const { isOffline } = useContext(NetworkStateContext);
 
   const handleDeleteSection = useCallback(
@@ -15,7 +15,12 @@ export default function Section(props) {
   return (
     <Container>
       <Header>
-        {title}
+        <Box sx={{}}>
+          {title}
+          <DateCreated>
+            - {new Date(dateCreated).toLocaleDateString()}
+          </DateCreated>
+        </Box>
         <Button
           color="primary"
           disabled={isOffline}
@@ -52,4 +57,11 @@ const Header = styled((props) => (
 
 const DeleteIcon = styled(Delete)`
   ${({ disabled }) => (disabled ? `cursor: auto;` : "cursor: pointer")}
+`;
+
+const DateCreated = styled((props) => (
+  <Typography variant="subtitle2" component="div" {...props} />
+))`
+  width: 100%;
+  font-size: 0.8rem;
 `;

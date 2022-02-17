@@ -3,11 +3,12 @@ import styled from "styled-components";
 import Section from "./Section";
 
 export default function Note({ data, deleteNote }) {
-  const { id: noteId, title, text } = data;
+  const { id: noteId, title, text, dateCreated } = data;
 
   return (
     <Section
       sectionId={noteId}
+      dateCreated={dateCreated}
       onDeleteSection={deleteNote}
       title={
         <Title>

@@ -5,7 +5,7 @@ import Section from "./Section";
 import WeekRow from "./WeekRow";
 
 export default function Block({ data, changeAmrapReps, deleteBlock }) {
-  const { id: blockId, number: blockNumber, weeks } = data;
+  const { id: blockId, number: blockNumber, dateCreated, weeks } = data;
 
   const rows = useMemo(
     () =>
@@ -25,6 +25,7 @@ export default function Block({ data, changeAmrapReps, deleteBlock }) {
   return (
     <Section
       sectionId={blockId}
+      dateCreated={dateCreated}
       title={
         <Title>
           <FitnessCenter />

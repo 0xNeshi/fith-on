@@ -107,4 +107,4 @@ function ModeProvider({ children }) {
   );
 }
 
-export { ModeProvider as default, ModeContext, MODES, MODE_CONFIGS };
+export { ModeProvider as default, ModeContext, MODES };
