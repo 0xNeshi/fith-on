@@ -22,7 +22,6 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.1.0",
     "react-scripts": "5.0.0",
-    "styled-components": "^5.3.3",
     "uuid": "^8.3.2",
     "web-vitals": "^0.2.4",
     "workbox-background-sync": "^5.1.4",
