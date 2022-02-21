@@ -73,7 +73,7 @@ const Container = styled(Box)`
   flex-direction: column;
   justify-content: space-around;
   width: 100%;
-  height: 220px;
+  min-height: 220px;
 `;
 
 const WeekHeader = styled("h4")`
