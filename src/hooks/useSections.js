@@ -16,6 +16,7 @@ export default function useSections() {
     []
   );
   const [isLoading, setLoading] = useState(false);
+  const [shouldRefresh, setShouldRefresh] = useState(false);
 
   const getData = useCallback(async () => {
     setLoading(true);
@@ -27,7 +28,9 @@ export default function useSections() {
     setLoading(false);
   }, [user.email, setSections]);
 
-  useEffect(() => getData(), [getData]);
+  useEffect(() => getData(), [getData, shouldRefresh]);
+
+  const refresh = useCallback(() => setShouldRefresh((prev) => !prev), []);
 
   const add = useCallback(
     (section) => {
@@ -63,10 +66,11 @@ export default function useSections() {
   );
 
   return {
+    isLoading,
     sections,
+    refresh,
     add,
     remove,
     update,
-    isLoading,
   };
 }

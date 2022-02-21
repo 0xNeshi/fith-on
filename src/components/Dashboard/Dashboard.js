@@ -1,6 +1,7 @@
 import { Box, styled, useScrollTrigger } from "@mui/material";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { useSections } from "../../hooks";
+import { NetworkStateContext } from "../../providers";
 import Block from "../Block";
 import Loading from "../Loading";
 import Note from "../Note";
@@ -8,11 +9,18 @@ import { useRemoveSectionModal } from "./hooks";
 import useFAB from "./useFAB";
 
 export default function Dashboard() {
+  const { isOffline } = useContext(NetworkStateContext);
   const [contentRef, setContentRef] = useState();
-  const { isLoading, sections, add, remove, update } = useSections();
+  const { isLoading, sections, add, remove, update, refresh } = useSections();
   const trigger = useScrollTrigger({
     target: contentRef ? contentRef : window,
   });
+
+  useEffect(() => {
+    if (!isLoading && !sections.length && !isOffline) {
+      refresh();
+    }
+  }, [isOffline]);
 
   const handleAddSection = useCallback(
     (section) => {
