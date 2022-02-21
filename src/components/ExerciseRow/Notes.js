@@ -6,10 +6,14 @@ export default function Notes({ isVisible }) {
     return null;
   }
 
-  return <Container colSpan={6}>some content</Container>;
+  return (
+    <Container>
+      <td colSpan={6}>some content</td>
+    </Container>
+  );
 }
 
-const Container = styled("td")`
+const Container = styled("tr")`
   width: 100%;
   background-color: grey;
 `;

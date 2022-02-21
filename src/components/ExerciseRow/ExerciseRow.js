@@ -1,4 +1,5 @@
-import { styled } from "@mui/material";
+import { ArrowDropDown } from "@mui/icons-material";
+import { Button, styled } from "@mui/material";
 import { useState } from "react";
 import AmrapInput from "../AmrapInput";
 import Notes from "./Notes";
@@ -10,7 +11,16 @@ export default function ExerciseRow(props) {
   return (
     <>
       <tr>
-        <NameCell>{props.exerciseName}</NameCell>
+        <NameCell>
+          {props.exerciseName}
+          <Button
+            color="primary"
+            onClick={() => setShowNotes((prev) => !prev)}
+            sx={{ padding: "1px", minWidth: 0 }}
+          >
+            <ArrowDropDown fontSize="small" />
+          </Button>
+        </NameCell>
         <TMCell>{props.trainingMax}</TMCell>
         <td>{first}</td>
         <td>{second}</td>
