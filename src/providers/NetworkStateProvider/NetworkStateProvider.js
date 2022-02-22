@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { ModalContext } from "..";
 import OfflineWarning from "./OfflineWarning";
 
@@ -6,19 +12,27 @@ function NetworkStateProvider({ children }) {
   const [isOffline, setOffline] = useState(!window.navigator.onLine);
   const { openModal, closeModal } = useContext(ModalContext);
 
-  useEffect(() => {
-    function handleOffline() {
-      const modalContent = <OfflineWarning onConfirm={closeModal} />;
-      openModal(modalContent);
+  const handleOffline = useCallback(() => {
+    const modalContent = <OfflineWarning onConfirm={closeModal} />;
+    openModal(modalContent);
+    if (!isOffline) {
       setOffline(true);
     }
+  }, [closeModal, openModal]);
 
-    function handleOnline() {
-      closeModal();
-      setOffline(false);
-      alert("Back online");
+  const handleOnline = useCallback(() => {
+    closeModal();
+    setOffline(false);
+    alert("Back online");
+  }, [closeModal]);
+
+  useEffect(() => {
+    if (isOffline) {
+      handleOffline();
     }
+  }, []);
 
+  useEffect(() => {
     window.addEventListener("online", handleOnline);
     window.addEventListener("offline", handleOffline);
 
