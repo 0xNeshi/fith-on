@@ -50,27 +50,14 @@ export default function Dashboard() {
 
   const { open: openRemoveSection } = useRemoveSectionModal(remove);
 
-  const changeAmrapReps = useCallback(
-    (sectionId, weekNumber, exerciseName, amrapReps) => {
-      const section = sortedSections.find((x) => x.id === sectionId);
-      const week = section.weeks.find((week) => week.number === weekNumber);
-      const exercise = week.exercises.find((e) => e.name === exerciseName);
-      exercise.amrapReps = amrapReps;
-      update(section);
-    },
-    [sortedSections, update]
-  );
-
   const sectionComponents = useMemo(
     () =>
       sortedSections.map((section) =>
         section.type === "block" ? (
           <Block
             key={section.id}
-            data={section}
-            changeAmrapReps={(weekNumber, exercise, amrapReps) =>
-              changeAmrapReps(section.id, weekNumber, exercise, amrapReps)
-            }
+            section={section}
+            onUpdate={(updatedSection) => update(updatedSection)}
             deleteBlock={openRemoveSection}
           />
         ) : (
@@ -81,7 +68,7 @@ export default function Dashboard() {
           />
         )
       ),
-    [sortedSections, changeAmrapReps, openRemoveSection]
+    [sortedSections, update, openRemoveSection]
   );
 
   if (isLoading) {

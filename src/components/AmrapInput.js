@@ -5,14 +5,14 @@ import { ModeContext, NetworkStateContext } from "../providers";
 const WAIT_INTERVAL = 1000;
 const ENTER_KEY = 13;
 
-export default function AmrapInput({ reps, onChangeAmrapReps }) {
-  const [amrapReps, setAmrapReps] = useState(reps);
+export default function AmrapInput({ value, onChange }) {
+  const [amrapReps, setAmrapReps] = useState(value);
   const { isOffline } = useContext(NetworkStateContext);
   const { mode } = useContext(ModeContext);
 
   const handleChangeAmrapReps = useCallback(
-    () => amrapReps !== reps && onChangeAmrapReps(amrapReps),
-    [amrapReps, reps, onChangeAmrapReps]
+    () => amrapReps !== value && onChange(amrapReps),
+    [amrapReps, value, onChange]
   );
 
   const handleKeyDown = useCallback(
@@ -30,9 +30,9 @@ export default function AmrapInput({ reps, onChangeAmrapReps }) {
   useEffect(() => {
     const timer = setTimeout(() => handleChangeAmrapReps(), WAIT_INTERVAL);
     return () => clearTimeout(timer);
-  }, [reps, handleChangeAmrapReps]);
+  }, [value, handleChangeAmrapReps]);
 
-  const value = useMemo(
+  const displayValue = useMemo(
     () => (isOffline && !amrapReps ? "/" : amrapReps || ""),
     [isOffline, amrapReps]
   );
@@ -42,7 +42,7 @@ export default function AmrapInput({ reps, onChangeAmrapReps }) {
       variant="standard"
       inputProps={{ style: { textAlign: "center", padding: 0 } }}
       sx={{ width: 30, height: 30 }}
-      value={value}
+      value={displayValue}
       onChange={handleChange}
       onBlur={handleChangeAmrapReps}
       onKeyDown={handleKeyDown}

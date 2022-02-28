@@ -11,10 +11,7 @@ import usePersistentState from "./usePersistentState";
 
 export default function useSections() {
   const { user } = useContext(UserContext);
-  const [sections, setSections] = usePersistentState(
-    `sections-${user?.email}`,
-    []
-  );
+  const [sections, setSections] = usePersistentState("sections", []);
   const [isLoading, setLoading] = useState(false);
   const [shouldRefresh, setShouldRefresh] = useState(false);
 

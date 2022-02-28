@@ -1,11 +1,28 @@
 import { FitnessCenter } from "@mui/icons-material";
 import { Box, styled } from "@mui/material";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import Section from "./Section";
 import WeekRow from "./WeekRow";
 
-export default function Block({ data, changeAmrapReps, deleteBlock }) {
-  const { id: blockId, number: blockNumber, dateCreated, weeks } = data;
+export default function Block({
+  section,
+  onUpdate,
+  changeAmrapReps,
+  deleteBlock,
+}) {
+  const { id: blockId, number: blockNumber, dateCreated, weeks } = section;
+
+  const handleUpdateWeek = useCallback(
+    (updatedWeek) => {
+      const updatedSection = { ...section };
+      updatedSection.weeks = weeks.filter(
+        (oldWeek) => oldWeek.number !== updatedWeek.number
+      );
+      updatedSection.weeks.push(updatedWeek);
+      onUpdate(updatedSection);
+    },
+    [section, onUpdate]
+  );
 
   const rows = useMemo(
     () =>
@@ -14,9 +31,9 @@ export default function Block({ data, changeAmrapReps, deleteBlock }) {
         .map((week) => (
           <WeekRow
             key={`weekrow${blockId}${week.number}`}
-            changeAmrapReps={changeAmrapReps}
             week={week}
             blockId={blockId}
+            onUpdate={handleUpdateWeek}
           />
         )),
     [weeks, blockId, changeAmrapReps]

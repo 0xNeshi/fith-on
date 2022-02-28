@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { Box, styled } from "@mui/material";
 import ExerciseRow from "./ExerciseRow";
 
@@ -16,7 +16,19 @@ const percentagesPerWeek = {
   3: [0.75, 0.85, 0.95],
 };
 
-export default function WeekRow({ changeAmrapReps, week, blockId }) {
+export default function WeekRow({ onUpdate, week, blockId }) {
+  const handleExerciseUpdate = useCallback(
+    (updatedExercise) => {
+      const updatedWeek = { ...week };
+      updatedWeek.exercises = updatedWeek.exercises.filter(
+        (e) => e.name !== updatedExercise.name
+      );
+      updatedWeek.exercises.push(updatedExercise);
+      onUpdate(updatedWeek);
+    },
+    [week, onUpdate]
+  );
+
   const exerciseRows = useMemo(
     () =>
       exercisesInOrder
@@ -29,16 +41,12 @@ export default function WeekRow({ changeAmrapReps, week, blockId }) {
             <ExerciseRow
               key={`${blockId}${week.number}${exercise.name}`}
               weights={weights}
-              changeAmrapReps={(newAmrapReps) =>
-                changeAmrapReps(week.number, exercise.name, newAmrapReps)
-              }
-              amrapReps={exercise.amrapReps}
-              exerciseName={exercise.name}
-              trainingMax={exercise.trainingMax}
+              onUpdate={handleExerciseUpdate}
+              exercise={exercise}
             />
           );
         }),
-    [week, blockId, changeAmrapReps]
+    [week, blockId, handleExerciseUpdate]
   );
 
   const [first, second, third] = useMemo(
