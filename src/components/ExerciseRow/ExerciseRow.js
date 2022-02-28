@@ -5,7 +5,7 @@ import AmrapInput from "../AmrapInput";
 import Notes from "./Notes";
 
 export default function ExerciseRow({ weights, exercise, onUpdate }) {
-  const [showNotes, setShowNotes] = useState(true);
+  const [showNotes, setShowNotes] = useState(false);
   const [first, second, third] = weights;
   const { amrapReps, name, trainingMax, notes } = exercise;
 
@@ -13,6 +13,15 @@ export default function ExerciseRow({ weights, exercise, onUpdate }) {
     (updatedAmrap) => {
       const updatedExercise = { ...exercise };
       updatedExercise.amrapReps = updatedAmrap;
+      onUpdate(updatedExercise);
+    },
+    [exercise, onUpdate]
+  );
+
+  const handleUpdateNotes = useCallback(
+    (updatedNotes) => {
+      const updatedExercise = { ...exercise };
+      updatedExercise.notes = updatedNotes;
       onUpdate(updatedExercise);
     },
     [exercise, onUpdate]
@@ -43,7 +52,11 @@ export default function ExerciseRow({ weights, exercise, onUpdate }) {
           <AmrapInput value={amrapReps} onChange={handleUpdateAmrap} />
         </AmrapCell>
       </tr>
-      <Notes isVisible={showNotes} notes={notes || []} />
+      <Notes
+        isVisible={showNotes}
+        notes={notes || []}
+        onUpdate={handleUpdateNotes}
+      />
     </>
   );
 }
