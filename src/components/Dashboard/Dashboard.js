@@ -20,6 +20,7 @@ export default function Dashboard() {
     if (!isLoading && !sections.length && !isOffline) {
       refresh();
     }
+    // eslint-disable-next-line
   }, [isOffline]);
 
   const handleAddSection = useCallback(

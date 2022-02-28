@@ -4,18 +4,13 @@ import { useCallback, useMemo } from "react";
 import Section from "./Section";
 import WeekRow from "./WeekRow";
 
-export default function Block({
-  section,
-  onUpdate,
-  changeAmrapReps,
-  deleteBlock,
-}) {
+export default function Block({ section, onUpdate, deleteBlock }) {
   const { id: blockId, number: blockNumber, dateCreated, weeks } = section;
 
   const handleUpdateWeek = useCallback(
     (updatedWeek) => {
       const updatedSection = { ...section };
-      updatedSection.weeks = weeks.filter(
+      updatedSection.weeks = updatedSection.weeks.filter(
         (oldWeek) => oldWeek.number !== updatedWeek.number
       );
       updatedSection.weeks.push(updatedWeek);
@@ -36,7 +31,7 @@ export default function Block({
             onUpdate={handleUpdateWeek}
           />
         )),
-    [weeks, blockId, changeAmrapReps]
+    [weeks, blockId, handleUpdateWeek]
   );
 
   return (

@@ -18,6 +18,7 @@ function NetworkStateProvider({ children }) {
     if (!isOffline) {
       setOffline(true);
     }
+    // eslint-disable-next-line
   }, [closeModal, openModal]);
 
   const handleOnline = useCallback(() => {
@@ -30,6 +31,7 @@ function NetworkStateProvider({ children }) {
     if (isOffline) {
       handleOffline();
     }
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -40,7 +42,7 @@ function NetworkStateProvider({ children }) {
       window.removeEventListener("online", handleOnline);
       window.removeEventListener("offline", handleOffline);
     };
-  }, [closeModal, openModal]);
+  }, [handleOnline, handleOffline]);
 
   return (
     <NetworkStateContext.Provider value={{ isOffline }}>
