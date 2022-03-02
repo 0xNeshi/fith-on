@@ -1,5 +1,5 @@
 {
-  "name": "FithOn - Fitness app for 5/3/1 lifting program by Jim Wendler",
+  "name": "",
   "short_name": "FithOn",
   "icons": [
     {
@@ -30,7 +30,7 @@
     {
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "any image/png"
+      "type": "image/png"
     },
     {
       "src": "/android-chrome-256x256.png",
@@ -51,7 +51,7 @@
       "src": "/maskable_icon.png",
       "sizes": "384x384",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ],
   "theme_color": "#ffffff",
