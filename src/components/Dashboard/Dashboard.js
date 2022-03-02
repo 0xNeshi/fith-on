@@ -72,12 +72,13 @@ export default function Dashboard() {
     [sortedSections, update, openRemoveSection]
   );
 
-  if (isLoading) {
+  if (isLoading && !sections) {
     return <Loading />;
   }
 
   return (
     <Container>
+      {isLoading && <Spinner />}
       <Content ref={(_ref) => setContentRef(_ref)}>
         {!sectionComponents?.length ? (
           <EmptySectionsMessage />
@@ -117,7 +118,7 @@ const Content = styled(Box)`
   height: 100%;
   gap: 20px;
   align-items: center;
-  padding: 20px 0;
+  padding: 5px 0 20px;
   width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
@@ -137,4 +138,16 @@ const Footer = styled("footer")`
   width: 100%;
   margin-top: auto;
   text-align: center;
+`;
+
+function Spinner() {
+  return <SpinnerContainer>Submitting...</SpinnerContainer>;
+}
+
+const SpinnerContainer = styled(Box)`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
 `;
