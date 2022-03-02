@@ -34,33 +34,48 @@ export default function useSections() {
 
   const add = useCallback(
     async (section) => {
+      setLoading(true);
       const newSections = [...sections];
 
       section.id = uuidv4();
       section.dateCreated = Date.now();
       newSections.push(section);
 
-      await addSection(user.email, section);
-      setSections(newSections);
+      try {
+        await addSection(user.email, section);
+        setSections(newSections);
+      } finally {
+        setLoading(false);
+      }
     },
     [sections, setSections, user.email]
   );
 
   const remove = useCallback(
     async (sectionId) => {
-      const newSections = [...sections].filter((x) => x.id !== sectionId);
-      await removeSection(user.email, sectionId);
-      setSections(newSections);
+      setLoading(true);
+      try {
+        const newSections = [...sections].filter((x) => x.id !== sectionId);
+        await removeSection(user.email, sectionId);
+        setSections(newSections);
+      } finally {
+        setLoading(false);
+      }
     },
     [sections, setSections, user.email]
   );
 
   const update = useCallback(
     async (section) => {
-      const newSections = [...sections].filter((x) => x.id !== section.id);
-      newSections.push(section);
-      await updateSection(user.email, section);
-      setSections(newSections);
+      setLoading(true);
+      try {
+        const newSections = [...sections].filter((x) => x.id !== section.id);
+        newSections.push(section);
+        await updateSection(user.email, section);
+        setSections(newSections);
+      } finally {
+        setLoading(false);
+      }
     },
     [sections, setSections, user.email]
   );
