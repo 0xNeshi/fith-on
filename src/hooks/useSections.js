@@ -36,8 +36,8 @@ export default function useSections() {
       section.dateCreated = Date.now();
       newSections.push(section);
 
-      setSections(newSections);
       await addSection(user.email, section);
+      setSections(newSections);
     },
     [sections, setSections, user.email]
   );
@@ -45,8 +45,8 @@ export default function useSections() {
   const remove = useCallback(
     async (sectionId) => {
       const newSections = [...sections].filter((x) => x.id !== sectionId);
-      setSections(newSections);
       await removeSection(user.email, sectionId);
+      setSections(newSections);
     },
     [sections, setSections, user.email]
   );
@@ -55,8 +55,8 @@ export default function useSections() {
     async (section) => {
       const newSections = [...sections].filter((x) => x.id !== section.id);
       newSections.push(section);
-      setSections(newSections);
       await updateSection(user.email, section);
+      setSections(newSections);
     },
     [sections, setSections, user.email]
   );
