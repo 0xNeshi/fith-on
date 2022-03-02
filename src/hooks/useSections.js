@@ -7,11 +7,10 @@ import {
   removeSection,
   updateSection,
 } from "../services";
-import usePersistentState from "./usePersistentState";
 
 export default function useSections() {
   const { user } = useContext(UserContext);
-  const [sections, setSections] = usePersistentState("sections", []);
+  const [sections, setSections] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [shouldRefresh, setShouldRefresh] = useState(false);
 
@@ -30,7 +29,7 @@ export default function useSections() {
   const refresh = useCallback(() => setShouldRefresh((prev) => !prev), []);
 
   const add = useCallback(
-    (section) => {
+    async (section) => {
       const newSections = [...sections];
 
       section.id = uuidv4();
@@ -38,26 +37,26 @@ export default function useSections() {
       newSections.push(section);
 
       setSections(newSections);
-      addSection(user.email, section);
+      await addSection(user.email, section);
     },
     [sections, setSections, user.email]
   );
 
   const remove = useCallback(
-    (sectionId) => {
+    async (sectionId) => {
       const newSections = [...sections].filter((x) => x.id !== sectionId);
       setSections(newSections);
-      removeSection(user.email, sectionId);
+      await removeSection(user.email, sectionId);
     },
     [sections, setSections, user.email]
   );
 
   const update = useCallback(
-    (section) => {
+    async (section) => {
       const newSections = [...sections].filter((x) => x.id !== section.id);
       newSections.push(section);
       setSections(newSections);
-      updateSection(user.email, section);
+      await updateSection(user.email, section);
     },
     [sections, setSections, user.email]
   );
