@@ -1,14 +1,15 @@
 import { FitnessCenter, Menu as MenuIcon, NoteAlt } from "@mui/icons-material";
 import Logout from "@mui/icons-material/Logout";
+import SettingsIcon from "@mui/icons-material/Settings";
 import { Fab, styled } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
-import SettingsIcon from "@mui/icons-material/Settings";
 import { useContext, useState } from "react";
-import { NetworkStateContext, UserContext } from "../../../providers";
+import { UserContext } from "../../../providers";
+import { InteractibleContext } from "../Dashboard";
 import FabMenu from "./FabMenu";
 
 const MENU_ID = "account-menu";
@@ -17,7 +18,7 @@ export default function FAB(props) {
   const { onAddNote, onAddBlock, onSignOut, onSelectMode } = props;
   const [anchorEl, setAnchorEl] = useState(null);
   const { user } = useContext(UserContext);
-  const { isOffline } = useContext(NetworkStateContext);
+  const isInteractible = useContext(InteractibleContext);
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
@@ -49,13 +50,13 @@ export default function FAB(props) {
           Choose mode
         </MenuItem>
         <Divider />
-        <MenuItem onClick={onAddBlock} disabled={isOffline}>
+        <MenuItem onClick={onAddBlock} disabled={!isInteractible}>
           <ListItemIcon>
             <FitnessCenter color="primary" />
           </ListItemIcon>
           Add block
         </MenuItem>
-        <MenuItem onClick={onAddNote} disabled={isOffline}>
+        <MenuItem onClick={onAddNote} disabled={!isInteractible}>
           <ListItemIcon>
             <NoteAlt color="primary" />
           </ListItemIcon>

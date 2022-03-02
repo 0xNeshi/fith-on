@@ -1,11 +1,11 @@
-import { useCallback, useContext } from "react";
 import { Delete } from "@mui/icons-material";
-import { NetworkStateContext } from "../providers";
 import { Box, Button, styled, Typography } from "@mui/material";
+import { useCallback, useContext } from "react";
+import { InteractibleContext } from "./Dashboard/Dashboard";
 
 export default function Section(props) {
   const { sectionId, title, onDeleteSection, dateCreated, children } = props;
-  const { isOffline } = useContext(NetworkStateContext);
+  const isInteractible = useContext(InteractibleContext);
 
   const handleDeleteSection = useCallback(
     () => onDeleteSection(sectionId),
@@ -21,7 +21,7 @@ export default function Section(props) {
         </Title>
         <Button
           color="primary"
-          disabled={isOffline}
+          disabled={!isInteractible}
           onClick={handleDeleteSection}
           sx={{ padding: "0 6px", minWidth: 0 }}
         >

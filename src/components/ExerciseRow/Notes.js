@@ -1,12 +1,13 @@
 import { Add, Close } from "@mui/icons-material";
 import { Box, Button, styled, TextField } from "@mui/material";
 import React, { useCallback, useContext, useState } from "react";
-import { ModeContext, NetworkStateContext } from "../../providers";
 import { v4 as uuidv4 } from "uuid";
+import { ModeContext } from "../../providers";
+import { InteractibleContext } from "../Dashboard/Dashboard";
 
 export default function Notes({ isVisible, notes, onUpdate }) {
   const { mode } = useContext(ModeContext);
-  const { isOffline } = useContext(NetworkStateContext);
+  const isInteractible = useContext(InteractibleContext);
   const [newNote, setNewNote] = useState("");
 
   const handleAdd = useCallback(() => {
@@ -39,7 +40,7 @@ export default function Notes({ isVisible, notes, onUpdate }) {
                 <NoteLabel>{note.text}</NoteLabel>
                 <Button
                   color="primary"
-                  disabled={isOffline}
+                  disabled={!isInteractible}
                   onClick={() => handleRemove(note.id)}
                   sx={{ padding: "0 6px", minWidth: 0 }}
                 >
@@ -60,10 +61,11 @@ export default function Notes({ isVisible, notes, onUpdate }) {
               mode={mode}
               value={newNote}
               onChange={(e) => setNewNote(e.target.value)}
+              disabled={!isInteractible}
             />
             <Button
               color="primary"
-              disabled={isOffline}
+              disabled={!isInteractible}
               onClick={handleAdd}
               sx={{ padding: "0 6px", minWidth: 0 }}
             >

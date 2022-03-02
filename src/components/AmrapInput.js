@@ -1,13 +1,14 @@
 import { styled, TextField } from "@mui/material";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { ModeContext, NetworkStateContext } from "../providers";
+import { ModeContext } from "../providers";
+import { InteractibleContext } from "./Dashboard/Dashboard";
 
 const WAIT_INTERVAL = 1000;
 const ENTER_KEY = 13;
 
 export default function AmrapInput({ value, onChange }) {
   const [amrapReps, setAmrapReps] = useState(value);
-  const { isOffline } = useContext(NetworkStateContext);
+  const isInteractible = useContext(InteractibleContext);
   const { mode } = useContext(ModeContext);
 
   const handleChangeAmrapReps = useCallback(
@@ -33,8 +34,8 @@ export default function AmrapInput({ value, onChange }) {
   }, [value, handleChangeAmrapReps]);
 
   const displayValue = useMemo(
-    () => (isOffline && !amrapReps ? "/" : amrapReps || ""),
-    [isOffline, amrapReps]
+    () => (!isInteractible && !amrapReps ? "/" : amrapReps || ""),
+    [isInteractible, amrapReps]
   );
 
   return (
@@ -47,7 +48,7 @@ export default function AmrapInput({ value, onChange }) {
       onBlur={handleChangeAmrapReps}
       onKeyDown={handleKeyDown}
       onFocus={handleFocus}
-      disabled={isOffline}
+      disabled={!isInteractible}
       mode={mode}
     />
   );
