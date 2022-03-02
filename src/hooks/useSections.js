@@ -7,6 +7,7 @@ import {
   removeSection,
   updateSection,
 } from "../services";
+import logf from "../services/log";
 
 export default function useSections() {
   const { user } = useContext(UserContext);
@@ -26,7 +27,10 @@ export default function useSections() {
 
   useEffect(() => getData(), [getData, shouldRefresh]);
 
-  const refresh = useCallback(() => setShouldRefresh((prev) => !prev), []);
+  const refresh = useCallback(() => {
+    logf(user.email, "refresh", "Refreshing data");
+    setShouldRefresh((prev) => !prev);
+  }, []);
 
   const add = useCallback(
     async (section) => {

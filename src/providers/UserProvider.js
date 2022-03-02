@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../config/firebase";
+import logf from "../services/log";
 
 export default function UserProvider({ children }) {
   const [isLoading, setLoading] = useState(true);
@@ -8,6 +9,9 @@ export default function UserProvider({ children }) {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       if (!user || currentUser === undefined || currentUser?.uid !== user.uid) {
+        if (!!user) {
+          logf(user.email, "onAuthStateChanged", "Signed in");
+        }
         setUser(currentUser);
         setLoading(false);
       }
