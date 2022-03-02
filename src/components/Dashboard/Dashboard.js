@@ -51,34 +51,26 @@ export default function Dashboard() {
 
   const { open: openRemoveSection } = useRemoveSectionModal(remove);
 
-  const sectionComponents = useMemo(
-    () =>
-      sortedSections.map((section) =>
-        section.type === "block" ? (
-          <Block
-            key={section.id}
-            section={section}
-            onUpdate={(updatedSection) => update(updatedSection)}
-            deleteBlock={openRemoveSection}
-          />
-        ) : (
-          <Note
-            key={section.id}
-            data={section}
-            deleteNote={openRemoveSection}
-          />
-        )
-      ),
-    [sortedSections, update, openRemoveSection]
+  const sectionComponents = sortedSections.map((section) =>
+    section.type === "block" ? (
+      <Block
+        key={section.id}
+        section={section}
+        onUpdate={(updatedSection) => update(updatedSection)}
+        deleteBlock={openRemoveSection}
+      />
+    ) : (
+      <Note key={section.id} data={section} deleteNote={openRemoveSection} />
+    )
   );
 
-  if (isLoading && !sections) {
+  if (isLoading && !sectionComponents?.length) {
     return <Loading />;
   }
 
   return (
     <Container>
-      {isLoading && <Spinner />}
+      {isLoading && !!sectionComponents?.length && <Spinner />}
       <Content ref={(_ref) => setContentRef(_ref)}>
         {!sectionComponents?.length ? (
           <EmptySectionsMessage />
