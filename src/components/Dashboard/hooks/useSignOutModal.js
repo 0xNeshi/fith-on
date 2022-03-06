@@ -14,7 +14,7 @@ export default function useSignOutModal() {
     };
     const modalContent = <SignOut onSignOut={onSignOut} onClose={closeModal} />;
     openModal(modalContent);
-  }, [openModal, closeModal]);
+  }, [openModal, closeModal, user.email]);
 
   return {
     open,

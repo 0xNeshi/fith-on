@@ -30,7 +30,7 @@ export default function useSections() {
   const refresh = useCallback(() => {
     logf(user.email, "refresh", "Refreshing data");
     setShouldRefresh((prev) => !prev);
-  }, []);
+  }, [user.email]);
 
   const add = useCallback(
     async (section) => {
