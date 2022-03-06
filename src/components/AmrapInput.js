@@ -4,34 +4,22 @@ import { ModeContext } from "../providers";
 import { InteractibleContext } from "./Dashboard/Dashboard";
 
 const WAIT_INTERVAL = 1000;
-const ENTER_KEY = 13;
 
 export default function AmrapInput({ value, onChange }) {
   const [amrapReps, setAmrapReps] = useState(value);
   const isInteractible = useContext(InteractibleContext);
   const { mode } = useContext(ModeContext);
 
-  const handleChangeAmrapReps = useCallback(
-    () => amrapReps !== value && onChange(amrapReps),
-    [amrapReps, value, onChange]
-  );
-
-  const handleKeyDown = useCallback(
-    (e) => e.keyCode === ENTER_KEY && handleChangeAmrapReps(),
-    [handleChangeAmrapReps]
-  );
-
-  const handleFocus = useCallback((e) => e.target.select(), []);
-
-  const handleChange = useCallback(
-    (e) => setAmrapReps(e.target.value),
-    [setAmrapReps]
-  );
+  const handleChangeAmrapReps = useCallback(() => {
+    if (amrapReps !== value) {
+      onChange(amrapReps);
+    }
+  }, [amrapReps, value, onChange]);
 
   useEffect(() => {
     const timer = setTimeout(() => handleChangeAmrapReps(), WAIT_INTERVAL);
     return () => clearTimeout(timer);
-  }, [value, handleChangeAmrapReps]);
+  }, [handleChangeAmrapReps]);
 
   const displayValue = useMemo(
     () => (!isInteractible && !amrapReps ? "/" : amrapReps || ""),
@@ -45,10 +33,10 @@ export default function AmrapInput({ value, onChange }) {
       sx={{ width: 30, height: 30 }}
       value={displayValue}
       onClick={(e) => e.stopPropagation()}
-      onChange={handleChange}
+      onChange={(e) => setAmrapReps(e.target.value)}
       onBlur={handleChangeAmrapReps}
-      onKeyDown={handleKeyDown}
-      onFocus={handleFocus}
+      onKeyDown={(e) => e.key === "Enter" && handleChangeAmrapReps()}
+      onFocus={(e) => e.target.select()}
       disabled={!isInteractible}
       mode={mode}
     />
