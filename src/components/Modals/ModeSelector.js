@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   FormControl,
   MenuItem,
   Select,
@@ -9,12 +10,12 @@ import {
 import { MODES } from "../../providers";
 import { useState } from "react";
 
-export default function ModeSelector({ currentMode, onConfirm }) {
+export default function ModeSelector({ currentMode, onChange, onConfirm }) {
   const [mode, setMode] = useState(currentMode);
 
   const handleOnChange = (event) => {
     setMode(event.target.value);
-    onConfirm(event.target.value);
+    onChange(event.target.value);
   };
 
   return (
@@ -39,6 +40,13 @@ export default function ModeSelector({ currentMode, onConfirm }) {
           ))}
         </Select>
       </FormControl>
+      <StyledButton
+        variant="contained"
+        color="primary"
+        onClick={() => onConfirm(mode)}
+      >
+        Confirm
+      </StyledButton>
     </Container>
   );
 }
@@ -47,5 +55,11 @@ const Container = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 0;
+  padding-top: 20px;
+`;
+
+const StyledButton = styled(Button)`
+  max-width: 9rem;
+  width: 70%;
+  margin-top: 20px;
 `;

@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../config/firebase";
 import logf from "../services/log";
+import { get } from "../services/mode";
 
 export default function UserProvider({ children }) {
   const [isLoading, setLoading] = useState(true);
@@ -13,6 +14,7 @@ export default function UserProvider({ children }) {
           logf(user.email, "onAuthStateChanged", "Signed in");
         }
         setUser(currentUser);
+        get(currentUser.email);
         setLoading(false);
       }
     });

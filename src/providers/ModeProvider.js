@@ -4,7 +4,16 @@ import {
   ThemeProvider as MuiThemeProvider,
 } from "@mui/material";
 import { common, grey, orange } from "@mui/material/colors";
-import { createContext, useCallback, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import logf from "../services/log";
+import { get, update } from "../services/mode";
+import { UserContext } from "./UserProvider";
 
 const olive = {
   100: "#d4d3bb",
@@ -86,19 +95,59 @@ const MODE_CONFIGS = {
   [MODES.dark]: darkTheme,
 };
 
-const ModeContext = createContext({ mode: null, setMode: null });
+const ModeContext = createContext({
+  mode: null,
+  setMode: null,
+  setDefaultMode: null,
+  isLoading: false,
+});
 
 function ModeProvider({ children }) {
+  const { user, isLoading: isUserLoading } = useContext(UserContext);
   const localMode = localStorage.getItem("mode") || MODES.dark;
   const [mode, setMode] = useState(localMode);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+
+    if (isUserLoading) return;
+
+    async function getMode() {
+      const userMode = await get(user.email);
+      setMode(userMode);
+      setLoading(false);
+    }
+
+    getMode();
+  }, [isUserLoading, user?.email]);
+
+  const saveMode = useCallback(
+    async (newMode) => {
+      try {
+        setLoading(true);
+        await update(user.email, newMode);
+        setMode(newMode);
+        localStorage.setItem("mode", newMode);
+      } catch (error) {
+        logf(user.email, "changeMode", error);
+        alert("Error changing mode");
+      } finally {
+        setLoading(false);
+      }
+    },
+    // eslint-disable-next-line
+    [user?.email]
+  );
 
   const changeMode = useCallback((newMode) => {
     setMode(newMode);
-    localStorage.setItem("mode", newMode);
   }, []);
 
   return (
-    <ModeContext.Provider value={{ mode, setMode: changeMode }}>
+    <ModeContext.Provider
+      value={{ mode, setMode: changeMode, saveMode, isLoading }}
+    >
       <MuiThemeProvider theme={MODE_CONFIGS[mode]}>
         <CssBaseline />
         {children}

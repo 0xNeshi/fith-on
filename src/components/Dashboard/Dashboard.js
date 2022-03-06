@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 import { useSections } from "../../hooks";
-import { NetworkStateContext } from "../../providers";
+import { ModeContext, NetworkStateContext } from "../../providers";
 import Block from "../Block";
 import Loading from "../Loading";
 import Note from "../Note";
@@ -19,12 +19,25 @@ export const InteractibleContext = createContext(true);
 
 export default function Dashboard() {
   const { isOffline } = useContext(NetworkStateContext);
+  const { isLoading: isModeLoading } = useContext(ModeContext);
   const [contentRef, setContentRef] = useState();
   const [isInteractible, setInteractible] = useState(true);
-  const { isLoading, sections, add, remove, update, refresh } = useSections();
+  const {
+    isLoading: areSectionsLoading,
+    sections,
+    add,
+    remove,
+    update,
+    refresh,
+  } = useSections();
   const trigger = useScrollTrigger({
     target: contentRef ? contentRef : window,
   });
+
+  const isLoading = useMemo(
+    () => isModeLoading || areSectionsLoading,
+    [isModeLoading, areSectionsLoading]
+  );
 
   useEffect(() => {
     if (!isLoading && !sections.length && !isOffline) {

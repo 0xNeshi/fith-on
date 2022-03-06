@@ -11,14 +11,19 @@ import {
 } from "./hooks";
 
 export default function useFAB(sections, display, handleAddSection) {
-  const { mode, setMode } = useContext(ModeContext);
+  const { mode, setMode, saveMode } = useContext(ModeContext);
 
-  const handleSetMode = useCallback((newMode) => setMode(newMode), [setMode]);
+  const handleSetMode = (newMode) => setMode(newMode);
+  const handleSaveMode = (newMode) => saveMode(newMode);
 
   const { open: openAddNote } = useAddNoteModal(handleAddSection);
   const { open: openAddBlock } = useAddBlockModal(handleAddSection);
   const { open: openSignOut } = useSignOutModal();
-  const openModeSelector = useModeSelectorModal(mode, handleSetMode);
+  const openModeSelector = useModeSelectorModal(
+    mode,
+    handleSetMode,
+    handleSaveMode
+  );
 
   const handleOpenAddBlock = useCallback(() => {
     const suggestedValues = getNewBlockSuggestedValues(sections);
