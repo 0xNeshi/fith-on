@@ -162,7 +162,11 @@ const Footer = styled("footer")`
 `;
 
 function Spinner({ showMessage }) {
-  return <SpinnerContainer>{showMessage && "Submitting..."}</SpinnerContainer>;
+  return (
+    <SpinnerContainer>
+      {showMessage && <i>Submitting, please wait...</i>}
+    </SpinnerContainer>
+  );
 }
 
 const SpinnerContainer = styled(Box)`
