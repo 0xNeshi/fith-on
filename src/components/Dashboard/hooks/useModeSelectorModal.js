@@ -18,7 +18,7 @@ export default function useModeSelectorModal(currentMode, onChange, onConfirm) {
         onConfirm={handleConfirm}
       />
     );
-  }, [openModal, closeModal, currentMode, onConfirm]);
+  }, [openModal, closeModal, currentMode, onChange, onConfirm]);
 
   return open;
 }

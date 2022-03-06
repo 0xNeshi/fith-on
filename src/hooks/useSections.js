@@ -27,10 +27,7 @@ export default function useSections() {
 
   useEffect(() => getData(), [getData, shouldRefresh]);
 
-  const refresh = useCallback(() => {
-    logf(user.email, "refresh", "Refreshing data");
-    setShouldRefresh((prev) => !prev);
-  }, [user.email]);
+  const refresh = useCallback(() => setShouldRefresh((prev) => !prev), []);
 
   const add = useCallback(
     async (section) => {
@@ -45,8 +42,8 @@ export default function useSections() {
         await addSection(user.email, section);
         setSections(newSections);
       } catch (err) {
-        logf(user.email, 'add (section)', err)
-        alert("Error adding section")
+        logf(user.email, "add (section)", err);
+        alert("Error adding section");
       } finally {
         setLoading(false);
       }
@@ -62,8 +59,8 @@ export default function useSections() {
         await removeSection(user.email, sectionId);
         setSections(newSections);
       } catch (err) {
-        logf(user.email, 'remove (section)', err)
-        alert("Error removing section")
+        logf(user.email, "remove (section)", err);
+        alert("Error removing section");
       } finally {
         setLoading(false);
       }
@@ -80,8 +77,8 @@ export default function useSections() {
         await updateSection(user.email, section);
         setSections(newSections);
       } catch (err) {
-        logf(user.email, 'update (section)', err)
-        alert("Error updating section")
+        logf(user.email, "update (section)", err);
+        alert("Error updating section");
       } finally {
         setLoading(false);
       }

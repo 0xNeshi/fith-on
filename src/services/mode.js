@@ -3,7 +3,6 @@ import { db } from "../config/firebase";
 import logf from "./log";
 
 export const get = async (userEmail) => {
-  logf(userEmail, "get (mode)", "Getting Mode");
   const docRef = doc(db, "users", userEmail);
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
@@ -17,8 +16,7 @@ export const get = async (userEmail) => {
 };
 
 export const update = async (userEmail, mode) => {
-  logf(userEmail, "update (mode)", `Updating Mode to ${mode}`);
   const docRef = doc(db, "users", userEmail);
   await updateDoc(docRef, { mode });
-  logf(userEmail, "update (mode)", `Update successful`);
+  logf(userEmail, "update (mode)", `Update to ${mode} successful`);
 };

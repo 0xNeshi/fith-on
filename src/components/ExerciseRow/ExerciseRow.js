@@ -1,5 +1,5 @@
 import { ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
-import { Button, styled } from "@mui/material";
+import { styled } from "@mui/material";
 import { useCallback, useState } from "react";
 import AmrapInput from "../AmrapInput";
 import Notes from "./Notes";
@@ -29,7 +29,10 @@ export default function ExerciseRow({ weights, exercise, onUpdate }) {
 
   return (
     <>
-      <tr onClick={() => setShowNotes((prev) => !prev)} style={{cursor: 'pointer'}}>
+      <tr
+        onClick={() => setShowNotes((prev) => !prev)}
+        style={{ cursor: "pointer" }}
+      >
         <NameCell>
           {name}
           {showNotes ? (
