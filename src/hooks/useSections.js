@@ -44,6 +44,9 @@ export default function useSections() {
       try {
         await addSection(user.email, section);
         setSections(newSections);
+      } catch (err) {
+        logf(user.email, 'add (section)', err)
+        alert("Error adding section")
       } finally {
         setLoading(false);
       }
@@ -58,6 +61,9 @@ export default function useSections() {
         const newSections = [...sections].filter((x) => x.id !== sectionId);
         await removeSection(user.email, sectionId);
         setSections(newSections);
+      } catch (err) {
+        logf(user.email, 'remove (section)', err)
+        alert("Error removing section")
       } finally {
         setLoading(false);
       }
@@ -73,6 +79,9 @@ export default function useSections() {
         newSections.push(section);
         await updateSection(user.email, section);
         setSections(newSections);
+      } catch (err) {
+        logf(user.email, 'update (section)', err)
+        alert("Error updating section")
       } finally {
         setLoading(false);
       }

@@ -17,5 +17,6 @@ export function signOut(userEmail) {
     })
     .catch((error) => {
       logf(userEmail, "signOut", error);
+      alert("Error signing out")
     });
 }
