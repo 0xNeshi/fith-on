@@ -29,20 +29,14 @@ export default function ExerciseRow({ weights, exercise, onUpdate }) {
 
   return (
     <>
-      <tr>
+      <tr onClick={() => setShowNotes((prev) => !prev)} style={{cursor: 'pointer'}}>
         <NameCell>
           {name}
-          <Button
-            color="primary"
-            onClick={() => setShowNotes((prev) => !prev)}
-            sx={{ padding: "1px", minWidth: 0 }}
-          >
-            {showNotes ? (
-              <ArrowDropUp fontSize="small" />
-            ) : (
-              <ArrowDropDown fontSize="small" />
-            )}
-          </Button>
+          {showNotes ? (
+            <ArrowDropUp fontSize="small" color="primary" />
+          ) : (
+            <ArrowDropDown fontSize="small" color="primary" />
+          )}
         </NameCell>
         <TMCell>{trainingMax}</TMCell>
         <td>{first}</td>

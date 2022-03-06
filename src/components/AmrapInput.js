@@ -44,6 +44,7 @@ export default function AmrapInput({ value, onChange }) {
       inputProps={{ style: { textAlign: "center", padding: 0 } }}
       sx={{ width: 30, height: 30 }}
       value={displayValue}
+      onClick={(e) => e.stopPropagation()}
       onChange={handleChange}
       onBlur={handleChangeAmrapReps}
       onKeyDown={handleKeyDown}
