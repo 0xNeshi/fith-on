@@ -85,7 +85,7 @@ export default function Dashboard() {
   return (
     <InteractibleContext.Provider value={isInteractible}>
       <Container>
-        {isLoading && !!sectionComponents?.length && <Spinner />}
+        <Spinner showMessage={isLoading && !!sectionComponents?.length} />
         <Content ref={(_ref) => setContentRef(_ref)}>
           {!sectionComponents?.length ? (
             <EmptySectionsMessage />
@@ -148,8 +148,8 @@ const Footer = styled("footer")`
   text-align: center;
 `;
 
-function Spinner() {
-  return <SpinnerContainer>Submitting...</SpinnerContainer>;
+function Spinner({ showMessage }) {
+  return <SpinnerContainer>{showMessage && "Submitting..."}</SpinnerContainer>;
 }
 
 const SpinnerContainer = styled(Box)`
@@ -157,5 +157,5 @@ const SpinnerContainer = styled(Box)`
   width: 100%;
   justify-content: center;
   align-items: center;
-  height: 40px;
+  height: 25px;
 `;
