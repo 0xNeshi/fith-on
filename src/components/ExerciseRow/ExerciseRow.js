@@ -29,10 +29,7 @@ export default function ExerciseRow({ weights, exercise, onUpdate }) {
 
   return (
     <>
-      <tr
-        onClick={() => setShowNotes((prev) => !prev)}
-        style={{ cursor: "pointer" }}
-      >
+      <Row onClick={() => setShowNotes((prev) => !prev)}>
         <NameCell>
           {name}
           {showNotes ? (
@@ -48,7 +45,7 @@ export default function ExerciseRow({ weights, exercise, onUpdate }) {
         <AmrapCell>
           <AmrapInput value={amrapReps} onChange={handleUpdateAmrap} />
         </AmrapCell>
-      </tr>
+      </Row>
       <Notes
         isVisible={showNotes}
         notes={notes || []}
@@ -63,10 +60,27 @@ const TMCell = styled("td")`
 `;
 
 const NameCell = styled("td")`
+  display: flex;
+  align-items: center;
   text-align: left;
 `;
 
 const AmrapCell = styled("td")`
   display: flex;
   justify-content: center;
+`;
+
+const Row = styled("tr")`
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+
+  &:focus {
+    outline: none !important;
+  }
 `;
