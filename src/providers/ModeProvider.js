@@ -119,8 +119,10 @@ function ModeProvider({ children }) {
       setLoading(false);
     }
 
-    getMode();
-  }, [isUserLoading, user?.email]);
+    if (!!user) {
+      getMode();
+    }
+  }, [isUserLoading, user]);
 
   const saveMode = useCallback(
     async (newMode) => {

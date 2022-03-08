@@ -8,9 +8,9 @@ export default function useSignOutModal() {
   const { openModal, closeModal } = useContext(ModalContext);
 
   const open = useCallback(() => {
-    const onSignOut = () => {
+    const onSignOut = async () => {
       closeModal();
-      signOut(user.email);
+      await signOut(user.email);
     };
     const modalContent = <SignOut onSignOut={onSignOut} onClose={closeModal} />;
     openModal(modalContent);

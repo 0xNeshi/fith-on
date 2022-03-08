@@ -10,13 +10,12 @@ export function signInWithGoogle() {
   return signInWithPopup(auth, googleProvider);
 }
 
-export function signOut(userEmail) {
-  _signOut(auth)
-    .then(() => {
-      logf(userEmail, "signOut", "Signed out");
-    })
-    .catch((error) => {
-      logf(userEmail, "signOut", error);
-      alert("Error signing out")
-    });
+export async function signOut(userEmail) {
+  try {
+    await logf(userEmail, "signOut", "Signing out");
+    await _signOut(auth);
+  } catch (error) {
+    await logf(userEmail, "signOut", error);
+    alert("Error signing out");
+  }
 }
