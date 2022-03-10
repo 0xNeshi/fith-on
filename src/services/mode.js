@@ -1,4 +1,4 @@
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import logf from "./log";
 
@@ -17,6 +17,6 @@ export const get = async (userEmail) => {
 
 export const update = async (userEmail, mode) => {
   const docRef = doc(db, "users", userEmail);
-  await updateDoc(docRef, { mode });
+  await setDoc(docRef, { mode });
   logf(userEmail, "update (mode)", `Update to ${mode} successful`);
 };
