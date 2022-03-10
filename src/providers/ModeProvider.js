@@ -33,7 +33,7 @@ const lightTheme = createTheme({
       primary: grey[700],
     },
     background: {
-      paper: olive[100],
+      default: grey[100],
     },
   },
 });
@@ -104,8 +104,9 @@ const ModeContext = createContext({
 
 function ModeProvider({ children }) {
   const { user, isLoading: isUserLoading } = useContext(UserContext);
-  const localMode = localStorage.getItem("mode") || MODES.light;
-  const [mode, setMode] = useState(localMode);
+  const [mode, setMode] = useState(
+    () => localStorage.getItem("mode") || MODES.light
+  );
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
