@@ -102,10 +102,12 @@ const ModeContext = createContext({
   isLoading: false,
 });
 
+const DEFAULT_MODE = MODES.light;
+
 function ModeProvider({ children }) {
   const { user, isLoading: isUserLoading } = useContext(UserContext);
   const [mode, setMode] = useState(
-    () => localStorage.getItem("mode") || MODES.light
+    () => localStorage.getItem("mode") || DEFAULT_MODE
   );
   const [isLoading, setLoading] = useState(true);
 
@@ -116,7 +118,7 @@ function ModeProvider({ children }) {
 
     async function getMode() {
       const userMode = await get(user.email);
-      setMode(userMode);
+      setMode(userMode || DEFAULT_MODE);
       setLoading(false);
     }
 

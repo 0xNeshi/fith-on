@@ -8,7 +8,7 @@ export const get = async (userEmail) => {
     const mode = docSnap.data().mode;
     return mode;
   } else {
-    return "dark";
+    return null;
   }
 };
 
