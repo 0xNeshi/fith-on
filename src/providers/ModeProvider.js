@@ -104,7 +104,7 @@ const ModeContext = createContext({
 
 function ModeProvider({ children }) {
   const { user, isLoading: isUserLoading } = useContext(UserContext);
-  const localMode = localStorage.getItem("mode") || MODES.dark;
+  const localMode = localStorage.getItem("mode") || MODES.light;
   const [mode, setMode] = useState(localMode);
   const [isLoading, setLoading] = useState(true);
 
