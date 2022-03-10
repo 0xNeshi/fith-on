@@ -12,7 +12,6 @@ export function signInWithGoogle() {
 
 export async function signOut(userEmail) {
   try {
-    await logf(userEmail, "signOut", "Signing out");
     await _signOut(auth);
   } catch (error) {
     await logf(userEmail, "signOut", error);

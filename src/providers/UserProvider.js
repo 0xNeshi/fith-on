@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../config/firebase";
-import logf from "../services/log";
 import { get } from "../services/mode";
 
 export default function UserProvider({ children }) {
@@ -11,7 +10,6 @@ export default function UserProvider({ children }) {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       if (!user || currentUser === undefined || currentUser?.uid !== user.uid) {
         if (!!currentUser) {
-          logf(currentUser.email, "onAuthStateChanged", "Signed in");
           get(currentUser.email);
         }
         setUser(currentUser);
