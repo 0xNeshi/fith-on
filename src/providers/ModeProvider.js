@@ -106,9 +106,7 @@ const DEFAULT_MODE = MODES.light;
 
 function ModeProvider({ children }) {
   const { user, isLoading: isUserLoading } = useContext(UserContext);
-  const [mode, setMode] = useState(
-    () => localStorage.getItem("mode") || DEFAULT_MODE
-  );
+  const [mode, setMode] = useState(DEFAULT_MODE);
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
