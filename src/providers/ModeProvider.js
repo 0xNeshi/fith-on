@@ -102,7 +102,7 @@ const ModeContext = createContext({
   isLoading: false,
 });
 
-const DEFAULT_MODE = MODES.light;
+const DEFAULT_MODE = MODES.dark;
 
 function ModeProvider({ children }) {
   const { user, isLoading: isUserLoading } = useContext(UserContext);
