@@ -93,6 +93,10 @@ const NoteContainer = styled(Box)`
 const StyledField = styled(TextField)(
   ({ theme }) => `
     width: 80%;
+    
+    & .MuiInput-input {
+      text-align: center;
+    }
 
     & .MuiInput-underline:before {
       border-bottom: 1px solid ${theme.palette.primary.main};
