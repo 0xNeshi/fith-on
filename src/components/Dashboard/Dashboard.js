@@ -7,8 +7,8 @@ import {
   useMemo,
   useState,
 } from "react";
-import { useSections } from "../../hooks";
 import { ModeContext, NetworkStateContext } from "../../providers";
+import { SectionsContext } from "../../providers/SectionsProvider";
 import Block from "../Block";
 import Loading from "../Loading";
 import Note from "../Note";
@@ -29,7 +29,7 @@ export default function Dashboard() {
     remove,
     update,
     refresh,
-  } = useSections();
+  } = useContext(SectionsContext);
   const trigger = useScrollTrigger({
     target: contentRef ? contentRef : window,
   });

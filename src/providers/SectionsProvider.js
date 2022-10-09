@@ -1,4 +1,10 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { v4 as uuidv4 } from "uuid";
 import { UserContext } from "../providers";
 import {
@@ -9,7 +15,16 @@ import {
 } from "../services";
 import logf from "../services/log";
 
-export default function useSections() {
+const SectionsContext = createContext({
+  isLoading: false,
+  sections: [],
+  refresh: () => {},
+  add: (section) => {},
+  remove: (sectionId) => {},
+  update: (section) => {},
+});
+
+export default function SectionsProvider({ children }) {
   const { user } = useContext(UserContext);
   const [sections, setSections] = useState([]);
   const [isLoading, setLoading] = useState(false);
@@ -86,12 +101,20 @@ export default function useSections() {
     [sections, setSections, user.email]
   );
 
-  return {
-    isLoading,
-    sections,
-    refresh,
-    add,
-    remove,
-    update,
-  };
+  return (
+    <SectionsContext.Provider
+      value={{
+        isLoading,
+        sections,
+        refresh,
+        add,
+        remove,
+        update,
+      }}
+    >
+      {children}
+    </SectionsContext.Provider>
+  );
 }
+
+export { SectionsContext };
