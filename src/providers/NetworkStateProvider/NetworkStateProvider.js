@@ -18,8 +18,7 @@ function NetworkStateProvider({ children }) {
     if (!isOffline) {
       setOffline(true);
     }
-    // eslint-disable-next-line
-  }, [closeModal, openModal]);
+  }, [closeModal, openModal, isOffline]);
 
   const handleOnline = useCallback(() => {
     closeModal();
