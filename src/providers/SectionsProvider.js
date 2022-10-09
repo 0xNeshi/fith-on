@@ -31,14 +31,17 @@ export function SectionsProvider({ children }) {
   const [shouldRefetch, setShouldRefetch] = useState(false);
 
   const getData = useCallback(async () => {
+    if (!user?.email) {
+      return;
+    }
     setLoading(true);
-    const newSections = await getSections(user?.email);
+    const newSections = await getSections(user.email);
     const sortedSections = newSections.sort(
       (b1, b2) => b2.dateCreated - b1.dateCreated
     );
     setSections(sortedSections);
     setLoading(false);
-  }, [user.email, setSections]);
+  }, [user?.email, setSections]);
 
   useEffect(() => getData(), [getData, shouldRefetch]);
 
@@ -63,7 +66,7 @@ export function SectionsProvider({ children }) {
         setLoading(false);
       }
     },
-    [sections, setSections, user.email]
+    [sections, setSections, user?.email]
   );
 
   const remove = useCallback(
@@ -80,7 +83,7 @@ export function SectionsProvider({ children }) {
         setLoading(false);
       }
     },
-    [sections, setSections, user.email]
+    [sections, setSections, user?.email]
   );
 
   const update = useCallback(
@@ -98,7 +101,7 @@ export function SectionsProvider({ children }) {
         setLoading(false);
       }
     },
-    [sections, setSections, user.email]
+    [sections, setSections, user?.email]
   );
 
   return (
