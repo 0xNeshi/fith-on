@@ -7,8 +7,11 @@ import {
   useMemo,
   useState,
 } from "react";
-import { useSections } from "../../hooks";
-import { ModeContext, NetworkStateContext } from "../../providers";
+import {
+  ModeContext,
+  NetworkStateContext,
+  SectionsContext,
+} from "../../providers";
 import Block from "../Block";
 import Loading from "../Loading";
 import Note from "../Note";
@@ -28,8 +31,8 @@ export default function Dashboard() {
     add,
     remove,
     update,
-    refresh,
-  } = useSections();
+  } = useContext(SectionsContext);
+  
   const trigger = useScrollTrigger({
     target: contentRef ? contentRef : window,
   });
@@ -38,13 +41,6 @@ export default function Dashboard() {
     () => isModeLoading || areSectionsLoading,
     [isModeLoading, areSectionsLoading]
   );
-
-  useEffect(() => {
-    if (!isLoading && !sections.length && !isOffline) {
-      refresh();
-    }
-    // eslint-disable-next-line
-  }, [isOffline]);
 
   const handleAddSection = useCallback(
     (section) => {

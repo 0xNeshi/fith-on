@@ -83,7 +83,7 @@ const darkTheme = createTheme({
   },
 });
 
-const MODES = {
+export const MODES = {
   light: "light",
   olive: "olive",
   dark: "dark",
@@ -95,7 +95,7 @@ const MODE_CONFIGS = {
   [MODES.dark]: darkTheme,
 };
 
-const ModeContext = createContext({
+export const ModeContext = createContext({
   mode: null,
   setMode: null,
   setDefaultMode: null,
@@ -104,7 +104,7 @@ const ModeContext = createContext({
 
 const DEFAULT_MODE = MODES.dark;
 
-function ModeProvider({ children }) {
+export function ModeProvider({ children }) {
   const { user, isLoading: isUserLoading } = useContext(UserContext);
   const [mode, setMode] = useState(DEFAULT_MODE);
   const [isLoading, setLoading] = useState(true);
@@ -158,5 +158,3 @@ function ModeProvider({ children }) {
     </ModeContext.Provider>
   );
 }
-
-export { ModeProvider as default, ModeContext, MODES };

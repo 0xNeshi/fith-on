@@ -1,4 +1,10 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { v4 as uuidv4 } from "uuid";
 import { UserContext } from "../providers";
 import {
@@ -9,11 +15,20 @@ import {
 } from "../services";
 import logf from "../services/log";
 
-export default function useSections() {
+export const SectionsContext = createContext({
+  isLoading: false,
+  sections: [],
+  refetch: () => {},
+  add: (section) => {},
+  remove: (sectionId) => {},
+  update: (section) => {},
+});
+
+export function SectionsProvider({ children }) {
   const { user } = useContext(UserContext);
   const [sections, setSections] = useState([]);
   const [isLoading, setLoading] = useState(false);
-  const [shouldRefresh, setShouldRefresh] = useState(false);
+  const [shouldRefetch, setShouldRefetch] = useState(false);
 
   const getData = useCallback(async () => {
     setLoading(true);
@@ -25,9 +40,9 @@ export default function useSections() {
     setLoading(false);
   }, [user.email, setSections]);
 
-  useEffect(() => getData(), [getData, shouldRefresh]);
+  useEffect(() => getData(), [getData, shouldRefetch]);
 
-  const refresh = useCallback(() => setShouldRefresh((prev) => !prev), []);
+  const refetch = useCallback(() => setShouldRefetch((prev) => !prev), []);
 
   const add = useCallback(
     async (section) => {
@@ -86,12 +101,18 @@ export default function useSections() {
     [sections, setSections, user.email]
   );
 
-  return {
-    isLoading,
-    sections,
-    refresh,
-    add,
-    remove,
-    update,
-  };
+  return (
+    <SectionsContext.Provider
+      value={{
+        isLoading,
+        sections,
+        refetch,
+        add,
+        remove,
+        update,
+      }}
+    >
+      {children}
+    </SectionsContext.Provider>
+  );
 }

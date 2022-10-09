@@ -9,6 +9,7 @@ import {
   ModeProvider,
   NetworkStateProvider,
   UserProvider,
+  SectionsProvider,
 } from "./providers";
 
 const Dashboard = lazy(() => import("./components/Dashboard"));
@@ -17,43 +18,45 @@ const SignIn = lazy(() => import("./components/SignIn"));
 export default function App() {
   return (
     <UserProvider>
-      <ModeProvider>
-        <ModalProvider>
-          <NetworkStateProvider>
-            <Container
-              component="main"
-              maxWidth="sm"
-              sx={{ padding: 0, backgroundColor: "background.paper" }}
-            >
-              <Suspense fallback={<Loading />}>
-                <BrowserRouter>
-                  <Routes>
-                    <Route
-                      exact
-                      path="/signin"
-                      element={
-                        <RequireAnon>
-                          <SignIn />
-                        </RequireAnon>
-                      }
-                    />
-                    <Route
-                      exact
-                      path="/dashboard"
-                      element={
-                        <RequireAuth>
-                          <Dashboard />
-                        </RequireAuth>
-                      }
-                    />
-                    <Route exact path="/" element={<Landing />} />
-                  </Routes>
-                </BrowserRouter>
-              </Suspense>
-            </Container>
-          </NetworkStateProvider>
-        </ModalProvider>
-      </ModeProvider>
+      <SectionsProvider>
+        <ModeProvider>
+          <ModalProvider>
+            <NetworkStateProvider>
+              <Container
+                component="main"
+                maxWidth="sm"
+                sx={{ padding: 0, backgroundColor: "background.paper" }}
+              >
+                <Suspense fallback={<Loading />}>
+                  <BrowserRouter>
+                    <Routes>
+                      <Route
+                        exact
+                        path="/signin"
+                        element={
+                          <RequireAnon>
+                            <SignIn />
+                          </RequireAnon>
+                        }
+                      />
+                      <Route
+                        exact
+                        path="/dashboard"
+                        element={
+                          <RequireAuth>
+                            <Dashboard />
+                          </RequireAuth>
+                        }
+                      />
+                      <Route exact path="/" element={<Landing />} />
+                    </Routes>
+                  </BrowserRouter>
+                </Suspense>
+              </Container>
+            </NetworkStateProvider>
+          </ModalProvider>
+        </ModeProvider>
+      </SectionsProvider>
     </UserProvider>
   );
 }

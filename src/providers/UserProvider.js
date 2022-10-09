@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../config/firebase";
 
-export default function UserProvider({ children }) {
+export function UserProvider({ children }) {
   const [isLoading, setLoading] = useState(true);
   const [user, setUser] = useState();
 
@@ -24,6 +24,4 @@ export default function UserProvider({ children }) {
   );
 }
 
-const UserContext = createContext({ user: null, isLoading: true });
-
-export { UserContext };
+export const UserContext = createContext({ user: null, isLoading: true });
