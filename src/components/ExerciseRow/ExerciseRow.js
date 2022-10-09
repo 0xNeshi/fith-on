@@ -7,7 +7,7 @@ import Notes from "./Notes";
 export default function ExerciseRow({ weights, exercise, onUpdate }) {
   const { amrapReps, name, trainingMax, notes = [] } = exercise;
   const [first, second, third] = weights;
-  const [showNotes, setShowNotes] = useState(false);
+  const [showNotes, setShowNotes] = useState(!!notes.length);
 
   const handleUpdateAmrap = useCallback(
     (updatedAmrap) => {
