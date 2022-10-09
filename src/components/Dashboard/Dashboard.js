@@ -31,8 +31,8 @@ export default function Dashboard() {
     add,
     remove,
     update,
-    refresh,
   } = useContext(SectionsContext);
+
   const trigger = useScrollTrigger({
     target: contentRef ? contentRef : window,
   });

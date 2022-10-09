@@ -11,7 +11,7 @@ import OfflineWarning from "./OfflineWarning";
 function NetworkStateProvider({ children }) {
   const [isOffline, setOffline] = useState(!window.navigator.onLine);
   const { openModal, closeModal } = useContext(ModalContext);
-  const { refresh } = useContext(SectionsContext);
+  const { refetch } = useContext(SectionsContext);
 
   const handleOffline = useCallback(() => {
     const modalContent = <OfflineWarning onConfirm={closeModal} />;
@@ -22,11 +22,11 @@ function NetworkStateProvider({ children }) {
   }, [closeModal, openModal, isOffline]);
 
   const handleOnline = useCallback(() => {
+    refetch();
     closeModal();
     setOffline(false);
-    refresh();
     alert("Back online");
-  }, [closeModal, refresh]);
+  }, [closeModal, refetch]);
 
   useEffect(() => {
     if (isOffline) {

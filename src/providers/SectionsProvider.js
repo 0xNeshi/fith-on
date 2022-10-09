@@ -18,7 +18,7 @@ import logf from "../services/log";
 export const SectionsContext = createContext({
   isLoading: false,
   sections: [],
-  refresh: () => {},
+  refetch: () => {},
   add: (section) => {},
   remove: (sectionId) => {},
   update: (section) => {},
@@ -28,7 +28,7 @@ export function SectionsProvider({ children }) {
   const { user } = useContext(UserContext);
   const [sections, setSections] = useState([]);
   const [isLoading, setLoading] = useState(false);
-  const [shouldRefresh, setShouldRefresh] = useState(false);
+  const [shouldRefetch, setShouldRefetch] = useState(false);
 
   const getData = useCallback(async () => {
     setLoading(true);
@@ -40,9 +40,9 @@ export function SectionsProvider({ children }) {
     setLoading(false);
   }, [user.email, setSections]);
 
-  useEffect(() => getData(), [getData, shouldRefresh]);
+  useEffect(() => getData(), [getData, shouldRefetch]);
 
-  const refresh = useCallback(() => setShouldRefresh((prev) => !prev), []);
+  const refetch = useCallback(() => setShouldRefetch((prev) => !prev), []);
 
   const add = useCallback(
     async (section) => {
@@ -106,7 +106,7 @@ export function SectionsProvider({ children }) {
       value={{
         isLoading,
         sections,
-        refresh,
+        refetch,
         add,
         remove,
         update,
