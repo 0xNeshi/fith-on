@@ -32,7 +32,7 @@ export default function Dashboard() {
     remove,
     update,
   } = useContext(SectionsContext);
-
+  
   const trigger = useScrollTrigger({
     target: contentRef ? contentRef : window,
   });
@@ -41,13 +41,6 @@ export default function Dashboard() {
     () => isModeLoading || areSectionsLoading,
     [isModeLoading, areSectionsLoading]
   );
-
-  useEffect(() => {
-    if (!isLoading && !sections.length && !isOffline) {
-      refresh();
-    }
-    // eslint-disable-next-line
-  }, [isOffline]);
 
   const handleAddSection = useCallback(
     (section) => {
