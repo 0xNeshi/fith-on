@@ -1,1 +1,1 @@
-export { default, NetworkStateContext } from "./NetworkStateProvider";
+export * from "./NetworkStateProvider";

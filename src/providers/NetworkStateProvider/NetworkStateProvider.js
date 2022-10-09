@@ -8,7 +8,7 @@ import {
 import { ModalContext, SectionsContext } from "..";
 import OfflineWarning from "./OfflineWarning";
 
-function NetworkStateProvider({ children }) {
+export function NetworkStateProvider({ children }) {
   const [isOffline, setOffline] = useState(!window.navigator.onLine);
   const { openModal, closeModal } = useContext(ModalContext);
   const { refetch } = useContext(SectionsContext);
@@ -52,6 +52,4 @@ function NetworkStateProvider({ children }) {
   );
 }
 
-const NetworkStateContext = createContext({ isOffline: false });
-
-export { NetworkStateProvider as default, NetworkStateContext };
+export const NetworkStateContext = createContext({ isOffline: false });
