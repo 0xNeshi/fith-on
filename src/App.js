@@ -9,8 +9,8 @@ import {
   ModeProvider,
   NetworkStateProvider,
   UserProvider,
+  SectionsProvider,
 } from "./providers";
-import SectionsProvider from "./providers/SectionsProvider";
 
 const Dashboard = lazy(() => import("./components/Dashboard"));
 const SignIn = lazy(() => import("./components/SignIn"));

@@ -15,7 +15,7 @@ import {
 } from "../services";
 import logf from "../services/log";
 
-const SectionsContext = createContext({
+export const SectionsContext = createContext({
   isLoading: false,
   sections: [],
   refresh: () => {},
@@ -24,7 +24,7 @@ const SectionsContext = createContext({
   update: (section) => {},
 });
 
-export default function SectionsProvider({ children }) {
+export function SectionsProvider({ children }) {
   const { user } = useContext(UserContext);
   const [sections, setSections] = useState([]);
   const [isLoading, setLoading] = useState(false);
@@ -116,5 +116,3 @@ export default function SectionsProvider({ children }) {
     </SectionsContext.Provider>
   );
 }
-
-export { SectionsContext };

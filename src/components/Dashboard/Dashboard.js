@@ -7,8 +7,11 @@ import {
   useMemo,
   useState,
 } from "react";
-import { ModeContext, NetworkStateContext } from "../../providers";
-import { SectionsContext } from "../../providers/SectionsProvider";
+import {
+  ModeContext,
+  NetworkStateContext,
+  SectionsContext,
+} from "../../providers";
 import Block from "../Block";
 import Loading from "../Loading";
 import Note from "../Note";
