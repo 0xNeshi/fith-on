@@ -2,7 +2,7 @@ import { createContext, useCallback, useEffect, useState } from "react";
 
 export function NetworkStateProvider({ children }) {
   const [isOffline, setOffline] = useState(!window.navigator.onLine);
-  const [onOnline, setOnOnline] = useState(() => {});
+  const [onOnlineFuncs, setOnOnlineFuncs] = useState([]);
 
   const handleOffline = useCallback(() => {
     if (!isOffline) {
@@ -14,10 +14,10 @@ export function NetworkStateProvider({ children }) {
   }, [isOffline]);
 
   const handleOnline = useCallback(() => {
-    onOnline();
+    onOnlineFuncs.forEach(func => func());
     setOffline(false);
     alert("Back online");
-  }, [onOnline]);
+  }, [onOnlineFuncs]);
 
   useEffect(() => {
     if (isOffline) {
@@ -36,6 +36,8 @@ export function NetworkStateProvider({ children }) {
     };
   }, [handleOnline, handleOffline]);
 
+  const setOnOnline = useCallback((onOnline) => setOnOnlineFuncs(prev => [...prev, onOnline]))
+  
   return (
     <NetworkStateContext.Provider value={{ isOffline, setOnOnline }}>
       {children}
