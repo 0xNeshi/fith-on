@@ -35,12 +35,18 @@ export function SectionsProvider({ children }) {
       return;
     }
     setLoading(true);
-    const newSections = await getSections(user.email);
-    const sortedSections = newSections.sort(
-      (b1, b2) => b2.dateCreated - b1.dateCreated
-    );
-    setSections(sortedSections);
-    setLoading(false);
+    try {
+      const newSections = await getSections(user.email);
+      const sortedSections = newSections.sort(
+        (b1, b2) => b2.dateCreated - b1.dateCreated
+      );
+      setSections(sortedSections);
+    } catch (error) {
+      logf(user.email, "getData", error);
+      alert("Error getting data");
+    } finally {
+      setLoading(false);
+    }
   }, [user?.email, setSections]);
 
   useEffect(() => getData(), [getData, shouldRefetch]);
