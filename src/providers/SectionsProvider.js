@@ -29,7 +29,7 @@ export function SectionsProvider({ children }) {
   const { isOffline, setOnOnline } = useContext(NetworkStateContext);
   const [sections, setSections] = useState([]);
   const [isLoading, setLoading] = useState(false);
-  const [shouldRefetch, setShouldRefetch] = useState(false);
+  const [toggleRefetch, setToggleRefetch] = useState(false);
 
   const getData = useCallback(async () => {
     if (!user?.email || isOffline) {
@@ -48,13 +48,17 @@ export function SectionsProvider({ children }) {
     } finally {
       setLoading(false);
     }
-  }, [user?.email, setSections]);
+  }, [user?.email, isOffline, setSections]);
 
-  useEffect(() => getData(), [getData, shouldRefetch]);
+  useEffect(() => getData(), [getData, toggleRefetch]);
 
-  const refetch = useCallback(() => setShouldRefetch((prev) => !prev), []);
+  const refetch = useCallback(() => setToggleRefetch((prev) => !prev), []);
 
-  useEffect(() => setOnOnline(refetch), [refetch]);
+  useEffect(
+    () => setOnOnline(refetch),
+    // eslint-disable-next-line
+    []
+  );
 
   const add = useCallback(
     async (section) => {
@@ -79,7 +83,7 @@ export function SectionsProvider({ children }) {
         setLoading(false);
       }
     },
-    [sections, setSections, user?.email]
+    [isOffline, sections, user.email, setSections]
   );
 
   const remove = useCallback(
@@ -100,7 +104,7 @@ export function SectionsProvider({ children }) {
         setLoading(false);
       }
     },
-    [sections, setSections, user?.email]
+    [isOffline, sections, user.email, setSections]
   );
 
   const update = useCallback(
@@ -122,7 +126,7 @@ export function SectionsProvider({ children }) {
         setLoading(false);
       }
     },
-    [sections, setSections, user?.email]
+    [isOffline, sections, user.email, setSections]
   );
 
   return (
