@@ -36,7 +36,7 @@ export function NetworkStateProvider({ children }) {
     };
   }, [handleOnline, handleOffline]);
 
-  const setOnOnline = useCallback((onOnline) => setOnOnlineFuncs(prev => [...prev, onOnline]))
+  const setOnOnline = useCallback((onOnline) => setOnOnlineFuncs(prev => [...prev, onOnline]), [])
   
   return (
     <NetworkStateContext.Provider value={{ isOffline, setOnOnline }}>
