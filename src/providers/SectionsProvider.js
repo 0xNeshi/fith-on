@@ -19,9 +19,9 @@ export const SectionsContext = createContext({
   isLoading: false,
   sections: [],
   refetch: () => {},
-  add: (section) => {},
-  remove: (sectionId) => {},
-  update: (section) => {},
+  add: (_) => {},
+  remove: (_) => {},
+  update: (_) => {},
 });
 
 export function SectionsProvider({ children }) {
