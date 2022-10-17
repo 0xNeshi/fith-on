@@ -127,6 +127,7 @@ export function ModeProvider({ children }) {
         setLoading(false);
       }
     })();
+    // eslint-disable-next-line
   }, [isUserLoading, user]);
 
   const saveMode = useCallback(
@@ -147,8 +148,7 @@ export function ModeProvider({ children }) {
         setLoading(false);
       }
     },
-    // eslint-disable-next-line
-    [user?.email]
+    [user.email, isOffline]
   );
 
   const changeMode = useCallback((newMode) => {
