@@ -13,6 +13,7 @@ import {
 } from "react";
 import logf from "../services/log";
 import { get, update } from "../services/mode";
+import { NetworkStateContext } from "./NetworkStateProvider";
 import { UserContext } from "./UserProvider";
 
 const olive = {
@@ -106,11 +107,12 @@ const DEFAULT_MODE = MODES.dark;
 
 export function ModeProvider({ children }) {
   const { user, isLoading: isUserLoading } = useContext(UserContext);
+  const { isOffline } = useContext(NetworkStateContext);
   const [mode, setMode] = useState(DEFAULT_MODE);
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (isUserLoading || !user) return;
+    if (isUserLoading || !user || isOffline) return;
 
     setLoading(true);
 
@@ -129,6 +131,10 @@ export function ModeProvider({ children }) {
 
   const saveMode = useCallback(
     async (newMode) => {
+      if (isOffline) {
+        return;
+      }
+
       try {
         setLoading(true);
         await update(user.email, newMode);
