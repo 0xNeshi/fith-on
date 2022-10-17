@@ -26,12 +26,13 @@ export const SectionsContext = createContext({
 
 export function SectionsProvider({ children }) {
   const { user } = useContext(UserContext);
+  const { isOffline, setOnOnline } = useContext(NetworkStateContext);
   const [sections, setSections] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [shouldRefetch, setShouldRefetch] = useState(false);
 
   const getData = useCallback(async () => {
-    if (!user?.email) {
+    if (!user?.email || isOffline) {
       return;
     }
     setLoading(true);
@@ -53,8 +54,14 @@ export function SectionsProvider({ children }) {
 
   const refetch = useCallback(() => setShouldRefetch((prev) => !prev), []);
 
+  useEffect(() => setOnOnline(refetch), [refetch]);
+
   const add = useCallback(
     async (section) => {
+      if (isOffline) {
+        return;
+      }
+
       setLoading(true);
       const newSections = [...sections];
 
@@ -77,6 +84,10 @@ export function SectionsProvider({ children }) {
 
   const remove = useCallback(
     async (sectionId) => {
+      if (isOffline) {
+        return;
+      }
+
       setLoading(true);
       try {
         const newSections = [...sections].filter((x) => x.id !== sectionId);
@@ -94,6 +105,10 @@ export function SectionsProvider({ children }) {
 
   const update = useCallback(
     async (section) => {
+      if (isOffline) {
+        return;
+      }
+
       setLoading(true);
       try {
         const newSections = [...sections].filter((x) => x.id !== section.id);
