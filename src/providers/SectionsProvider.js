@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { UserContext } from "../providers";
+import { NetworkStateContext, UserContext } from "../providers";
 import {
   addSection,
   getSections,
@@ -19,36 +19,53 @@ export const SectionsContext = createContext({
   isLoading: false,
   sections: [],
   refetch: () => {},
-  add: (section) => {},
-  remove: (sectionId) => {},
-  update: (section) => {},
+  add: (_) => {},
+  remove: (_) => {},
+  update: (_) => {},
 });
 
 export function SectionsProvider({ children }) {
   const { user } = useContext(UserContext);
+  const { isOffline, setOnOnline } = useContext(NetworkStateContext);
   const [sections, setSections] = useState([]);
   const [isLoading, setLoading] = useState(false);
-  const [shouldRefetch, setShouldRefetch] = useState(false);
+  const [toggleRefetch, setToggleRefetch] = useState(false);
 
   const getData = useCallback(async () => {
-    if (!user?.email) {
+    if (!user?.email || isOffline) {
       return;
     }
     setLoading(true);
-    const newSections = await getSections(user.email);
-    const sortedSections = newSections.sort(
-      (b1, b2) => b2.dateCreated - b1.dateCreated
-    );
-    setSections(sortedSections);
-    setLoading(false);
-  }, [user?.email, setSections]);
+    try {
+      const newSections = await getSections(user.email);
+      const sortedSections = newSections.sort(
+        (b1, b2) => b2.dateCreated - b1.dateCreated
+      );
+      setSections(sortedSections);
+    } catch (error) {
+      logf(user.email, "getData", error);
+      alert("Error getting data");
+    } finally {
+      setLoading(false);
+    }
+  }, [user?.email, isOffline, setSections]);
 
-  useEffect(() => getData(), [getData, shouldRefetch]);
+  useEffect(() => getData(), [getData, toggleRefetch]);
 
-  const refetch = useCallback(() => setShouldRefetch((prev) => !prev), []);
+  const refetch = useCallback(() => setToggleRefetch((prev) => !prev), []);
+
+  useEffect(
+    () => setOnOnline(refetch),
+    // eslint-disable-next-line
+    []
+  );
 
   const add = useCallback(
     async (section) => {
+      if (isOffline) {
+        return;
+      }
+
       setLoading(true);
       const newSections = [...sections];
 
@@ -66,11 +83,15 @@ export function SectionsProvider({ children }) {
         setLoading(false);
       }
     },
-    [sections, setSections, user?.email]
+    [isOffline, sections, user.email, setSections]
   );
 
   const remove = useCallback(
     async (sectionId) => {
+      if (isOffline) {
+        return;
+      }
+
       setLoading(true);
       try {
         const newSections = [...sections].filter((x) => x.id !== sectionId);
@@ -83,11 +104,15 @@ export function SectionsProvider({ children }) {
         setLoading(false);
       }
     },
-    [sections, setSections, user?.email]
+    [isOffline, sections, user.email, setSections]
   );
 
   const update = useCallback(
     async (section) => {
+      if (isOffline) {
+        return;
+      }
+
       setLoading(true);
       try {
         const newSections = [...sections].filter((x) => x.id !== section.id);
@@ -101,7 +126,7 @@ export function SectionsProvider({ children }) {
         setLoading(false);
       }
     },
-    [sections, setSections, user?.email]
+    [isOffline, sections, user.email, setSections]
   );
 
   return (

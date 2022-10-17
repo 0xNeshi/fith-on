@@ -1,32 +1,23 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { ModalContext, SectionsContext } from "..";
-import OfflineWarning from "./OfflineWarning";
+import { createContext, useCallback, useEffect, useState } from "react";
 
 export function NetworkStateProvider({ children }) {
   const [isOffline, setOffline] = useState(!window.navigator.onLine);
-  const { openModal, closeModal } = useContext(ModalContext);
-  const { refetch } = useContext(SectionsContext);
+  const [onOnlineFuncs, setOnOnlineFuncs] = useState([]);
 
   const handleOffline = useCallback(() => {
-    const modalContent = <OfflineWarning onConfirm={closeModal} />;
-    openModal(modalContent);
     if (!isOffline) {
       setOffline(true);
     }
-  }, [closeModal, openModal, isOffline]);
+    alert(
+      "You are in offline mode and will be unable to interact with the app"
+    );
+  }, [isOffline]);
 
   const handleOnline = useCallback(() => {
-    refetch();
-    closeModal();
+    onOnlineFuncs.forEach(func => func());
     setOffline(false);
     alert("Back online");
-  }, [closeModal, refetch]);
+  }, [onOnlineFuncs]);
 
   useEffect(() => {
     if (isOffline) {
@@ -45,11 +36,16 @@ export function NetworkStateProvider({ children }) {
     };
   }, [handleOnline, handleOffline]);
 
+  const setOnOnline = useCallback((onOnline) => setOnOnlineFuncs(prev => [...prev, onOnline]), [])
+  
   return (
-    <NetworkStateContext.Provider value={{ isOffline }}>
+    <NetworkStateContext.Provider value={{ isOffline, setOnOnline }}>
       {children}
     </NetworkStateContext.Provider>
   );
 }
 
-export const NetworkStateContext = createContext({ isOffline: false });
+export const NetworkStateContext = createContext({
+  isOffline: false,
+  setOnOnline: (_func) => {},
+});

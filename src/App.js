@@ -17,11 +17,11 @@ const SignIn = lazy(() => import("./components/SignIn"));
 
 export default function App() {
   return (
-    <UserProvider>
-      <SectionsProvider>
+    <NetworkStateProvider>
+      <UserProvider>
         <ModeProvider>
           <ModalProvider>
-            <NetworkStateProvider>
+            <SectionsProvider>
               <Container
                 component="main"
                 maxWidth="sm"
@@ -53,10 +53,10 @@ export default function App() {
                   </BrowserRouter>
                 </Suspense>
               </Container>
-            </NetworkStateProvider>
+            </SectionsProvider>
           </ModalProvider>
         </ModeProvider>
-      </SectionsProvider>
-    </UserProvider>
+      </UserProvider>
+    </NetworkStateProvider>
   );
 }

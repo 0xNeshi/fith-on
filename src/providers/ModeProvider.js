@@ -13,6 +13,7 @@ import {
 } from "react";
 import logf from "../services/log";
 import { get, update } from "../services/mode";
+import { NetworkStateContext } from "./NetworkStateProvider";
 import { UserContext } from "./UserProvider";
 
 const olive = {
@@ -106,27 +107,35 @@ const DEFAULT_MODE = MODES.dark;
 
 export function ModeProvider({ children }) {
   const { user, isLoading: isUserLoading } = useContext(UserContext);
+  const { isOffline } = useContext(NetworkStateContext);
   const [mode, setMode] = useState(DEFAULT_MODE);
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (isUserLoading || !user || isOffline) return;
+
     setLoading(true);
 
-    if (isUserLoading) return;
-
-    async function getMode() {
-      const userMode = await get(user.email);
-      setMode(userMode || DEFAULT_MODE);
-      setLoading(false);
-    }
-
-    if (!!user) {
-      getMode();
-    }
+    (async function () {
+      try {
+        const userMode = await get(user.email);
+        setMode(userMode || DEFAULT_MODE);
+      } catch (err) {
+        logf(user.email, "useEffect -> load user mode", err);
+        alert("Error loading user mode");
+      } finally {
+        setLoading(false);
+      }
+    })();
+    // eslint-disable-next-line
   }, [isUserLoading, user]);
 
   const saveMode = useCallback(
     async (newMode) => {
+      if (isOffline) {
+        return;
+      }
+
       try {
         setLoading(true);
         await update(user.email, newMode);
@@ -139,8 +148,7 @@ export function ModeProvider({ children }) {
         setLoading(false);
       }
     },
-    // eslint-disable-next-line
-    [user?.email]
+    [user.email, isOffline]
   );
 
   const changeMode = useCallback((newMode) => {
