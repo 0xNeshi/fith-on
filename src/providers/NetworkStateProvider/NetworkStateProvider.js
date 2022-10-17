@@ -47,5 +47,5 @@ export function NetworkStateProvider({ children }) {
 
 export const NetworkStateContext = createContext({
   isOffline: false,
-  setOnOnline: () => {},
+  setOnOnline: (_func) => {},
 });
