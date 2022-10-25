@@ -32,9 +32,19 @@ export function SectionsProvider({ children }) {
   const [toggleRefetch, setToggleRefetch] = useState(false);
 
   const getData = useCallback(async () => {
-    if (!user?.email || isOffline) {
+    if (isOffline) {
       return;
     }
+
+    if (!user?.email) {
+      logf(
+        user?.email,
+        "getData > user?.email check",
+        "Unexpected state: user?.email is null"
+      );
+      return;
+    }
+
     setLoading(true);
     try {
       const newSections = await getSections(user.email);
@@ -66,6 +76,15 @@ export function SectionsProvider({ children }) {
         return;
       }
 
+      if (!user?.email) {
+        logf(
+          user?.email,
+          "add > user?.email check",
+          "Unexpected state: user?.email is null"
+        );
+        return;
+      }
+
       setLoading(true);
       const newSections = [...sections];
 
@@ -83,12 +102,21 @@ export function SectionsProvider({ children }) {
         setLoading(false);
       }
     },
-    [isOffline, sections, user.email, setSections]
+    [isOffline, sections, user?.email, setSections]
   );
 
   const remove = useCallback(
     async (sectionId) => {
       if (isOffline) {
+        return;
+      }
+
+      if (!user?.email) {
+        logf(
+          user?.email,
+          "remove > user?.email check",
+          "Unexpected state: user?.email is null"
+        );
         return;
       }
 
@@ -104,12 +132,21 @@ export function SectionsProvider({ children }) {
         setLoading(false);
       }
     },
-    [isOffline, sections, user.email, setSections]
+    [isOffline, sections, user?.email, setSections]
   );
 
   const update = useCallback(
     async (section) => {
       if (isOffline) {
+        return;
+      }
+
+      if (!user?.email) {
+        logf(
+          user?.email,
+          "update > user?.email check",
+          "Unexpected state: user?.email is null"
+        );
         return;
       }
 
@@ -126,7 +163,7 @@ export function SectionsProvider({ children }) {
         setLoading(false);
       }
     },
-    [isOffline, sections, user.email, setSections]
+    [isOffline, sections, user?.email, setSections]
   );
 
   return (

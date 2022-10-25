@@ -136,6 +136,15 @@ export function ModeProvider({ children }) {
         return;
       }
 
+      if (!user?.email) {
+        logf(
+          user?.email,
+          "saveMode > user?.email check",
+          "Unexpected state: user?.email is null"
+        );
+        return;
+      }
+
       try {
         setLoading(true);
         await update(user.email, newMode);
@@ -148,7 +157,7 @@ export function ModeProvider({ children }) {
         setLoading(false);
       }
     },
-    [user.email, isOffline]
+    [user?.email, isOffline]
   );
 
   const changeMode = useCallback((newMode) => {
