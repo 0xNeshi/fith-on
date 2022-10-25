@@ -32,20 +32,12 @@ export function SectionsProvider({ children }) {
   const [toggleRefetch, setToggleRefetch] = useState(false);
 
   const getData = useCallback(async () => {
-    if (isOffline) {
+    if (!user?.email || isOffline) {
       return;
     }
-
-    if (!user?.email) {
-      logf(
-        user?.email,
-        "getData > user?.email check",
-        "Unexpected state: user?.email is null"
-      );
-      return;
-    }
-
+    
     setLoading(true);
+    
     try {
       const newSections = await getSections(user.email);
       const sortedSections = newSections.sort(
