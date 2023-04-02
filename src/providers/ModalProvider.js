@@ -1,5 +1,7 @@
 import { ModalUnstyled } from "@mui/base";
 import { Box, styled } from "@mui/material";
+import clsx from "clsx";
+import * as React from "react";
 import { createContext, useCallback, useState } from "react";
 
 export const ModalContext = createContext({
@@ -25,7 +27,7 @@ export function ModalProvider({ children }) {
       <StyledModal
         open={isOpen}
         onClose={closeModal}
-        BackdropComponent={Backdrop}
+        slots={{ backdrop: Backdrop }}
       >
         <Box sx={style}>{content}</Box>
       </StyledModal>
@@ -55,7 +57,18 @@ const StyledModal = styled(ModalUnstyled)`
   justify-content: center;
 `;
 
-const Backdrop = styled("div")`
+const BackdropUnstyled = React.forwardRef((props, ref) => {
+  const { open, className, ...other } = props;
+  return (
+    <div
+      className={clsx({ "MuiBackdrop-open": open }, className)}
+      ref={ref}
+      {...other}
+    />
+  );
+});
+
+const Backdrop = styled(BackdropUnstyled)`
   z-index: -1;
   position: fixed;
   right: 0;
