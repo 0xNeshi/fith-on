@@ -18,13 +18,17 @@ import Note from "../Note";
 import { useRemoveSectionModal } from "./hooks";
 import useFAB from "./useFAB";
 
-export const InteractibleContext = createContext(true);
+export const InteractibleContext = createContext({
+  interactible: true,
+  setInputting: (_isInputting) => false,
+});
 
 export default function Dashboard() {
   const { isOffline } = useContext(NetworkStateContext);
   const { isLoading: isModeLoading } = useContext(ModeContext);
   const [contentRef, setContentRef] = useState();
   const [isInteractible, setInteractible] = useState(true);
+  const [isInputting, setInputting] = useState(false);
   const {
     isLoading: areSectionsLoading,
     sections,
@@ -32,7 +36,7 @@ export default function Dashboard() {
     remove,
     update,
   } = useContext(SectionsContext);
-  
+
   const trigger = useScrollTrigger({
     target: contentRef ? contentRef : window,
   });
@@ -58,8 +62,8 @@ export default function Dashboard() {
   );
 
   const shouldDisplayFab = useMemo(
-    () => !isLoading && !trigger,
-    [isLoading, trigger]
+    () => !isLoading && !trigger && !isInputting,
+    [isInputting, isLoading, trigger]
   );
 
   const fabComponent = useFAB(
@@ -87,12 +91,17 @@ export default function Dashboard() {
     setInteractible(!isLoading && !isOffline);
   }, [isLoading, isOffline]);
 
+  const interactibleContextValue = useMemo(
+    () => ({ isInteractible, setInputting }),
+    [isInteractible, setInputting]
+  );
+
   if (isLoading && !sectionComponents?.length) {
     return <Loading />;
   }
 
   return (
-    <InteractibleContext.Provider value={isInteractible}>
+    <InteractibleContext.Provider value={interactibleContextValue}>
       <Container>
         <Spinner showMessage={isLoading && !!sectionComponents?.length} />
         <Content ref={(_ref) => setContentRef(_ref)}>

@@ -6,7 +6,7 @@ import { InteractibleContext } from "../Dashboard/Dashboard";
 
 export default function Note({ note, onAdd, onRemove, onUpdate }) {
   const { mode } = useContext(ModeContext);
-  const isInteractible = useContext(InteractibleContext);
+  const { isInteractible, setInputting } = useContext(InteractibleContext);
   const [text, setText] = useState(note?.text ?? "");
 
   return (
@@ -19,6 +19,8 @@ export default function Note({ note, onAdd, onRemove, onUpdate }) {
         mode={mode}
         value={text}
         onChange={(e) => setText(e.target.value)}
+        onFocus={() => setInputting(true)}
+        onBlur={() => setInputting(false)}
         disabled={!isInteractible}
       />
       {!note ? (

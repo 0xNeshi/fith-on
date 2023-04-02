@@ -5,7 +5,7 @@ import { InteractibleContext } from "./Dashboard/Dashboard";
 
 export default function Section(props) {
   const { sectionId, title, onDeleteSection, dateCreated, children } = props;
-  const isInteractible = useContext(InteractibleContext);
+  const { isInteractible } = useContext(InteractibleContext);
 
   const handleDeleteSection = useCallback(
     () => onDeleteSection(sectionId),

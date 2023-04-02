@@ -1,25 +1,19 @@
 import { styled, TextField } from "@mui/material";
-import { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 import { ModeContext } from "../providers";
 import { InteractibleContext } from "./Dashboard/Dashboard";
 
-const WAIT_INTERVAL = 1000;
-
 export default function AmrapInput({ value, onChange }) {
   const [amrapReps, setAmrapReps] = useState(value);
-  const isInteractible = useContext(InteractibleContext);
+  const { isInteractible, setInputting } = useContext(InteractibleContext);
   const { mode } = useContext(ModeContext);
 
   const handleChangeAmrapReps = useCallback(() => {
     if (amrapReps !== value) {
       onChange(amrapReps);
     }
-  }, [amrapReps, value, onChange]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => handleChangeAmrapReps(), WAIT_INTERVAL);
-    return () => clearTimeout(timer);
-  }, [handleChangeAmrapReps]);
+    setInputting(false);
+  }, [amrapReps, value, onChange, setInputting]);
 
   const displayValue = useMemo(
     () => (!isInteractible && !amrapReps ? "/" : amrapReps || ""),
@@ -35,8 +29,16 @@ export default function AmrapInput({ value, onChange }) {
       onClick={(e) => e.stopPropagation()}
       onChange={(e) => setAmrapReps(e.target.value)}
       onBlur={handleChangeAmrapReps}
-      onKeyDown={(e) => e.key === "Enter" && handleChangeAmrapReps()}
-      onFocus={(e) => e.target.select()}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          e.currentTarget.blur();
+          handleChangeAmrapReps();
+        }
+      }}
+      onFocus={(e) => {
+        e.target.select();
+        setInputting(true);
+      }}
       disabled={!isInteractible}
       mode={mode}
       autoComplete="off"

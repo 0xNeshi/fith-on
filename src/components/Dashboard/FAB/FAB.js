@@ -18,7 +18,7 @@ export default function FAB(props) {
   const { onAddNote, onAddBlock, onSignOut, onSelectMode } = props;
   const [anchorEl, setAnchorEl] = useState(null);
   const { user } = useContext(UserContext);
-  const isInteractible = useContext(InteractibleContext);
+  const { isInteractible } = useContext(InteractibleContext);
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
