@@ -38,24 +38,22 @@ export default function AddBlock(props) {
   return (
     <Form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
       <InputContainer>
-        <InputColumn>
-          <Input
-            label="Block number"
-            registerReturn={register("blockNumber")}
-            error={errors?.blockNumber?.message}
-          />
+        <Input
+          label="Block number"
+          registerReturn={register("blockNumber")}
+          error={errors?.blockNumber?.message}
+        />
 
-          {Object.keys(EXERCISE_KEYS).map((key) => (
-            <Input
-              key={`ex-input-${key}`}
-              label={`${EXERCISE_KEYS[key]} max`}
-              registerReturn={register(`${EXERCISE_KEYS[key]}Max`)}
-              error={
-                errors ? errors[`${EXERCISE_KEYS[key]}Max`]?.message : undefined
-              }
-            />
-          ))}
-        </InputColumn>
+        {Object.keys(EXERCISE_KEYS).map((key) => (
+          <Input
+            key={`ex-input-${key}`}
+            label={`${EXERCISE_KEYS[key]} max`}
+            registerReturn={register(`${EXERCISE_KEYS[key]}Max`)}
+            error={
+              errors ? errors[`${EXERCISE_KEYS[key]}Max`]?.message : undefined
+            }
+          />
+        ))}
       </InputContainer>
       <ButtonContainer>
         <Button color="secondary" disabled={isSubmitting} onClick={onClose}>
