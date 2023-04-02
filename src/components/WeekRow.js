@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Box, styled } from "@mui/material";
 import ExerciseRow from "./ExerciseRow";
 import { EXERCISES } from "../constants";
@@ -16,6 +16,8 @@ const percentagesPerWeek = {
 };
 
 export default function WeekRow({ onUpdate, week, blockId }) {
+  const [showNotes, setShowNotes] = useState(false);
+
   const handleExerciseUpdate = useCallback(
     (updatedExercise) => {
       const updatedWeek = { ...week };
@@ -41,6 +43,7 @@ export default function WeekRow({ onUpdate, week, blockId }) {
               weights={weights}
               onUpdate={handleExerciseUpdate}
               exercise={exercise}
+              showNotes={showNotes}
             />
           );
         }),

@@ -1,13 +1,20 @@
 import { ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
 import { styled } from "@mui/material";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AmrapInput from "../AmrapInput";
 import Notes from "./Notes";
 
-export default function ExerciseRow({ weights, exercise, onUpdate }) {
+export default function ExerciseRow({
+  weights,
+  exercise,
+  onUpdate,
+  showNotes: showNotesParent,
+}) {
   const { amrapReps, name, trainingMax, notes = [] } = exercise;
   const [first, second, third] = weights;
-  const [showNotes, setShowNotes] = useState(!!notes.length);
+  const [showNotes, setShowNotes] = useState(showNotesParent);
+
+  useEffect(() => setShowNotes(showNotesParent), [showNotesParent]);
 
   const handleUpdateAmrap = useCallback(
     (updatedAmrap) => {
@@ -46,11 +53,7 @@ export default function ExerciseRow({ weights, exercise, onUpdate }) {
           <AmrapInput value={amrapReps} onChange={handleUpdateAmrap} />
         </AmrapCell>
       </Row>
-      <Notes
-        isVisible={showNotes}
-        notes={notes}
-        onUpdate={handleUpdateNotes}
-      />
+      <Notes isVisible={showNotes} notes={notes} onUpdate={handleUpdateNotes} />
     </>
   );
 }
