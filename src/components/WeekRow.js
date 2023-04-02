@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
-import { Box, styled } from "@mui/material";
+import { Box, styled, Checkbox, FormControlLabel } from "@mui/material";
 import ExerciseRow from "./ExerciseRow";
 import { EXERCISES } from "../constants";
 
@@ -47,7 +47,7 @@ export default function WeekRow({ onUpdate, week, blockId }) {
             />
           );
         }),
-    [week, blockId, handleExerciseUpdate]
+    [showNotes, week, blockId, handleExerciseUpdate]
   );
 
   const [first, second, third] = useMemo(
@@ -58,7 +58,19 @@ export default function WeekRow({ onUpdate, week, blockId }) {
   return (
     <Container>
       <WeekHeader>
-        Week {week.number} ({repSchemas[week.number]})
+        <span>
+          Week {week.number} ({repSchemas[week.number]})
+        </span>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={showNotes}
+              onChange={(e) => setShowNotes(e.target.checked)}
+            />
+          }
+          label="Show notes"
+          labelPlacement="start"
+        />
       </WeekHeader>
       <Table>
         <thead>
@@ -87,6 +99,8 @@ const Container = styled(Box)`
 
 const WeekHeader = styled("h4")`
   margin-block: 0;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Table = styled("table")`
