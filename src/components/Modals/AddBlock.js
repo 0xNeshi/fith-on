@@ -4,6 +4,7 @@ import { Box, styled } from "@mui/material";
 import * as yup from "yup";
 import Button from "../Button";
 import Input from "../Input";
+import { EXERCISES, EXERCISE_KEYS } from "../../constants";
 
 const TRAINING_MAX_SCHEMA = yup
   .number()
@@ -12,14 +13,15 @@ const TRAINING_MAX_SCHEMA = yup
   .nullable(true)
   .transform((_, x) => (!x ? null : +x));
 
-const YUP_SHAPE = yup.object().shape({
-  overheadMax: TRAINING_MAX_SCHEMA,
-  squatMax: TRAINING_MAX_SCHEMA,
-  powercleanMax: TRAINING_MAX_SCHEMA,
-  benchMax: TRAINING_MAX_SCHEMA,
-  deadliftMax: TRAINING_MAX_SCHEMA,
-  blockNumber: TRAINING_MAX_SCHEMA,
-});
+const YUP_SHAPE = yup.object().shape(
+  EXERCISES.reduce(
+    (schema, exName) => {
+      schema[`${exName}Max`] = TRAINING_MAX_SCHEMA;
+      return schema;
+    },
+    { blockNumber: TRAINING_MAX_SCHEMA }
+  )
+);
 
 export default function AddBlock(props) {
   const { onClose, onSubmit, initialValues } = props;
@@ -41,36 +43,18 @@ export default function AddBlock(props) {
             label="Block number"
             registerReturn={register("blockNumber")}
             error={errors?.blockNumber?.message}
-            style={{ marginBottom: 10 }}
           />
-          <Input
-            label="Overhead max"
-            registerReturn={register("overheadMax")}
-            error={errors?.overheadMax?.message}
-          />
-          <Input
-            label="Squat max"
-            registerReturn={register("squatMax")}
-            error={errors?.squatMax?.message}
-            autoFocus
-          />
-        </InputColumn>
-        <InputColumn>
-          <Input
-            label="Powerclean"
-            registerReturn={register("powercleanMax")}
-            error={errors?.powercleanMax?.message}
-          />
-          <Input
-            label="Bench max"
-            registerReturn={register("benchMax")}
-            error={errors?.benchMax?.message}
-          />
-          <Input
-            label="Deadlift max"
-            registerReturn={register("deadliftMax")}
-            error={errors?.deadliftMax?.message}
-          />
+
+          {Object.keys(EXERCISE_KEYS).map((key) => (
+            <Input
+              key={`ex-input-${key}`}
+              label={`${EXERCISE_KEYS[key]} max`}
+              registerReturn={register(`${EXERCISE_KEYS[key]}Max`)}
+              error={
+                errors ? errors[`${EXERCISE_KEYS[key]}Max`]?.message : undefined
+              }
+            />
+          ))}
         </InputColumn>
       </InputContainer>
       <ButtonContainer>
@@ -99,14 +83,9 @@ const ButtonContainer = styled(Box)`
 `;
 
 const InputContainer = styled(Box)`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   height: 100%;
   width: 100%;
-  gap: 40px;
-`;
-
-const InputColumn = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  gap: 10px 40px;
 `;

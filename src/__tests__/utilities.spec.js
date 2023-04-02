@@ -1,3 +1,4 @@
+import { EXERCISE_KEYS } from "../constants";
 import { getNewBlockSuggestedValues } from "../utilities";
 
 const defaultSuggestionsInput = [[], undefined, null, [{ type: "note" }]];
@@ -31,27 +32,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 1,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 80,
                 amrapReps: 10,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 42.5,
                 amrapReps: 11,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 42.5,
                 amrapReps: 11,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 105,
                 amrapReps: 12,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 52.5,
                 amrapReps: 7,
               },
@@ -61,27 +62,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 2,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 80,
                 amrapReps: 9,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 42.5,
                 amrapReps: 10,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 42.5,
                 amrapReps: 10,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 105,
                 amrapReps: 10,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 52.5,
                 amrapReps: 8,
               },
@@ -91,27 +92,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 3,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 80,
                 amrapReps: 0,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 42.5,
                 amrapReps: 0,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 42.5,
                 amrapReps: 0,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 105,
                 amrapReps: 0,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 52.5,
                 amrapReps: 0,
               },
@@ -123,17 +124,17 @@ describe("getNewBlockSuggestedValues", () => {
 
     const output = {
       blockNumber: 2,
-      squatMax: 85,
+      squatMax: 82.5,
       overheadMax: 45,
       powercleanMax: 45,
-      deadliftMax: 110,
+      deadliftMax: 107.5,
       benchMax: 55,
     };
 
     expect(getNewBlockSuggestedValues(sections)).toEqual(output);
   });
 
-  test("should return maxes incremented by default increments", () => {
+  test("should return maxes incremented by previous increments", () => {
     const sections = [
       {
         id: 2,
@@ -145,27 +146,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 1,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 80,
                 amrapReps: 10,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 42.5,
                 amrapReps: 11,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 42.5,
                 amrapReps: 11,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 105,
                 amrapReps: 12,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 52.5,
                 amrapReps: 7,
               },
@@ -175,27 +176,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 2,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 80,
                 amrapReps: 9,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 42.5,
                 amrapReps: 10,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 42.5,
                 amrapReps: 10,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 105,
                 amrapReps: 10,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 52.5,
                 amrapReps: 8,
               },
@@ -205,27 +206,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 3,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 80,
                 amrapReps: 0,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 42.5,
                 amrapReps: 0,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 42.5,
                 amrapReps: 0,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 105,
                 amrapReps: 0,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 52.5,
                 amrapReps: 0,
               },
@@ -243,27 +244,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 1,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 75,
                 amrapReps: 10,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 40,
                 amrapReps: 11,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 40,
                 amrapReps: 11,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 100,
                 amrapReps: 12,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 50,
                 amrapReps: 7,
               },
@@ -273,27 +274,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 2,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 75,
                 amrapReps: 9,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 40,
                 amrapReps: 10,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 40,
                 amrapReps: 10,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 100,
                 amrapReps: 10,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 50,
                 amrapReps: 8,
               },
@@ -303,27 +304,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 3,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 75,
                 amrapReps: 7,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 40,
                 amrapReps: 7,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 40,
                 amrapReps: 7,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 100,
                 amrapReps: 7,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 50,
                 amrapReps: 8,
               },
@@ -357,27 +358,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 1,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 80,
                 amrapReps: 10,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 42.5,
                 amrapReps: 11,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 42.5,
                 amrapReps: 11,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 105,
                 amrapReps: 12,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 52.5,
                 amrapReps: 7,
               },
@@ -387,27 +388,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 2,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 80,
                 amrapReps: 9,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 42.5,
                 amrapReps: 10,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 42.5,
                 amrapReps: 10,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 105,
                 amrapReps: 10,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 52.5,
                 amrapReps: 8,
               },
@@ -417,27 +418,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 3,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 80,
                 amrapReps: 0,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 42.5,
                 amrapReps: 0,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 42.5,
                 amrapReps: 0,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 105,
                 amrapReps: 0,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 52.5,
                 amrapReps: 0,
               },
@@ -469,27 +470,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 1,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 75,
                 amrapReps: 10,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 40,
                 amrapReps: 11,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 40,
                 amrapReps: 11,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 100,
                 amrapReps: 12,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 50,
                 amrapReps: 7,
               },
@@ -499,27 +500,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 2,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 75,
                 amrapReps: 9,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 40,
                 amrapReps: 10,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 40,
                 amrapReps: 10,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 100,
                 amrapReps: 10,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 50,
                 amrapReps: 8,
               },
@@ -529,27 +530,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 3,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 75,
                 amrapReps: 7,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 40,
                 amrapReps: 7,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 40,
                 amrapReps: 7,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 100,
                 amrapReps: 7,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 50,
                 amrapReps: 8,
               },
@@ -583,27 +584,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 1,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 77.5,
                 amrapReps: 10,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 41,
                 amrapReps: 11,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 41,
                 amrapReps: 11,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 102.5,
                 amrapReps: 12,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 51,
                 amrapReps: 7,
               },
@@ -613,27 +614,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 2,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 77.5,
                 amrapReps: 9,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 41,
                 amrapReps: 10,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 41,
                 amrapReps: 10,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 102.5,
                 amrapReps: 10,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 51,
                 amrapReps: 8,
               },
@@ -643,27 +644,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 3,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 77.5,
                 amrapReps: 0,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 41,
                 amrapReps: 0,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 41,
                 amrapReps: 0,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 102.5,
                 amrapReps: 0,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 51,
                 amrapReps: 0,
               },
@@ -681,27 +682,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 1,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 75,
                 amrapReps: 10,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 40,
                 amrapReps: 11,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 40,
                 amrapReps: 11,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 100,
                 amrapReps: 12,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 50,
                 amrapReps: 7,
               },
@@ -711,27 +712,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 2,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 75,
                 amrapReps: 9,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 40,
                 amrapReps: 10,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 40,
                 amrapReps: 10,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 100,
                 amrapReps: 10,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 50,
                 amrapReps: 8,
               },
@@ -741,27 +742,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 3,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 75,
                 amrapReps: 7,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 40,
                 amrapReps: 7,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 40,
                 amrapReps: 7,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 100,
                 amrapReps: 7,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 50,
                 amrapReps: 8,
               },
@@ -795,27 +796,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 1,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 77.5,
                 amrapReps: 10,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 41,
                 amrapReps: 11,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 41,
                 amrapReps: 11,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 102.5,
                 amrapReps: 12,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 51,
                 amrapReps: 7,
               },
@@ -825,27 +826,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 2,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 77.5,
                 amrapReps: 9,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 41,
                 amrapReps: 10,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 41,
                 amrapReps: 10,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 102.5,
                 amrapReps: 10,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 51,
                 amrapReps: 8,
               },
@@ -855,27 +856,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 3,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 77.5,
                 amrapReps: 0,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 41,
                 amrapReps: 0,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 41,
                 amrapReps: 0,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 102.5,
                 amrapReps: 0,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 51,
                 amrapReps: 0,
               },
@@ -893,12 +894,12 @@ describe("getNewBlockSuggestedValues", () => {
             number: 1,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 75,
                 amrapReps: 10,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 100,
                 amrapReps: 12,
               },
@@ -908,12 +909,12 @@ describe("getNewBlockSuggestedValues", () => {
             number: 2,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 75,
                 amrapReps: 9,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 100,
                 amrapReps: 10,
               },
@@ -923,12 +924,12 @@ describe("getNewBlockSuggestedValues", () => {
             number: 3,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 75,
                 amrapReps: 7,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 100,
                 amrapReps: 7,
               },
@@ -962,12 +963,12 @@ describe("getNewBlockSuggestedValues", () => {
             number: 1,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 77.5,
                 amrapReps: 10,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 102.5,
                 amrapReps: 12,
               },
@@ -977,12 +978,12 @@ describe("getNewBlockSuggestedValues", () => {
             number: 2,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 77.5,
                 amrapReps: 9,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 102.5,
                 amrapReps: 10,
               },
@@ -992,12 +993,12 @@ describe("getNewBlockSuggestedValues", () => {
             number: 3,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 77.5,
                 amrapReps: 0,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 102.5,
                 amrapReps: 0,
               },
@@ -1015,27 +1016,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 1,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 75,
                 amrapReps: 10,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 40,
                 amrapReps: 11,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 40,
                 amrapReps: 11,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 100,
                 amrapReps: 12,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 50,
                 amrapReps: 7,
               },
@@ -1045,27 +1046,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 2,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 75,
                 amrapReps: 9,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 40,
                 amrapReps: 10,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 40,
                 amrapReps: 10,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 100,
                 amrapReps: 10,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 50,
                 amrapReps: 8,
               },
@@ -1075,27 +1076,27 @@ describe("getNewBlockSuggestedValues", () => {
             number: 3,
             exercises: [
               {
-                name: "squat",
+                name: EXERCISE_KEYS.Squat,
                 trainingMax: 75,
                 amrapReps: 7,
               },
               {
-                name: "overhead",
+                name: EXERCISE_KEYS.Overhead,
                 trainingMax: 40,
                 amrapReps: 7,
               },
               {
-                name: "powerclean",
+                name: EXERCISE_KEYS.Powerclean,
                 trainingMax: 40,
                 amrapReps: 7,
               },
               {
-                name: "deadlift",
+                name: EXERCISE_KEYS.Deadlift,
                 trainingMax: 100,
                 amrapReps: 7,
               },
               {
-                name: "bench",
+                name: EXERCISE_KEYS.Bench,
                 trainingMax: 50,
                 amrapReps: 8,
               },

@@ -1,20 +1,13 @@
 import { useCallback, useMemo } from "react";
 import { Box, styled } from "@mui/material";
 import ExerciseRow from "./ExerciseRow";
+import { EXERCISES } from "../constants";
 
 const repSchemas = {
   1: "5/5/5",
   2: "3/3/3",
   3: "5/3/1",
 };
-
-const exercisesInOrder = [
-  "overhead",
-  "squat",
-  "powerclean",
-  "bench",
-  "deadlift",
-];
 
 const percentagesPerWeek = {
   1: [0.65, 0.75, 0.85],
@@ -37,8 +30,7 @@ export default function WeekRow({ onUpdate, week, blockId }) {
 
   const exerciseRows = useMemo(
     () =>
-      exercisesInOrder
-        .map((exName) => week.exercises.find((x) => x.name === exName))
+      EXERCISES.map((exName) => week.exercises.find((x) => x.name === exName))
         .filter((exercise) => (exercise?.trainingMax || 0) > 0)
         .map((exercise) => {
           const weights = getWeights(exercise.trainingMax, week.number);

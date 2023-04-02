@@ -1,31 +1,21 @@
-const DEFAULT_INCREMENTS = {
-  overhead: 2.5,
-  squat: 5,
-  powerclean: 2.5,
-  bench: 2.5,
-  deadlift: 5,
-};
+import { EXERCISES } from "../constants";
 
-const EXERCISE_KEYS = {
-  Overhead: "overhead",
-  Squat: "squat",
-  Powerclean: "powerclean",
-  Bench: "bench",
-  Deadlift: "deadlift",
-};
+const DEFAULT_INCREMENTS = EXERCISES.reduce((obj, exName) => {
+  obj[exName] = 2.5;
+  return obj;
+}, {});
 
 export default function getNewBlockSuggestedValues(sections = []) {
   const blocks = sections?.filter((s) => s.type === "block");
 
   if (!blocks?.length) {
-    return {
-      blockNumber: 1,
-      overheadMax: "",
-      squatMax: "",
-      powercleanMax: "",
-      benchMax: "",
-      deadliftMax: "",
-    };
+    return EXERCISES.reduce(
+      (maxesObj, exName) => {
+        maxesObj[`${exName}Max`] = "";
+        return maxesObj;
+      },
+      { blockNumber: 1 }
+    );
   }
 
   // sections are sorted descending by dateCreated, so sections[0] is the last section
@@ -38,9 +28,8 @@ export default function getNewBlockSuggestedValues(sections = []) {
       ? DEFAULT_INCREMENTS
       : getIncrements(currentBlock, blocks[1]);
 
-  const suggestedValues = Object.keys(EXERCISE_KEYS).reduce(
-    (valuesObj, enumKey) => {
-      const exName = EXERCISE_KEYS[enumKey];
+  const suggestedValues = EXERCISES.reduce(
+    (valuesObj, exName) => {
       const key = `${exName}Max`;
       const exercise = currentExercises.find(
         (ex) => ex.name === exName && ex.trainingMax > 0

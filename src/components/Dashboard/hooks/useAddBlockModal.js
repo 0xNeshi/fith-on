@@ -1,6 +1,7 @@
 import { useCallback, useContext } from "react";
 import { ModalContext } from "../../../providers";
 import { AddBlock } from "../../Modals";
+import { EXERCISES } from "../../../constants";
 
 export default function useAddBlockModal(add) {
   const { openModal, closeModal } = useContext(ModalContext);
@@ -37,13 +38,9 @@ const createBlock = (blockData) => {
   for (let i = 1; i <= numberOfWeeks; i++) {
     weeks.push({
       number: i,
-      exercises: [
-        createExercise("overhead", blockData.overheadMax),
-        createExercise("squat", blockData.squatMax),
-        createExercise("powerclean", blockData.powercleanMax),
-        createExercise("bench", blockData.benchMax),
-        createExercise("deadlift", blockData.deadliftMax),
-      ],
+      exercises: EXERCISES.map((exName) =>
+        createExercise(exName, blockData[`${exName}Max`])
+      ),
     });
   }
 
