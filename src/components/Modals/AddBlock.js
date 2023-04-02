@@ -13,8 +13,9 @@ const TRAINING_MAX_SCHEMA = yup
   .transform((_, x) => (!x ? null : +x));
 
 const YUP_SHAPE = yup.object().shape({
-  squatMax: TRAINING_MAX_SCHEMA,
   overheadMax: TRAINING_MAX_SCHEMA,
+  squatMax: TRAINING_MAX_SCHEMA,
+  powercleanMax: TRAINING_MAX_SCHEMA,
   benchMax: TRAINING_MAX_SCHEMA,
   deadliftMax: TRAINING_MAX_SCHEMA,
   blockNumber: TRAINING_MAX_SCHEMA,
@@ -43,27 +44,32 @@ export default function AddBlock(props) {
             style={{ marginBottom: 10 }}
           />
           <Input
+            label="Overhead max"
+            registerReturn={register("overheadMax")}
+            error={errors?.overheadMax?.message}
+          />
+          <Input
             label="Squat max"
             registerReturn={register("squatMax")}
             error={errors?.squatMax?.message}
             autoFocus
+          />
+        </InputColumn>
+        <InputColumn>
+          <Input
+            label="Powerclean"
+            registerReturn={register("powercleanMax")}
+            error={errors?.powercleanMax?.message}
           />
           <Input
             label="Bench max"
             registerReturn={register("benchMax")}
             error={errors?.benchMax?.message}
           />
-        </InputColumn>
-        <InputColumn style={{ justifyContent: "flex-end" }}>
           <Input
             label="Deadlift max"
             registerReturn={register("deadliftMax")}
             error={errors?.deadliftMax?.message}
-          />
-          <Input
-            label="Overhead max"
-            registerReturn={register("overheadMax")}
-            error={errors?.overheadMax?.message}
           />
         </InputColumn>
       </InputContainer>

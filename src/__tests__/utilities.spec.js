@@ -8,10 +8,11 @@ describe("getNewBlockSuggestedValues", () => {
     (sections) => {
       const output = {
         blockNumber: 1,
-        squatMax: "",
         overheadMax: "",
-        deadliftMax: "",
+        squatMax: "",
+        powercleanMax: "",
         benchMax: "",
+        deadliftMax: "",
       };
 
       expect(getNewBlockSuggestedValues(sections)).toEqual(output);
@@ -36,6 +37,11 @@ describe("getNewBlockSuggestedValues", () => {
               },
               {
                 name: "overhead",
+                trainingMax: 42.5,
+                amrapReps: 11,
+              },
+              {
+                name: "powerclean",
                 trainingMax: 42.5,
                 amrapReps: 11,
               },
@@ -65,6 +71,11 @@ describe("getNewBlockSuggestedValues", () => {
                 amrapReps: 10,
               },
               {
+                name: "powerclean",
+                trainingMax: 42.5,
+                amrapReps: 10,
+              },
+              {
                 name: "deadlift",
                 trainingMax: 105,
                 amrapReps: 10,
@@ -90,6 +101,11 @@ describe("getNewBlockSuggestedValues", () => {
                 amrapReps: 0,
               },
               {
+                name: "powerclean",
+                trainingMax: 42.5,
+                amrapReps: 0,
+              },
+              {
                 name: "deadlift",
                 trainingMax: 105,
                 amrapReps: 0,
@@ -109,6 +125,7 @@ describe("getNewBlockSuggestedValues", () => {
       blockNumber: 2,
       squatMax: 85,
       overheadMax: 45,
+      powercleanMax: 45,
       deadliftMax: 110,
       benchMax: 55,
     };
@@ -138,6 +155,11 @@ describe("getNewBlockSuggestedValues", () => {
                 amrapReps: 11,
               },
               {
+                name: "powerclean",
+                trainingMax: 42.5,
+                amrapReps: 11,
+              },
+              {
                 name: "deadlift",
                 trainingMax: 105,
                 amrapReps: 12,
@@ -163,6 +185,11 @@ describe("getNewBlockSuggestedValues", () => {
                 amrapReps: 10,
               },
               {
+                name: "powerclean",
+                trainingMax: 42.5,
+                amrapReps: 10,
+              },
+              {
                 name: "deadlift",
                 trainingMax: 105,
                 amrapReps: 10,
@@ -184,6 +211,11 @@ describe("getNewBlockSuggestedValues", () => {
               },
               {
                 name: "overhead",
+                trainingMax: 42.5,
+                amrapReps: 0,
+              },
+              {
+                name: "powerclean",
                 trainingMax: 42.5,
                 amrapReps: 0,
               },
@@ -221,6 +253,11 @@ describe("getNewBlockSuggestedValues", () => {
                 amrapReps: 11,
               },
               {
+                name: "powerclean",
+                trainingMax: 40,
+                amrapReps: 11,
+              },
+              {
                 name: "deadlift",
                 trainingMax: 100,
                 amrapReps: 12,
@@ -242,6 +279,11 @@ describe("getNewBlockSuggestedValues", () => {
               },
               {
                 name: "overhead",
+                trainingMax: 40,
+                amrapReps: 10,
+              },
+              {
+                name: "powerclean",
                 trainingMax: 40,
                 amrapReps: 10,
               },
@@ -271,6 +313,11 @@ describe("getNewBlockSuggestedValues", () => {
                 amrapReps: 7,
               },
               {
+                name: "powerclean",
+                trainingMax: 40,
+                amrapReps: 7,
+              },
+              {
                 name: "deadlift",
                 trainingMax: 100,
                 amrapReps: 7,
@@ -290,6 +337,7 @@ describe("getNewBlockSuggestedValues", () => {
       blockNumber: 3,
       squatMax: 85,
       overheadMax: 45,
+      powercleanMax: 45,
       deadliftMax: 110,
       benchMax: 55,
     };
@@ -319,6 +367,11 @@ describe("getNewBlockSuggestedValues", () => {
                 amrapReps: 11,
               },
               {
+                name: "powerclean",
+                trainingMax: 42.5,
+                amrapReps: 11,
+              },
+              {
                 name: "deadlift",
                 trainingMax: 105,
                 amrapReps: 12,
@@ -344,6 +397,11 @@ describe("getNewBlockSuggestedValues", () => {
                 amrapReps: 10,
               },
               {
+                name: "powerclean",
+                trainingMax: 42.5,
+                amrapReps: 10,
+              },
+              {
                 name: "deadlift",
                 trainingMax: 105,
                 amrapReps: 10,
@@ -365,6 +423,11 @@ describe("getNewBlockSuggestedValues", () => {
               },
               {
                 name: "overhead",
+                trainingMax: 42.5,
+                amrapReps: 0,
+              },
+              {
+                name: "powerclean",
                 trainingMax: 42.5,
                 amrapReps: 0,
               },
@@ -416,6 +479,11 @@ describe("getNewBlockSuggestedValues", () => {
                 amrapReps: 11,
               },
               {
+                name: "powerclean",
+                trainingMax: 40,
+                amrapReps: 11,
+              },
+              {
                 name: "deadlift",
                 trainingMax: 100,
                 amrapReps: 12,
@@ -437,6 +505,11 @@ describe("getNewBlockSuggestedValues", () => {
               },
               {
                 name: "overhead",
+                trainingMax: 40,
+                amrapReps: 10,
+              },
+              {
+                name: "powerclean",
                 trainingMax: 40,
                 amrapReps: 10,
               },
@@ -466,6 +539,11 @@ describe("getNewBlockSuggestedValues", () => {
                 amrapReps: 7,
               },
               {
+                name: "powerclean",
+                trainingMax: 40,
+                amrapReps: 7,
+              },
+              {
                 name: "deadlift",
                 trainingMax: 100,
                 amrapReps: 7,
@@ -485,6 +563,7 @@ describe("getNewBlockSuggestedValues", () => {
       blockNumber: 3,
       squatMax: 85,
       overheadMax: 45,
+      powercleanMax: 45,
       deadliftMax: 110,
       benchMax: 55,
     };
@@ -514,6 +593,11 @@ describe("getNewBlockSuggestedValues", () => {
                 amrapReps: 11,
               },
               {
+                name: "powerclean",
+                trainingMax: 41,
+                amrapReps: 11,
+              },
+              {
                 name: "deadlift",
                 trainingMax: 102.5,
                 amrapReps: 12,
@@ -539,6 +623,11 @@ describe("getNewBlockSuggestedValues", () => {
                 amrapReps: 10,
               },
               {
+                name: "powerclean",
+                trainingMax: 41,
+                amrapReps: 10,
+              },
+              {
                 name: "deadlift",
                 trainingMax: 102.5,
                 amrapReps: 10,
@@ -560,6 +649,11 @@ describe("getNewBlockSuggestedValues", () => {
               },
               {
                 name: "overhead",
+                trainingMax: 41,
+                amrapReps: 0,
+              },
+              {
+                name: "powerclean",
                 trainingMax: 41,
                 amrapReps: 0,
               },
@@ -597,6 +691,11 @@ describe("getNewBlockSuggestedValues", () => {
                 amrapReps: 11,
               },
               {
+                name: "powerclean",
+                trainingMax: 40,
+                amrapReps: 11,
+              },
+              {
                 name: "deadlift",
                 trainingMax: 100,
                 amrapReps: 12,
@@ -618,6 +717,11 @@ describe("getNewBlockSuggestedValues", () => {
               },
               {
                 name: "overhead",
+                trainingMax: 40,
+                amrapReps: 10,
+              },
+              {
+                name: "powerclean",
                 trainingMax: 40,
                 amrapReps: 10,
               },
@@ -647,6 +751,11 @@ describe("getNewBlockSuggestedValues", () => {
                 amrapReps: 7,
               },
               {
+                name: "powerclean",
+                trainingMax: 40,
+                amrapReps: 7,
+              },
+              {
                 name: "deadlift",
                 trainingMax: 100,
                 amrapReps: 7,
@@ -666,6 +775,7 @@ describe("getNewBlockSuggestedValues", () => {
       blockNumber: 3,
       squatMax: 80,
       overheadMax: 42,
+      powercleanMax: 42,
       deadliftMax: 105,
       benchMax: 52,
     };
@@ -695,6 +805,11 @@ describe("getNewBlockSuggestedValues", () => {
                 amrapReps: 11,
               },
               {
+                name: "powerclean",
+                trainingMax: 41,
+                amrapReps: 11,
+              },
+              {
                 name: "deadlift",
                 trainingMax: 102.5,
                 amrapReps: 12,
@@ -720,6 +835,11 @@ describe("getNewBlockSuggestedValues", () => {
                 amrapReps: 10,
               },
               {
+                name: "powerclean",
+                trainingMax: 41,
+                amrapReps: 10,
+              },
+              {
                 name: "deadlift",
                 trainingMax: 102.5,
                 amrapReps: 10,
@@ -741,6 +861,11 @@ describe("getNewBlockSuggestedValues", () => {
               },
               {
                 name: "overhead",
+                trainingMax: 41,
+                amrapReps: 0,
+              },
+              {
+                name: "powerclean",
                 trainingMax: 41,
                 amrapReps: 0,
               },
@@ -817,6 +942,7 @@ describe("getNewBlockSuggestedValues", () => {
       blockNumber: 3,
       squatMax: 80,
       overheadMax: 43.5,
+      powercleanMax: 43.5,
       deadliftMax: 105,
       benchMax: 53.5,
     };
@@ -899,6 +1025,11 @@ describe("getNewBlockSuggestedValues", () => {
                 amrapReps: 11,
               },
               {
+                name: "powerclean",
+                trainingMax: 40,
+                amrapReps: 11,
+              },
+              {
                 name: "deadlift",
                 trainingMax: 100,
                 amrapReps: 12,
@@ -920,6 +1051,11 @@ describe("getNewBlockSuggestedValues", () => {
               },
               {
                 name: "overhead",
+                trainingMax: 40,
+                amrapReps: 10,
+              },
+              {
+                name: "powerclean",
                 trainingMax: 40,
                 amrapReps: 10,
               },
@@ -949,6 +1085,11 @@ describe("getNewBlockSuggestedValues", () => {
                 amrapReps: 7,
               },
               {
+                name: "powerclean",
+                trainingMax: 40,
+                amrapReps: 7,
+              },
+              {
                 name: "deadlift",
                 trainingMax: 100,
                 amrapReps: 7,
@@ -968,6 +1109,7 @@ describe("getNewBlockSuggestedValues", () => {
       blockNumber: 3,
       squatMax: 80,
       overheadMax: 0,
+      powercleanMax: 0,
       deadliftMax: 105,
       benchMax: 0,
     };

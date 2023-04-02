@@ -8,7 +8,13 @@ const repSchemas = {
   3: "5/3/1",
 };
 
-const exercisesInOrder = ["overhead", "deadlift", "bench", "squat"];
+const exercisesInOrder = [
+  "overhead",
+  "squat",
+  "powerclean",
+  "bench",
+  "deadlift",
+];
 
 const percentagesPerWeek = {
   1: [0.65, 0.75, 0.85],

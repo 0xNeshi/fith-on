@@ -1,15 +1,17 @@
 const DEFAULT_INCREMENTS = {
-  squat: 5,
-  deadlift: 5,
   overhead: 2.5,
+  squat: 5,
+  powerclean: 2.5,
   bench: 2.5,
+  deadlift: 5,
 };
 
 const EXERCISE_KEYS = {
-  Squat: "squat",
-  Deadlift: "deadlift",
   Overhead: "overhead",
+  Squat: "squat",
+  Powerclean: "powerclean",
   Bench: "bench",
+  Deadlift: "deadlift",
 };
 
 export default function getNewBlockSuggestedValues(sections = []) {
@@ -18,10 +20,11 @@ export default function getNewBlockSuggestedValues(sections = []) {
   if (!blocks?.length) {
     return {
       blockNumber: 1,
-      squatMax: "",
       overheadMax: "",
-      deadliftMax: "",
+      squatMax: "",
+      powercleanMax: "",
       benchMax: "",
+      deadliftMax: "",
     };
   }
 

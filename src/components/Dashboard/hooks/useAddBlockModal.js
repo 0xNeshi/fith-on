@@ -38,10 +38,11 @@ const createBlock = (blockData) => {
     weeks.push({
       number: i,
       exercises: [
-        createExercise("squat", blockData.squatMax),
         createExercise("overhead", blockData.overheadMax),
-        createExercise("deadlift", blockData.deadliftMax),
+        createExercise("squat", blockData.squatMax),
+        createExercise("powerclean", blockData.powercleanMax),
         createExercise("bench", blockData.benchMax),
+        createExercise("deadlift", blockData.deadliftMax),
       ],
     });
   }
