@@ -4,10 +4,10 @@ import React, { useContext, useState } from "react";
 import { ModeContext } from "../../providers";
 import { InteractibleContext } from "../Dashboard/Dashboard";
 
-export default function Note({ note, onRemove, onUpdate }) {
+export default function Note({ note, onAdd, onRemove, onUpdate }) {
   const { mode } = useContext(ModeContext);
   const isInteractible = useContext(InteractibleContext);
-  const [text, setText] = useState(note.text);
+  const [text, setText] = useState(note?.text ?? "");
 
   return (
     <NoteContainer>
@@ -21,22 +21,38 @@ export default function Note({ note, onRemove, onUpdate }) {
         onChange={(e) => setText(e.target.value)}
         disabled={!isInteractible}
       />
-      <Button
-        color="primary"
-        disabled={!isInteractible}
-        onClick={() => onUpdate(note.id, text)}
-        sx={{ padding: "0 6px", minWidth: 0 }}
-      >
-        <UpdateIcon fontSize="small" />
-      </Button>
-      <Button
-        color="primary"
-        disabled={!isInteractible}
-        onClick={() => onRemove(note.id)}
-        sx={{ padding: "0 6px", minWidth: 0 }}
-      >
-        <CloseIcon fontSize="small" />
-      </Button>
+      {!note ? (
+        <Button
+          color="primary"
+          disabled={!isInteractible}
+          onClick={() => {
+            onAdd(text);
+            setText("");
+          }}
+          sx={{ padding: "0 6px", minWidth: 0 }}
+        >
+          <AddIcon fontSize="small" />
+        </Button>
+      ) : (
+        <>
+          <Button
+            color="primary"
+            disabled={!isInteractible || !text}
+            onClick={() => onUpdate(note.id, text)}
+            sx={{ padding: "0 6px", minWidth: 0 }}
+          >
+            <UpdateIcon fontSize="small" />
+          </Button>
+          <Button
+            color="primary"
+            disabled={!isInteractible}
+            onClick={() => onRemove(note.id)}
+            sx={{ padding: "0 6px", minWidth: 0 }}
+          >
+            <CloseIcon fontSize="small" />
+          </Button>
+        </>
+      )}
     </NoteContainer>
   );
 }
@@ -61,10 +77,6 @@ const StyledField = styled(TextField)(
       border-bottom: 1px solid ${theme.palette.primary.main};
     }`
 );
-
-const NoteLabel = styled(Box)`
-  width: 80%;
-`;
 
 const AddIcon = styled(Add)`
   ${({ disabled }) => (disabled ? `cursor: auto;` : "cursor: pointer")}
