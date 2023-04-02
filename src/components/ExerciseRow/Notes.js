@@ -4,6 +4,7 @@ import React, { useCallback, useContext, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { ModeContext } from "../../providers";
 import { InteractibleContext } from "../Dashboard/Dashboard";
+import Note from "./Note";
 
 export default function Notes({ isVisible, notes, onUpdate }) {
   const { mode } = useContext(ModeContext);
@@ -25,6 +26,15 @@ export default function Notes({ isVisible, notes, onUpdate }) {
     [notes, onUpdate]
   );
 
+  const handleUpdate = useCallback(
+    (noteId, newText) => {
+      const updatedNotes = [...notes].filter((note) => note.id !== noteId);
+      updatedNotes.push({ id: noteId, text: newText });
+      onUpdate(updatedNotes);
+    },
+    [notes, onUpdate]
+  );
+
   if (!isVisible) {
     return null;
   }
@@ -36,17 +46,11 @@ export default function Notes({ isVisible, notes, onUpdate }) {
         .map((note) => (
           <Row key={note.id}>
             <td colSpan={6}>
-              <NoteContainer>
-                <NoteLabel>{note.text}</NoteLabel>
-                <Button
-                  color="primary"
-                  disabled={!isInteractible}
-                  onClick={() => handleRemove(note.id)}
-                  sx={{ padding: "0 6px", minWidth: 0 }}
-                >
-                  <CloseIcon fontSize="small" />
-                </Button>
-              </NoteContainer>
+              <Note
+                note={note}
+                onRemove={handleRemove}
+                onUpdate={handleUpdate}
+              />
             </td>
           </Row>
         ))}
@@ -102,10 +106,6 @@ const StyledField = styled(TextField)(
       border-bottom: 1px solid ${theme.palette.primary.main};
     }`
 );
-
-const NoteLabel = styled(Box)`
-  width: 80%;
-`;
 
 const AddIcon = styled(Add)`
   ${({ disabled }) => (disabled ? `cursor: auto;` : "cursor: pointer")}
