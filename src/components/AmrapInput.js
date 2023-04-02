@@ -39,6 +39,7 @@ export default function AmrapInput({ value, onChange }) {
       onFocus={(e) => e.target.select()}
       disabled={!isInteractible}
       mode={mode}
+      autoComplete="off"
     />
   );
 }
