@@ -101,6 +101,7 @@ const WeekHeader = styled("h4")`
   margin-block: 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const Table = styled("table")`
