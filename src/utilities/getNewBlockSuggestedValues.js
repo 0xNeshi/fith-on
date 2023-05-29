@@ -54,9 +54,10 @@ function getIncrements(currentBlock, lastBlock) {
     const prevExercise = lastBlockLastExercises.find(
       (e) => e.name === exercise.name
     );
-    increments[exercise.name] = !!prevExercise
-      ? exercise.trainingMax - prevExercise.trainingMax
-      : DEFAULT_INCREMENTS[exercise.name];
+    increments[exercise.name] = 
+      !!prevExercise && prevExercise.trainingMax <= exercise.trainingMax
+        ? exercise.trainingMax - prevExercise.trainingMax
+        : DEFAULT_INCREMENTS[exercise.name];
   });
 
   return increments;
