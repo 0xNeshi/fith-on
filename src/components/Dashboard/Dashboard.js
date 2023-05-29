@@ -17,6 +17,7 @@ import Loading from "../Loading";
 import Note from "../Note";
 import { useRemoveSectionModal } from "./hooks";
 import useFAB from "./useFAB";
+import StateSection from "./StateSection"
 
 export const InteractibleContext = createContext({
   interactible: true,
@@ -41,10 +42,7 @@ export default function Dashboard() {
     target: contentRef ? contentRef : window,
   });
 
-  const isLoading = useMemo(
-    () => isModeLoading || areSectionsLoading,
-    [isModeLoading, areSectionsLoading]
-  );
+  const isLoading = isModeLoading || areSectionsLoading
 
   const handleAddSection = useCallback(
     (section) => {
@@ -103,7 +101,10 @@ export default function Dashboard() {
   return (
     <InteractibleContext.Provider value={interactibleContextValue}>
       <Container>
-        <Spinner showMessage={isLoading && !!sectionComponents?.length} />
+        <StateSection 
+          isOffline={isOffline}
+          isSubmitting={isLoading && !!sectionComponents?.length}
+        />
         <Content ref={(_ref) => setContentRef(_ref)}>
           {!sectionComponents?.length ? (
             <EmptySectionsMessage />
@@ -166,18 +167,3 @@ const Footer = styled("footer")`
   text-align: center;
 `;
 
-function Spinner({ showMessage }) {
-  return (
-    <SpinnerContainer>
-      {showMessage && <i>Submitting, please wait...</i>}
-    </SpinnerContainer>
-  );
-}
-
-const SpinnerContainer = styled(Box)`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  height: 25px;
-`;

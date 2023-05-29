@@ -8,17 +8,14 @@ export function NetworkStateProvider({ children }) {
     if (!isOffline) {
       setOffline(true);
     }
-    alert(
-      "You are in offline mode and will be unable to interact with the app"
-    );
   }, [isOffline]);
 
   const handleOnline = useCallback(() => {
     onOnlineFuncs.forEach(func => func());
     setOffline(false);
-    alert("Back online");
   }, [onOnlineFuncs]);
 
+  // Check if offline on first app load
   useEffect(() => {
     if (isOffline) {
       handleOffline();
