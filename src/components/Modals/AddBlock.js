@@ -9,7 +9,7 @@ import { EXERCISES, EXERCISE_KEYS } from "../../constants";
 const TRAINING_MAX_SCHEMA = yup
   .number()
   .typeError("Must be a number")
-  .positive("Must be a positive number")
+  .min(0, "Must be a positive number")
   .nullable(true)
   .transform((_, x) => (!x ? null : +x));
 
