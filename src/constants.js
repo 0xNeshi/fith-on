@@ -1,7 +1,8 @@
 export const EXERCISE_KEYS = {
+  Powerclean: "powerclean",
   Overhead: "overhead",
   Squat: "squat",
-  Powerclean: "powerclean",
+  BarbellRow: "barbell row",
   Bench: "bench",
   Deadlift: "deadlift",
 };
