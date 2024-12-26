@@ -4,21 +4,21 @@ import { getNewBlockSuggestedValues } from "../utilities";
 const defaultSuggestionsInput = [[], undefined, null, [{ type: "note" }]];
 
 describe("getNewBlockSuggestedValues", () => {
-  test.each(defaultSuggestionsInput)(
-    "should return empty suggestions",
-    (sections) => {
-      const output = {
-        blockNumber: 1,
-        overheadMax: "",
-        squatMax: "",
-        powercleanMax: "",
-        benchMax: "",
-        deadliftMax: "",
-      };
+  test.each(defaultSuggestionsInput)("should return empty suggestions", (sections) => {
+    const output = {
+      blockNumber: 1,
+      overheadMax: "",
+      squatMax: "",
+      powercleanMax: "",
+      benchMax: "",
+      deadliftMax: "",
+      splitSquatMax: "",
+      legPressMax: "",
+      barbellRowMax: "",
+    };
 
-      expect(getNewBlockSuggestedValues(sections)).toEqual(output);
-    }
-  );
+    expect(getNewBlockSuggestedValues(sections)).toEqual(output);
+  });
 
   test("should return maxes incremented by default increments", () => {
     const sections = [
@@ -56,6 +56,21 @@ describe("getNewBlockSuggestedValues", () => {
                 trainingMax: 52.5,
                 amrapReps: 7,
               },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 52.5,
+                amrapReps: 7,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 52.5,
+                amrapReps: 7,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 52.5,
+                amrapReps: 7,
+              },
             ],
           },
           {
@@ -83,6 +98,21 @@ describe("getNewBlockSuggestedValues", () => {
               },
               {
                 name: EXERCISE_KEYS.Bench,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
                 trainingMax: 52.5,
                 amrapReps: 8,
               },
@@ -116,6 +146,21 @@ describe("getNewBlockSuggestedValues", () => {
                 trainingMax: 52.5,
                 amrapReps: 0,
               },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 52.5,
+                amrapReps: 0,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 52.5,
+                amrapReps: 0,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 52.5,
+                amrapReps: 0,
+              },
             ],
           },
         ],
@@ -129,6 +174,9 @@ describe("getNewBlockSuggestedValues", () => {
       powercleanMax: 45,
       deadliftMax: 107.5,
       benchMax: 55,
+      legPressMax: 55,
+      barbellRowMax: 55,
+      splitSquatMax: 55,
     };
 
     expect(getNewBlockSuggestedValues(sections)).toEqual(output);
@@ -170,6 +218,21 @@ describe("getNewBlockSuggestedValues", () => {
                 trainingMax: 52.5,
                 amrapReps: 7,
               },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
             ],
           },
           {
@@ -200,6 +263,21 @@ describe("getNewBlockSuggestedValues", () => {
                 trainingMax: 52.5,
                 amrapReps: 8,
               },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
             ],
           },
           {
@@ -227,6 +305,21 @@ describe("getNewBlockSuggestedValues", () => {
               },
               {
                 name: EXERCISE_KEYS.Bench,
+                trainingMax: 52.5,
+                amrapReps: 0,
+              },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 52.5,
+                amrapReps: 0,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 52.5,
+                amrapReps: 0,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
                 trainingMax: 52.5,
                 amrapReps: 0,
               },
@@ -268,6 +361,21 @@ describe("getNewBlockSuggestedValues", () => {
                 trainingMax: 50,
                 amrapReps: 7,
               },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
             ],
           },
           {
@@ -295,6 +403,21 @@ describe("getNewBlockSuggestedValues", () => {
               },
               {
                 name: EXERCISE_KEYS.Bench,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
                 trainingMax: 50,
                 amrapReps: 8,
               },
@@ -328,6 +451,21 @@ describe("getNewBlockSuggestedValues", () => {
                 trainingMax: 50,
                 amrapReps: 8,
               },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
             ],
           },
         ],
@@ -341,6 +479,9 @@ describe("getNewBlockSuggestedValues", () => {
       powercleanMax: 45,
       deadliftMax: 110,
       benchMax: 55,
+      legPressMax: 55,
+      barbellRowMax: 55,
+      splitSquatMax: 55,
     };
 
     expect(getNewBlockSuggestedValues(sections)).toEqual(output);
@@ -382,6 +523,21 @@ describe("getNewBlockSuggestedValues", () => {
                 trainingMax: 52.5,
                 amrapReps: 7,
               },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
             ],
           },
           {
@@ -412,6 +568,21 @@ describe("getNewBlockSuggestedValues", () => {
                 trainingMax: 52.5,
                 amrapReps: 8,
               },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
             ],
           },
           {
@@ -439,6 +610,21 @@ describe("getNewBlockSuggestedValues", () => {
               },
               {
                 name: EXERCISE_KEYS.Bench,
+                trainingMax: 52.5,
+                amrapReps: 0,
+              },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 52.5,
+                amrapReps: 0,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 52.5,
+                amrapReps: 0,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
                 trainingMax: 52.5,
                 amrapReps: 0,
               },
@@ -494,6 +680,21 @@ describe("getNewBlockSuggestedValues", () => {
                 trainingMax: 50,
                 amrapReps: 7,
               },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
             ],
           },
           {
@@ -521,6 +722,21 @@ describe("getNewBlockSuggestedValues", () => {
               },
               {
                 name: EXERCISE_KEYS.Bench,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
                 trainingMax: 50,
                 amrapReps: 8,
               },
@@ -554,6 +770,21 @@ describe("getNewBlockSuggestedValues", () => {
                 trainingMax: 50,
                 amrapReps: 8,
               },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
             ],
           },
         ],
@@ -567,6 +798,9 @@ describe("getNewBlockSuggestedValues", () => {
       powercleanMax: 45,
       deadliftMax: 110,
       benchMax: 55,
+      legPressMax: 55,
+      barbellRowMax: 55,
+      splitSquatMax: 55,
     };
 
     expect(getNewBlockSuggestedValues(sections)).toEqual(output);
@@ -608,6 +842,21 @@ describe("getNewBlockSuggestedValues", () => {
                 trainingMax: 51,
                 amrapReps: 7,
               },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
             ],
           },
           {
@@ -636,6 +885,21 @@ describe("getNewBlockSuggestedValues", () => {
               {
                 name: EXERCISE_KEYS.Bench,
                 trainingMax: 51,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 52.5,
                 amrapReps: 8,
               },
             ],
@@ -667,6 +931,21 @@ describe("getNewBlockSuggestedValues", () => {
                 name: EXERCISE_KEYS.Bench,
                 trainingMax: 51,
                 amrapReps: 0,
+              },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 52.5,
+                amrapReps: 8,
               },
             ],
           },
@@ -706,6 +985,21 @@ describe("getNewBlockSuggestedValues", () => {
                 trainingMax: 50,
                 amrapReps: 7,
               },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
             ],
           },
           {
@@ -733,6 +1027,21 @@ describe("getNewBlockSuggestedValues", () => {
               },
               {
                 name: EXERCISE_KEYS.Bench,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
                 trainingMax: 50,
                 amrapReps: 8,
               },
@@ -766,6 +1075,21 @@ describe("getNewBlockSuggestedValues", () => {
                 trainingMax: 50,
                 amrapReps: 8,
               },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 50,
+                amrapReps: 8,
+              },
             ],
           },
         ],
@@ -779,6 +1103,9 @@ describe("getNewBlockSuggestedValues", () => {
       powercleanMax: 42,
       deadliftMax: 105,
       benchMax: 52,
+      legPressMax: 55,
+      barbellRowMax: 55,
+      splitSquatMax: 55,
     };
 
     expect(getNewBlockSuggestedValues(sections)).toEqual(output);
@@ -797,7 +1124,7 @@ describe("getNewBlockSuggestedValues", () => {
             exercises: [
               {
                 name: EXERCISE_KEYS.Squat,
-                trainingMax: 77.5,
+                trainingMax: 85,
                 amrapReps: 10,
               },
               {
@@ -812,13 +1139,28 @@ describe("getNewBlockSuggestedValues", () => {
               },
               {
                 name: EXERCISE_KEYS.Deadlift,
-                trainingMax: 102.5,
+                trainingMax: 110,
                 amrapReps: 12,
               },
               {
                 name: EXERCISE_KEYS.Bench,
                 trainingMax: 51,
                 amrapReps: 7,
+              },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 52.5,
+                amrapReps: 8,
               },
             ],
           },
@@ -827,7 +1169,7 @@ describe("getNewBlockSuggestedValues", () => {
             exercises: [
               {
                 name: EXERCISE_KEYS.Squat,
-                trainingMax: 77.5,
+                trainingMax: 85,
                 amrapReps: 9,
               },
               {
@@ -842,12 +1184,27 @@ describe("getNewBlockSuggestedValues", () => {
               },
               {
                 name: EXERCISE_KEYS.Deadlift,
-                trainingMax: 102.5,
+                trainingMax: 110,
                 amrapReps: 10,
               },
               {
                 name: EXERCISE_KEYS.Bench,
                 trainingMax: 51,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 52.5,
                 amrapReps: 8,
               },
             ],
@@ -857,7 +1214,7 @@ describe("getNewBlockSuggestedValues", () => {
             exercises: [
               {
                 name: EXERCISE_KEYS.Squat,
-                trainingMax: 77.5,
+                trainingMax: 85,
                 amrapReps: 0,
               },
               {
@@ -872,13 +1229,28 @@ describe("getNewBlockSuggestedValues", () => {
               },
               {
                 name: EXERCISE_KEYS.Deadlift,
-                trainingMax: 102.5,
+                trainingMax: 110,
                 amrapReps: 0,
               },
               {
                 name: EXERCISE_KEYS.Bench,
                 trainingMax: 51,
                 amrapReps: 0,
+              },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 52.5,
+                amrapReps: 8,
               },
             ],
           },
@@ -941,17 +1313,20 @@ describe("getNewBlockSuggestedValues", () => {
 
     const output = {
       blockNumber: 3,
-      squatMax: 80,
+      squatMax: 95,
       overheadMax: 43.5,
       powercleanMax: 43.5,
-      deadliftMax: 105,
+      deadliftMax: 120,
       benchMax: 53.5,
+      legPressMax: 55,
+      barbellRowMax: 55,
+      splitSquatMax: 55,
     };
 
     expect(getNewBlockSuggestedValues(sections)).toEqual(output);
   });
 
-  test("should increment squat and deadlift by previous increments and 0s bench and overhead", () => {
+  test("should increment squat and deadlift by previous increments, and return 0s for all others", () => {
     const sections = [
       {
         id: 2,
@@ -1040,6 +1415,21 @@ describe("getNewBlockSuggestedValues", () => {
                 trainingMax: 50,
                 amrapReps: 7,
               },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
             ],
           },
           {
@@ -1068,6 +1458,21 @@ describe("getNewBlockSuggestedValues", () => {
               {
                 name: EXERCISE_KEYS.Bench,
                 trainingMax: 50,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 52.5,
                 amrapReps: 8,
               },
             ],
@@ -1100,6 +1505,21 @@ describe("getNewBlockSuggestedValues", () => {
                 trainingMax: 50,
                 amrapReps: 8,
               },
+              {
+                name: EXERCISE_KEYS.SplitSquat,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.LegPress,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
+              {
+                name: EXERCISE_KEYS.BarbellRow,
+                trainingMax: 52.5,
+                amrapReps: 8,
+              },
             ],
           },
         ],
@@ -1108,11 +1528,15 @@ describe("getNewBlockSuggestedValues", () => {
 
     const output = {
       blockNumber: 3,
+      barbellRowMax: 0,
       squatMax: 80,
       overheadMax: 0,
       powercleanMax: 0,
       deadliftMax: 105,
       benchMax: 0,
+      legPressMax: 0,
+      barbellRowMax: 0,
+      splitSquatMax: 0,
     };
 
     expect(getNewBlockSuggestedValues(sections)).toEqual(output);
