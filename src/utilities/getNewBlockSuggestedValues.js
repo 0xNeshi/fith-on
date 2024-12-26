@@ -5,13 +5,25 @@ const DEFAULT_INCREMENTS = EXERCISES.reduce((obj, exName) => {
   return obj;
 }, {});
 
+const capitalizeAfterSpace = (str) =>
+  str
+    .split(" ") // Split the string into words by spaces
+    .map(
+      (word, index) =>
+        index === 0
+          ? word // Keep the first word unchanged
+          : word.charAt(0).toUpperCase() + word.slice(1) // Capitalize the first letter of subsequent words
+    )
+    .join(""); // Join the words back together without spaces
+
 export default function getNewBlockSuggestedValues(sections = []) {
   const blocks = sections?.filter((s) => s.type === "block");
 
   if (!blocks?.length) {
     return EXERCISES.reduce(
       (maxesObj, exName) => {
-        maxesObj[`${exName}Max`] = "";
+        let cleanName = capitalizeAfterSpace(exName);
+        maxesObj[`${cleanName}Max`] = "";
         return maxesObj;
       },
       { blockNumber: 1 }
@@ -23,17 +35,13 @@ export default function getNewBlockSuggestedValues(sections = []) {
   const blockNumber = currentBlock.number + 1;
   const currentExercises = getLastWeeksExercises(currentBlock);
 
-  const increments =
-    blocks.length === 1
-      ? DEFAULT_INCREMENTS
-      : getIncrements(currentBlock, blocks[1]);
+  const increments = blocks.length === 1 ? DEFAULT_INCREMENTS : getIncrements(currentBlock, blocks[1]);
 
   const suggestedValues = EXERCISES.reduce(
     (valuesObj, exName) => {
-      const key = `${exName}Max`;
-      const exercise = currentExercises.find(
-        (ex) => ex.name === exName && ex.trainingMax > 0
-      );
+      let cleanName = capitalizeAfterSpace(exName);
+      const key = `${cleanName}Max`;
+      const exercise = currentExercises.find((ex) => ex.name === exName && ex.trainingMax > 0);
 
       valuesObj[key] = exercise ? exercise.trainingMax + increments[exName] : 0;
 
@@ -51,10 +59,8 @@ function getIncrements(currentBlock, lastBlock) {
 
   const increments = {};
   currentBlockLastExercises.forEach((exercise) => {
-    const prevExercise = lastBlockLastExercises.find(
-      (e) => e.name === exercise.name
-    );
-    increments[exercise.name] = 
+    const prevExercise = lastBlockLastExercises.find((e) => e.name === exercise.name);
+    increments[exercise.name] =
       !!prevExercise && prevExercise.trainingMax <= exercise.trainingMax
         ? exercise.trainingMax - prevExercise.trainingMax
         : DEFAULT_INCREMENTS[exercise.name];
@@ -65,9 +71,7 @@ function getIncrements(currentBlock, lastBlock) {
 
 // Gets exercises from the last week (week 3) of the block
 function getLastWeeksExercises(block) {
-  const lastWeek = block.weeks.reduce((prev, curr) =>
-    curr.number > prev.number ? curr : prev
-  );
+  const lastWeek = block.weeks.reduce((prev, curr) => (curr.number > prev.number ? curr : prev));
 
   return lastWeek.exercises;
 }
